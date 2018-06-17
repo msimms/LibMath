@@ -31,7 +31,7 @@ namespace LibMath
 	class Matrix
 	{
 	public:
-		Matrix(int size);
+		Matrix(size_t size);
 		virtual ~Matrix(void);
 
 		/**
@@ -65,7 +65,7 @@ namespace LibMath
 		double dot(const Matrix* B);
 		
 	protected:
-		int      m_size;
+		size_t   m_size;
 		double** m_data;
 	};
 }

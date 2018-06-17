@@ -26,9 +26,9 @@
 
 namespace LibMath
 {
-	Matrix::Matrix(int size)
+	Matrix::Matrix(size_t size)
 	{
-		register unsigned long i;
+		register size_t i;
 		
 		m_size = size;
 		m_data = new double *[m_size];
@@ -38,7 +38,7 @@ namespace LibMath
 
 	Matrix::~Matrix(void)
 	{
-		register unsigned long i;
+		register size_t i;
 		
 		if (m_data != NULL)
 		{
@@ -54,7 +54,7 @@ namespace LibMath
 
 	void Matrix::multiply(const Matrix * B, Matrix * C)
 	{
-		register unsigned long i, j, k;
+		register size_t i, j, k;
 		
 		// Compute C = A x B
 		for (i = 0; i < m_size; i++)
@@ -72,7 +72,7 @@ namespace LibMath
 
 	void Matrix::multiply(const Vector * B, Vector * C)
 	{
-		register unsigned long i, j;
+		register size_t i, j;
 		
 		// Compute C = A x B
 		for (i = 0; i < m_size; i++)
@@ -87,7 +87,7 @@ namespace LibMath
 
 	void Matrix::subtract(const Matrix * B, Matrix * C)
 	{
-		register unsigned long i, j;
+		register size_t i, j;
 		
 		// Compute C = A - B
 		for (i = 0; i < m_size; i++)
@@ -101,7 +101,7 @@ namespace LibMath
 
 	void Matrix::zero(void)
 	{
-		register unsigned long i, j;
+		register size_t i, j;
 		
 		for (i = 0; i < m_size; i++)
 		{
@@ -114,7 +114,7 @@ namespace LibMath
 
 	void Matrix::identity(void)
 	{
-		register unsigned long i, j;
+		register size_t i, j;
 		
 		for (i = 0; i < m_size; i++)
 		{
@@ -130,7 +130,7 @@ namespace LibMath
 
 	double Matrix::dot(const Matrix * B)
 	{
-		register unsigned long i, j;
+		register size_t i, j;
 		double dot = 0.0;
 		
 		for (i = 0; i < m_size; i++)

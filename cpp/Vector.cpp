@@ -26,7 +26,7 @@
 
 namespace LibMath
 {
-	Vector::Vector(int size)
+	Vector::Vector(size_t size)
 	{
 		m_size = size;
 		m_data = new double[m_size];
@@ -48,7 +48,7 @@ namespace LibMath
 
 	double Vector::multiply(const Vector* B)
 	{
-		register unsigned long i;
+		register size_t i;
 		double C = 0;
 
 		// Compute C = A x B
@@ -61,7 +61,7 @@ namespace LibMath
 
 	void Vector::subtract(const Vector* B, Vector* C)
 	{
-		register unsigned long i;
+		register size_t i;
 
 		// Compute C = A - B
 		for (i = 0; i < m_size; i++)
@@ -70,7 +70,7 @@ namespace LibMath
 
 	double Vector::dot(const Vector* B)
 	{
-		register unsigned long i;
+		register size_t i;
 		double result = 0.0;
 
 		// Compute the dot product
@@ -83,7 +83,7 @@ namespace LibMath
 
 	double Vector::length(void)
 	{
-		register int index;
+		register size_t index;
 		double sum = 0.0;
 
 		for (index = 0; index < m_size; index++)
@@ -93,7 +93,7 @@ namespace LibMath
 
 	void Vector::normalize(void)
 	{
-		register int i;
+		register size_t i;
 		double norm;
 		
 		norm = length();

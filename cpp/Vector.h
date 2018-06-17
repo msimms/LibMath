@@ -29,7 +29,7 @@ namespace LibMath
 	class Vector
 	{
 	public:
-		Vector(int size);
+		Vector(size_t size);
 		virtual ~Vector(void);
 
 		/**
@@ -68,7 +68,7 @@ namespace LibMath
 		void cross(const Vector* A, const Vector* B);
 
 	protected:
-		int     m_size;
+		size_t  m_size;
 		double* m_data;
 	};
 }
