@@ -1,13 +1,8 @@
-/*
- *  Powers.h
- *  MathLib
- *
- *  Created by Michael Simms on 4/24/11.
- *  Copyright 2011 Michael J. Simms. All rights reserved.
- *
- */
+// by Michael J. Simms
+// Copyright (c) 2011 Michael J. Simms
+// All Rights Reserved
 
-namespace MathLib
+namespace LibMath
 {
 	unsigned long NearestPowerOf2(unsigned long num);
 }
