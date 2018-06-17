@@ -35,6 +35,11 @@ namespace LibMath
 		virtual ~Matrix(void);
 
 		/**
+		 * Returns the number of elements in the matrix.
+		 */		
+		size_t size(void) const { return m_size; };
+
+		/**
 		 * Returns C = A x B, where A, B, and C are matrices.
 		 */
 		void multiply(const Matrix* B, Matrix* C);
