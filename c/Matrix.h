@@ -69,6 +69,11 @@ void matrixZero(MatrixPtr A);
 void matrixIdentity(MatrixPtr A);
 
 /**
+ * Sets the value of A to the matrix of all ones.
+ */
+void matrixOnes(MatrixPtr A);
+
+/**
  * Returns the dot product of A (the current matrix) and B.
  */
 double matrixDot(const MatrixPtr A, const MatrixPtr B);

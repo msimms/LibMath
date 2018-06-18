@@ -127,7 +127,20 @@ namespace LibMath
 			}
 		}
 	}
-
+	
+	void Matrix::ones(void)
+	{
+		register size_t i, j;
+		
+		for (i = 0; i < m_size; i++)
+		{
+			for (j = 0; j < m_size; j++)
+			{
+				m_data[i][j] = 1.0;
+			}
+		}
+	}
+	
 	double Matrix::dot(const Matrix * B)
 	{
 		register size_t i, j;

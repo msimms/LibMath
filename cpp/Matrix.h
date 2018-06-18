@@ -63,7 +63,12 @@ namespace LibMath
 		 * Sets the value of A to the identity matrix.
 		 */
 		void identity(void);
-
+		
+		/**
+		 * Sets the value of A to the matrix of all ones.
+		 */
+		void ones(void);
+		
 		/**
 		 * Returns the dot product of A (the current matrix) and B.
 		 */

@@ -132,6 +132,19 @@ void matrixIdentity(MatrixPtr A)
 	}
 }
 
+void matrixOnes(MatrixPtr A)
+{
+	register size_t i, j;
+	
+	for (i = 0; i < A->size; i++)
+	{
+		for (j = 0; j < A->size; j++)
+		{
+			A->data[i][j] = 1.0;
+		}
+	}
+}
+
 double matrixDot(const MatrixPtr A, const MatrixPtr B)
 {
 	register size_t i, j;
