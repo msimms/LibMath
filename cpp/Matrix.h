@@ -53,7 +53,12 @@ namespace LibMath
 		 * Returns C = A x B, where A is a matrix and B and C are vectors.
 		 */
 		void multiply(const Vector* B, Vector* C);
-
+		
+		/**
+		 * Multiplies the matrix by the supplied scalar.
+		 */
+		void multiply(double B);
+		
 		/**
 		 * Returns C = A - B, where A, B, and C are matrices.
 		 */

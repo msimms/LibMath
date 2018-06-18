@@ -109,10 +109,23 @@ void matrixMultiplyByVector(const MatrixPtr A, const VectorPtr B, VectorPtr C)
 	}
 }
 
-void matrixSubtract(const MatrixPtr A, const MatrixPtr B, MatrixPtr C)
+void matrixMultiplyByScalar(MatrixPtr A, double B)
 {
 	register size_t i, j;
 	
+	for (i = 0; i < A->size; ++i)
+	{
+		for (j = 0; j < A->size; ++j)
+		{
+			A->data[i][j] = A->data[i][j] * B;
+		}
+	}
+}
+
+void matrixSubtract(const MatrixPtr A, const MatrixPtr B, MatrixPtr C)
+{
+	register size_t i, j;
+
 	// Compute C = A - B
 	for (i = 0; i < A->size; ++i)
 	{

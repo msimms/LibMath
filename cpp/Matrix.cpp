@@ -104,6 +104,19 @@ namespace LibMath
 		}
 	}
 
+	void Matrix::multiply(double B)
+	{
+		register size_t i, j;
+		
+		for (i = 0; i < m_size; ++i)
+		{
+			for (j = 0; j < m_size; ++j)
+			{
+				m_data[i][j] *= B;
+			}
+		}
+	}
+
 	void Matrix::subtract(const Matrix* B, Matrix* C)
 	{
 		register size_t i, j;

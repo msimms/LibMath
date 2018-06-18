@@ -28,6 +28,14 @@ int main(int argc, const char * argv[])
 	MatrixPtr m = matrixCreate(5);
 	matrixIdentity(m);
 	matrixPrint(m);
+	matrixDestroy(m);
 
+	m = matrixCreate(5);
+	matrixOnes(m);
+	matrixPrint(m);
+	matrixMultiplyByScalar(m, 2);
+	matrixPrint(m);
+	matrixDestroy(m);
+	
 	return 0;
 }

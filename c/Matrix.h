@@ -59,6 +59,11 @@ void matrixMultiply(const MatrixPtr A, const MatrixPtr B, MatrixPtr C);
 void matrixMultiplyByVector(const MatrixPtr A, const VectorPtr B, VectorPtr C);
 
 /**
+ * Multiplies the matrix by the supplied scalar.
+ */
+void matrixMultiplyByScalar(MatrixPtr A, double B);
+
+/**
  * Returns C = A - B, where A, B, and C are matrices.
  */
 void matrixSubtract(const MatrixPtr A, const MatrixPtr B, MatrixPtr C);
