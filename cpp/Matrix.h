@@ -1,5 +1,5 @@
 // by Michael J. Simms
-// Copyright (c) 1997-1998 Michael J. Simms
+// Copyright (c) 1997-2018 Michael J. Simms
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,6 +33,11 @@ namespace LibMath
 	public:
 		Matrix(size_t size);
 		virtual ~Matrix(void);
+
+		/**
+		 * Prints the matrix to standard out. Intended for testing and debugging.
+		 */
+		void print(void);
 
 		/**
 		 * Returns the number of elements in the matrix.

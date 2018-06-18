@@ -1,5 +1,5 @@
 // by Michael J. Simms
-// Copyright (c) 1997-1998 Michael J. Simms
+// Copyright (c) 1997-2018 Michael J. Simms
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 // SOFTWARE.
 
 #include <math.h>
-#include <string.h>
+#include <iostream>
 
 #include "Matrix.h"
 
@@ -32,7 +32,7 @@ namespace LibMath
 		
 		m_size = size;
 		m_data = new double *[m_size];
-		for (i = 0; i < m_size; i++)
+		for (i = 0; i < m_size; ++i)
 			m_data[i] = new double[m_size];
 	}
 
@@ -42,7 +42,7 @@ namespace LibMath
 		
 		if (m_data != NULL)
 		{
-			for (i = 0; i < m_size; i++)
+			for (i = 0; i < m_size; ++i)
 			{
 				delete m_data[i];
 				m_data[i] = NULL;
@@ -52,17 +52,36 @@ namespace LibMath
 		}
 	}
 
-	void Matrix::multiply(const Matrix * B, Matrix * C)
+	void Matrix::print(void)
+	{
+		register size_t i, j;
+		
+		if (m_data != NULL)
+		{
+			for (i = 0; i < m_size; ++i)
+			{
+				std::cout << "[ ";
+				for (j = 0; j < m_size; ++j)
+				{
+					std::cout << m_data[i][j] << " ";
+				}
+				std::cout << "]" << std::endl;
+			}
+			std::cout << std::endl;
+		}
+	}
+
+	void Matrix::multiply(const Matrix* B, Matrix* C)
 	{
 		register size_t i, j, k;
 		
 		// Compute C = A x B
-		for (i = 0; i < m_size; i++)
+		for (i = 0; i < m_size; ++i)
 		{
-			for (j = 0; j < m_size; j++)
+			for (j = 0; j < m_size; ++j)
 			{
 				C->m_data[i][j] = 0.0;
-				for (k = 0; k < m_size; k++)
+				for (k = 0; k < m_size; ++k)
 				{
 					C->m_data[i][j] += m_data[i][k] * B->m_data[k][j];
 				}
@@ -70,29 +89,29 @@ namespace LibMath
 		}
 	}
 
-	void Matrix::multiply(const Vector * B, Vector * C)
+	void Matrix::multiply(const Vector* B, Vector* C)
 	{
 		register size_t i, j;
 		
 		// Compute C = A x B
-		for (i = 0; i < m_size; i++)
+		for (i = 0; i < m_size; ++i)
 		{
 			C->m_data[i] = 0.0;
-			for (j = 0; j < m_size; j++)
+			for (j = 0; j < m_size; ++j)
 			{
 				C->m_data[i] += m_data[i][j] * B->m_data[j];
 			}
 		}
 	}
 
-	void Matrix::subtract(const Matrix * B, Matrix * C)
+	void Matrix::subtract(const Matrix* B, Matrix* C)
 	{
 		register size_t i, j;
 		
 		// Compute C = A - B
-		for (i = 0; i < m_size; i++)
+		for (i = 0; i < m_size; ++i)
 		{
-			for (j = 0; j < m_size; j++)
+			for (j = 0; j < m_size; ++j)
 			{
 				C->m_data[i][j] = m_data[i][j] - B->m_data[i][j];
 			}
@@ -103,9 +122,9 @@ namespace LibMath
 	{
 		register size_t i, j;
 		
-		for (i = 0; i < m_size; i++)
+		for (i = 0; i < m_size; ++i)
 		{
-			for (j = 0; j < m_size; j++)
+			for (j = 0; j < m_size; ++j)
 			{
 				m_data[i][j] = 0.0;
 			}
@@ -116,9 +135,9 @@ namespace LibMath
 	{
 		register size_t i, j;
 		
-		for (i = 0; i < m_size; i++)
+		for (i = 0; i < m_size; ++i)
 		{
-			for (j = 0; j < m_size; j++)
+			for (j = 0; j < m_size; ++j)
 			{
 				if (i == j)
 					m_data[i][j] = 1.0;
@@ -132,23 +151,23 @@ namespace LibMath
 	{
 		register size_t i, j;
 		
-		for (i = 0; i < m_size; i++)
+		for (i = 0; i < m_size; ++i)
 		{
-			for (j = 0; j < m_size; j++)
+			for (j = 0; j < m_size; ++j)
 			{
 				m_data[i][j] = 1.0;
 			}
 		}
 	}
 	
-	double Matrix::dot(const Matrix * B)
+	double Matrix::dot(const Matrix* B)
 	{
 		register size_t i, j;
 		double dot = 0.0;
 		
-		for (i = 0; i < m_size; i++)
+		for (i = 0; i < m_size; ++i)
 		{
-			for (j = 0; j < m_size; j++)
+			for (j = 0; j < m_size; ++j)
 			{
 				dot +=	*(m_data[i] + j * m_size) +
 				*(B->m_data[i] + j * B->m_size);

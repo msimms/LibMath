@@ -1,5 +1,5 @@
 // by Michael J. Simms
-// Copyright (c) 1997-1998 Michael J. Simms
+// Copyright (c) 1997-2018 Michael J. Simms
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -71,6 +71,8 @@ namespace LibMath
 		 * Returns C = A x B, where A, B, and C are 3x3 vectors.
 		 */
 		void cross(const Vector* A, const Vector* B);
+
+		friend class Matrix;
 
 	protected:
 		size_t  m_size;

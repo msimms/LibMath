@@ -44,6 +44,11 @@ MatrixPtr matrixCreate(size_t size);
 void matrixDestroy(MatrixPtr matrix);
 
 /**
+ * Prints the matrix to standard out. Intended for testing and debugging.
+ */
+void matrixPrint(MatrixPtr matrix);
+
+/**
  * Returns C = A x B, where A, B, and C are matrices.
  */
 void matrixMultiply(const MatrixPtr A, const MatrixPtr B, MatrixPtr C);

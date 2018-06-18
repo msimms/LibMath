@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		27B4139E20D687FD00A97E4B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B4139D20D687FD00A97E4B /* main.cpp */; };
+		279CC71920D74FD600E8690E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 279CC71820D74FD600E8690E /* main.cpp */; };
 		27B413AC20D6884200A97E4B /* Powers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B413A420D6884200A97E4B /* Powers.cpp */; };
 		27B413AD20D6884200A97E4B /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B413A620D6884200A97E4B /* Matrix.cpp */; };
 		27B413AE20D6884200A97E4B /* Vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B413A720D6884200A97E4B /* Vector.cpp */; };
@@ -27,8 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		279CC71820D74FD600E8690E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
 		27B4139A20D687FD00A97E4B /* libmath */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = libmath; sourceTree = BUILT_PRODUCTS_DIR; };
-		27B4139D20D687FD00A97E4B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		27B413A420D6884200A97E4B /* Powers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Powers.cpp; sourceTree = SOURCE_ROOT; };
 		27B413A520D6884200A97E4B /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statistics.h; sourceTree = SOURCE_ROOT; };
 		27B413A620D6884200A97E4B /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = SOURCE_ROOT; };
@@ -69,6 +69,7 @@
 		27B4139C20D687FD00A97E4B /* libmath */ = {
 			isa = PBXGroup;
 			children = (
+				279CC71820D74FD600E8690E /* main.cpp */,
 				27B413A620D6884200A97E4B /* Matrix.cpp */,
 				27B413A820D6884200A97E4B /* Matrix.h */,
 				27B413A420D6884200A97E4B /* Powers.cpp */,
@@ -77,7 +78,6 @@
 				27B413A520D6884200A97E4B /* Statistics.h */,
 				27B413A720D6884200A97E4B /* Vector.cpp */,
 				27B413AA20D6884200A97E4B /* Vector.h */,
-				27B4139D20D687FD00A97E4B /* main.cpp */,
 			);
 			path = libmath;
 			sourceTree = "<group>";
@@ -139,9 +139,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				27B413AD20D6884200A97E4B /* Matrix.cpp in Sources */,
-				27B4139E20D687FD00A97E4B /* main.cpp in Sources */,
 				27B413AE20D6884200A97E4B /* Vector.cpp in Sources */,
 				27B413AC20D6884200A97E4B /* Powers.cpp in Sources */,
+				279CC71920D74FD600E8690E /* main.cpp in Sources */,
 				27B413AF20D6884200A97E4B /* Statistics.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

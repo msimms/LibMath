@@ -1,5 +1,5 @@
 // by Michael J. Simms
-// Copyright (c) 1997-1998 Michael J. Simms
+// Copyright (c) 1997-2018 Michael J. Simms
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +52,7 @@ namespace LibMath
 		double C = 0;
 
 		// Compute C = A x B
-		for (i = 0; i < m_size; i++)
+		for (i = 0; i < m_size; ++i)
 			C += m_data[i] * B->m_data[i];
 
 		// Return the result.
@@ -64,7 +64,7 @@ namespace LibMath
 		register size_t i;
 
 		// Compute C = A - B
-		for (i = 0; i < m_size; i++)
+		for (i = 0; i < m_size; ++i)
 			C[i] = m_data[i] - B->m_data[i];
 	}
 
@@ -74,7 +74,7 @@ namespace LibMath
 		double result = 0.0;
 
 		// Compute the dot product
-		for (i = 0; i < m_size; i++)
+		for (i = 0; i < m_size; ++i)
 			result += (m_data[i] * B->m_data[i]);
 
 		// Return the result
@@ -83,11 +83,11 @@ namespace LibMath
 
 	double Vector::length(void)
 	{
-		register size_t index;
+		register size_t i;
 		double sum = 0.0;
 
-		for (index = 0; index < m_size; index++)
-			sum += (m_data[index] * m_data[index]);
+		for (i = 0; i < m_size; ++i)
+			sum += (m_data[i] * m_data[i]);
 		return (sqrt(sum));
 	}
 
@@ -97,7 +97,7 @@ namespace LibMath
 		double norm;
 		
 		norm = length();
-		for (i = 0; i < m_size; i++)
+		for (i = 0; i < m_size; ++i)
 			m_data[i] = m_data[i] / norm;
 	}
 

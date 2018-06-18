@@ -55,7 +55,7 @@ double vectorMultiply(const VectorPtr A, const VectorPtr B)
 	register size_t i;
 	double C = 0;
 
-	for (i = 0; i < A->size; i++)
+	for (i = 0; i < A->size; ++i)
 		C += A->data[i] * B->data[i];
 	return C;
 }
@@ -64,7 +64,7 @@ void vectorSubtract(const VectorPtr A, const VectorPtr B, VectorPtr C)
 {
 	register size_t i;
 
-	for (i = 0; i < A->size; i++)
+	for (i = 0; i < A->size; ++i)
 		C->data[i] = A->data[i] - B->data[i];
 }
 
@@ -73,18 +73,18 @@ double vectorDot(const VectorPtr A, const VectorPtr B)
 	register size_t i;
 	double result = 0.0;
 
-	for (i = 0; i < A->size; i++)
+	for (i = 0; i < A->size; ++i)
 		result += (A->data[i] * B->data[i]);
 	return result;
 }
 
 double vectorLength(const VectorPtr A)
 {
-	register size_t index;
+	register size_t i;
 	double sum = 0.0;
 
-	for (index = 0; index < A->size; index++)
-		sum += (A->data[index] * A->data[index]);
+	for (i = 0; i < A->size; ++i)
+		sum += (A->data[i] * A->data[i]);
 	return (sqrt(sum));
 }
 
@@ -94,7 +94,7 @@ void vectorNormalize(VectorPtr A)
 	double norm;
 
 	norm = vectorLength(A);
-	for (i = 0; i < A->size; i++)
+	for (i = 0; i < A->size; ++i)
 		A->data[i] = A->data[i] / norm;
 }
 
