@@ -21,21 +21,21 @@
 
 #include <stdio.h>
 
-#include "Matrix.h"
+#include "SquareMatrix.h"
 
 int main(int argc, const char * argv[])
 {
-	MatrixPtr m = matrixCreate(5);
-	matrixIdentity(m);
-	matrixPrint(m);
-	matrixDestroy(m);
+	SquareMatrixPtr m = squareMatrixCreate(5);
+	squareMatrixIdentity(m);
+	squareMatrixPrint(m);
+	squareMatrixDestroy(m);
 
-	m = matrixCreate(5);
-	matrixOnes(m);
-	matrixPrint(m);
-	matrixMultiplyByScalar(m, 2);
-	matrixPrint(m);
-	matrixDestroy(m);
+	m = squareMatrixCreate(5);
+	squareMatrixOnes(m);
+	squareMatrixPrint(m);
+	squareMatrixMultiplyByScalar(m, 2);
+	squareMatrixPrint(m);
+	squareMatrixDestroy(m);
 	
 	return 0;
 }

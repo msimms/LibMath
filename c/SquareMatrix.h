@@ -21,71 +21,71 @@
 
 #pragma once
 
-#ifndef _MATRIX_
-#define _MATRIX_
+#ifndef _SQUAREMATRIX_
+#define _SQUAREMATRIX_
 
 #include "Vector.h"
 
-typedef struct Matrix
+typedef struct SquareMatrix
 {
 	double** data;
 	size_t size;
-} Matrix;
-typedef Matrix* MatrixPtr;
+} SquareMatrix;
+typedef SquareMatrix* SquareMatrixPtr;
 
 /**
  * Returns a square matrix of the specified size.
  */
-MatrixPtr matrixCreate(size_t size);
+SquareMatrixPtr squareMatrixCreate(size_t size);
 
 /**
  * Frees the memory of the square matrix of the specified size.
  */
-void matrixDestroy(MatrixPtr matrix);
+void squareMatrixDestroy(SquareMatrixPtr matrix);
 
 /**
  * Prints the matrix to standard out. Intended for testing and debugging.
  */
-void matrixPrint(MatrixPtr matrix);
+void squareMatrixPrint(SquareMatrixPtr matrix);
 
 /**
  * Returns C = A x B, where A, B, and C are matrices.
  */
-void matrixMultiply(const MatrixPtr A, const MatrixPtr B, MatrixPtr C);
+void squareMatrixMultiply(const SquareMatrixPtr A, const SquareMatrixPtr B, SquareMatrixPtr C);
 
 /**
  * Returns C = A x B, where A is a matrix and B and C are vectors.
  */
-void matrixMultiplyByVector(const MatrixPtr A, const VectorPtr B, VectorPtr C);
+void squareMatrixMultiplyByVector(const SquareMatrixPtr A, const VectorPtr B, VectorPtr C);
 
 /**
  * Multiplies the matrix by the supplied scalar.
  */
-void matrixMultiplyByScalar(MatrixPtr A, double B);
+void squareMatrixMultiplyByScalar(SquareMatrixPtr A, double B);
 
 /**
  * Returns C = A - B, where A, B, and C are matrices.
  */
-void matrixSubtract(const MatrixPtr A, const MatrixPtr B, MatrixPtr C);
+void squareMatrixSubtract(const SquareMatrixPtr A, const SquareMatrixPtr B, SquareMatrixPtr C);
 
 /**
  * Sets the value of A to the zero matrix.
  */
-void matrixZero(MatrixPtr A);
+void squareMatrixZero(SquareMatrixPtr A);
 
 /**
  * Sets the value of A to the identity matrix.
  */
-void matrixIdentity(MatrixPtr A);
+void squareMatrixIdentity(SquareMatrixPtr A);
 
 /**
  * Sets the value of A to the matrix of all ones.
  */
-void matrixOnes(MatrixPtr A);
+void squareMatrixOnes(SquareMatrixPtr A);
 
 /**
  * Returns the dot product of A (the current matrix) and B.
  */
-double matrixDot(const MatrixPtr A, const MatrixPtr B);
+double squareMatrixDot(const SquareMatrixPtr A, const SquareMatrixPtr B);
 
 #endif

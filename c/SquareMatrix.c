@@ -23,13 +23,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Matrix.h"
+#include "SquareMatrix.h"
 
-MatrixPtr matrixCreate(size_t size)
+SquareMatrixPtr squareMatrixCreate(size_t size)
 {
 	register size_t i;
 
-	MatrixPtr matrix = (MatrixPtr)malloc(sizeof(Matrix));
+	SquareMatrixPtr matrix = (SquareMatrixPtr)malloc(sizeof(SquareMatrix));
 	if (matrix)
 	{
 		matrix->data = (double**)malloc(sizeof(double*) * size);
@@ -41,7 +41,7 @@ MatrixPtr matrixCreate(size_t size)
 	return matrix;
 }
 
-void matrixDestroy(MatrixPtr matrix)
+void squareMatrixDestroy(SquareMatrixPtr matrix)
 {
 	register size_t i;
 
@@ -57,7 +57,7 @@ void matrixDestroy(MatrixPtr matrix)
 	}
 }
 
-void matrixPrint(MatrixPtr matrix)
+void squareMatrixPrint(SquareMatrixPtr matrix)
 {
 	register size_t i, j;
 
@@ -76,7 +76,7 @@ void matrixPrint(MatrixPtr matrix)
 	}
 }
 
-void matrixMultiply(const MatrixPtr A, const MatrixPtr B, MatrixPtr C)
+void squareMatrixMultiply(const SquareMatrixPtr A, const SquareMatrixPtr B, SquareMatrixPtr C)
 {
 	register size_t i, j, k;
 	
@@ -94,7 +94,7 @@ void matrixMultiply(const MatrixPtr A, const MatrixPtr B, MatrixPtr C)
 	}
 }
 
-void matrixMultiplyByVector(const MatrixPtr A, const VectorPtr B, VectorPtr C)
+void squareMatrixMultiplyByVector(const SquareMatrixPtr A, const VectorPtr B, VectorPtr C)
 {
 	register size_t i, j;
 	
@@ -109,7 +109,7 @@ void matrixMultiplyByVector(const MatrixPtr A, const VectorPtr B, VectorPtr C)
 	}
 }
 
-void matrixMultiplyByScalar(MatrixPtr A, double B)
+void squareMatrixMultiplyByScalar(SquareMatrixPtr A, double B)
 {
 	register size_t i, j;
 	
@@ -122,7 +122,7 @@ void matrixMultiplyByScalar(MatrixPtr A, double B)
 	}
 }
 
-void matrixSubtract(const MatrixPtr A, const MatrixPtr B, MatrixPtr C)
+void squareMatrixSubtract(const SquareMatrixPtr A, const SquareMatrixPtr B, SquareMatrixPtr C)
 {
 	register size_t i, j;
 
@@ -136,7 +136,7 @@ void matrixSubtract(const MatrixPtr A, const MatrixPtr B, MatrixPtr C)
 	}
 }
 
-void matrixZero(MatrixPtr A)
+void squareMatrixZero(SquareMatrixPtr A)
 {
 	register size_t i, j;
 	
@@ -149,7 +149,7 @@ void matrixZero(MatrixPtr A)
 	}
 }
 
-void matrixIdentity(MatrixPtr A)
+void squareMatrixIdentity(SquareMatrixPtr A)
 {
 	register size_t i, j;
 	
@@ -165,7 +165,7 @@ void matrixIdentity(MatrixPtr A)
 	}
 }
 
-void matrixOnes(MatrixPtr A)
+void squareMatrixOnes(SquareMatrixPtr A)
 {
 	register size_t i, j;
 	
@@ -178,7 +178,7 @@ void matrixOnes(MatrixPtr A)
 	}
 }
 
-double matrixDot(const MatrixPtr A, const MatrixPtr B)
+double squareMatrixDot(const SquareMatrixPtr A, const SquareMatrixPtr B)
 {
 	register size_t i, j;
 	double dot = 0.0;
