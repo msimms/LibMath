@@ -21,14 +21,15 @@
 
 #pragma once
 
-#ifndef _MATRIX_
-#define _MATRIX_
+#ifndef _SQUAREMATRIX_
+#define _SQUAREMATRIX_
 
+#include "Matrix.h"
 #include "Vector.h"
 
 namespace LibMath
 {
-	class SquareMatrix
+	class SquareMatrix : public Matrix
 	{
 	public:
 		SquareMatrix(size_t size);
@@ -53,12 +54,12 @@ namespace LibMath
 		 * Returns C = A x B, where A is a matrix and B and C are vectors.
 		 */
 		void multiply(const Vector* B, Vector* C);
-		
+
 		/**
 		 * Multiplies the matrix by the supplied scalar.
 		 */
 		void multiply(double B);
-		
+
 		/**
 		 * Returns C = A - B, where A, B, and C are matrices.
 		 */
@@ -73,20 +74,22 @@ namespace LibMath
 		 * Sets the value of A to the identity matrix.
 		 */
 		void identity(void);
-		
+
 		/**
 		 * Sets the value of A to the matrix of all ones.
 		 */
 		void ones(void);
-		
+
 		/**
 		 * Returns the dot product of A (the current matrix) and B.
 		 */
 		double dot(const SquareMatrix* B);
-		
+
 	protected:
 		size_t   m_size;
-		double** m_data;
+
+	protected:
+		SquareMatrix();
 	};
 }
 

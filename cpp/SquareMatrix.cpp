@@ -26,23 +26,25 @@
 
 namespace LibMath
 {
-	SquareMatrix::SquareMatrix(size_t size)
+	SquareMatrix::SquareMatrix() : Matrix()
 	{
-		register size_t i;
-		
+		m_size = 0;
+		m_data = NULL;
+	}
+
+	SquareMatrix::SquareMatrix(size_t size) : Matrix(size, size)
+	{
 		m_size = size;
 		m_data = new double *[m_size];
-		for (i = 0; i < m_size; ++i)
+		for (auto i = 0; i < m_size; ++i)
 			m_data[i] = new double[m_size];
 	}
 
 	SquareMatrix::~SquareMatrix(void)
 	{
-		register size_t i;
-		
 		if (m_data != NULL)
 		{
-			for (i = 0; i < m_size; ++i)
+			for (auto i = 0; i < m_size; ++i)
 			{
 				delete m_data[i];
 				m_data[i] = NULL;
@@ -54,14 +56,12 @@ namespace LibMath
 
 	void SquareMatrix::print(void)
 	{
-		register size_t i, j;
-		
 		if (m_data != NULL)
 		{
-			for (i = 0; i < m_size; ++i)
+			for (auto i = 0; i < m_size; ++i)
 			{
 				std::cout << "[ ";
-				for (j = 0; j < m_size; ++j)
+				for (auto j = 0; j < m_size; ++j)
 				{
 					std::cout << m_data[i][j] << " ";
 				}
@@ -73,15 +73,13 @@ namespace LibMath
 
 	void SquareMatrix::multiply(const SquareMatrix* B, SquareMatrix* C)
 	{
-		register size_t i, j, k;
-		
 		// Compute C = A x B
-		for (i = 0; i < m_size; ++i)
+		for (auto i = 0; i < m_size; ++i)
 		{
-			for (j = 0; j < m_size; ++j)
+			for (auto j = 0; j < m_size; ++j)
 			{
 				C->m_data[i][j] = 0.0;
-				for (k = 0; k < m_size; ++k)
+				for (auto k = 0; k < m_size; ++k)
 				{
 					C->m_data[i][j] += m_data[i][k] * B->m_data[k][j];
 				}
@@ -91,13 +89,11 @@ namespace LibMath
 
 	void SquareMatrix::multiply(const Vector* B, Vector* C)
 	{
-		register size_t i, j;
-		
 		// Compute C = A x B
-		for (i = 0; i < m_size; ++i)
+		for (auto i = 0; i < m_size; ++i)
 		{
 			C->m_data[i] = 0.0;
-			for (j = 0; j < m_size; ++j)
+			for (auto j = 0; j < m_size; ++j)
 			{
 				C->m_data[i] += m_data[i][j] * B->m_data[j];
 			}
@@ -106,11 +102,9 @@ namespace LibMath
 
 	void SquareMatrix::multiply(double B)
 	{
-		register size_t i, j;
-		
-		for (i = 0; i < m_size; ++i)
+		for (auto i = 0; i < m_size; ++i)
 		{
-			for (j = 0; j < m_size; ++j)
+			for (auto j = 0; j < m_size; ++j)
 			{
 				m_data[i][j] *= B;
 			}
@@ -119,12 +113,10 @@ namespace LibMath
 
 	void SquareMatrix::subtract(const SquareMatrix* B, SquareMatrix* C)
 	{
-		register size_t i, j;
-		
 		// Compute C = A - B
-		for (i = 0; i < m_size; ++i)
+		for (auto i = 0; i < m_size; ++i)
 		{
-			for (j = 0; j < m_size; ++j)
+			for (auto j = 0; j < m_size; ++j)
 			{
 				C->m_data[i][j] = m_data[i][j] - B->m_data[i][j];
 			}
@@ -133,11 +125,9 @@ namespace LibMath
 
 	void SquareMatrix::zero(void)
 	{
-		register size_t i, j;
-		
-		for (i = 0; i < m_size; ++i)
+		for (auto i = 0; i < m_size; ++i)
 		{
-			for (j = 0; j < m_size; ++j)
+			for (auto j = 0; j < m_size; ++j)
 			{
 				m_data[i][j] = 0.0;
 			}
@@ -146,11 +136,9 @@ namespace LibMath
 
 	void SquareMatrix::identity(void)
 	{
-		register size_t i, j;
-		
-		for (i = 0; i < m_size; ++i)
+		for (auto i = 0; i < m_size; ++i)
 		{
-			for (j = 0; j < m_size; ++j)
+			for (auto j = 0; j < m_size; ++j)
 			{
 				if (i == j)
 					m_data[i][j] = 1.0;
@@ -162,11 +150,9 @@ namespace LibMath
 	
 	void SquareMatrix::ones(void)
 	{
-		register size_t i, j;
-		
-		for (i = 0; i < m_size; ++i)
+		for (auto i = 0; i < m_size; ++i)
 		{
-			for (j = 0; j < m_size; ++j)
+			for (auto j = 0; j < m_size; ++j)
 			{
 				m_data[i][j] = 1.0;
 			}
@@ -175,12 +161,11 @@ namespace LibMath
 	
 	double SquareMatrix::dot(const SquareMatrix* B)
 	{
-		register size_t i, j;
 		double dot = 0.0;
 		
-		for (i = 0; i < m_size; ++i)
+		for (auto i = 0; i < m_size; ++i)
 		{
-			for (j = 0; j < m_size; ++j)
+			for (auto j = 0; j < m_size; ++j)
 			{
 				dot +=	*(m_data[i] + j * m_size) +
 				*(B->m_data[i] + j * B->m_size);
