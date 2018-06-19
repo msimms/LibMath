@@ -1,0 +1,7 @@
+[package]
+name = "LibMath"
+version = "0.0.1"
+authors = ["Michael J Simms <msimms01@gmail.com>"]
+
+[dependencies]
+rand = "*"
