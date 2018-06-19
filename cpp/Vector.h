@@ -72,7 +72,7 @@ namespace LibMath
 		 */
 		void cross(const Vector* A, const Vector* B);
 
-		friend class Matrix;
+		friend class SquareMatrix;
 
 	protected:
 		size_t  m_size;

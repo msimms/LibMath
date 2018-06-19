@@ -28,11 +28,11 @@
 
 namespace LibMath
 {
-	class Matrix
+	class SquareMatrix
 	{
 	public:
-		Matrix(size_t size);
-		virtual ~Matrix(void);
+		SquareMatrix(size_t size);
+		virtual ~SquareMatrix(void);
 
 		/**
 		 * Prints the matrix to standard out. Intended for testing and debugging.
@@ -47,7 +47,7 @@ namespace LibMath
 		/**
 		 * Returns C = A x B, where A, B, and C are matrices.
 		 */
-		void multiply(const Matrix* B, Matrix* C);
+		void multiply(const SquareMatrix* B, SquareMatrix* C);
 
 		/**
 		 * Returns C = A x B, where A is a matrix and B and C are vectors.
@@ -62,7 +62,7 @@ namespace LibMath
 		/**
 		 * Returns C = A - B, where A, B, and C are matrices.
 		 */
-		void subtract(const Matrix* B, Matrix* C);
+		void subtract(const SquareMatrix* B, SquareMatrix* C);
 
 		/**
 		 * Sets the value of A to the zero matrix.
@@ -82,7 +82,7 @@ namespace LibMath
 		/**
 		 * Returns the dot product of A (the current matrix) and B.
 		 */
-		double dot(const Matrix* B);
+		double dot(const SquareMatrix* B);
 		
 	protected:
 		size_t   m_size;

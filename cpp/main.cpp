@@ -20,16 +20,16 @@
 // SOFTWARE.
 
 #include <iostream>
-#include "Matrix.h"
+#include "SquareMatrix.h"
 
 int main(int argc, const char * argv[])
 {
-	LibMath::Matrix* m = new LibMath::Matrix(5);
+	LibMath::SquareMatrix* m = new LibMath::SquareMatrix(5);
 	m->identity();
 	m->print();
 	delete m;
 
-	m = new LibMath::Matrix(5);
+	m = new LibMath::SquareMatrix(5);
 	m->ones();
 	m->print();
 	m->multiply(2);

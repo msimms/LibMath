@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		279CC71920D74FD600E8690E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 279CC71820D74FD600E8690E /* main.cpp */; };
 		27B413AC20D6884200A97E4B /* Powers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B413A420D6884200A97E4B /* Powers.cpp */; };
-		27B413AD20D6884200A97E4B /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B413A620D6884200A97E4B /* Matrix.cpp */; };
+		27B413AD20D6884200A97E4B /* SquareMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B413A620D6884200A97E4B /* SquareMatrix.cpp */; };
 		27B413AE20D6884200A97E4B /* Vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B413A720D6884200A97E4B /* Vector.cpp */; };
 		27B413AF20D6884200A97E4B /* Statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B413A920D6884200A97E4B /* Statistics.cpp */; };
 /* End PBXBuildFile section */
@@ -31,9 +31,9 @@
 		27B4139A20D687FD00A97E4B /* libmath */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = libmath; sourceTree = BUILT_PRODUCTS_DIR; };
 		27B413A420D6884200A97E4B /* Powers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Powers.cpp; sourceTree = SOURCE_ROOT; };
 		27B413A520D6884200A97E4B /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statistics.h; sourceTree = SOURCE_ROOT; };
-		27B413A620D6884200A97E4B /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = SOURCE_ROOT; };
+		27B413A620D6884200A97E4B /* SquareMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SquareMatrix.cpp; sourceTree = SOURCE_ROOT; };
 		27B413A720D6884200A97E4B /* Vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector.cpp; sourceTree = SOURCE_ROOT; };
-		27B413A820D6884200A97E4B /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = SOURCE_ROOT; };
+		27B413A820D6884200A97E4B /* SquareMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareMatrix.h; sourceTree = SOURCE_ROOT; };
 		27B413A920D6884200A97E4B /* Statistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Statistics.cpp; sourceTree = SOURCE_ROOT; };
 		27B413AA20D6884200A97E4B /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = SOURCE_ROOT; };
 		27B413AB20D6884200A97E4B /* Powers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Powers.h; sourceTree = SOURCE_ROOT; };
@@ -70,8 +70,8 @@
 			isa = PBXGroup;
 			children = (
 				279CC71820D74FD600E8690E /* main.cpp */,
-				27B413A620D6884200A97E4B /* Matrix.cpp */,
-				27B413A820D6884200A97E4B /* Matrix.h */,
+				27B413A620D6884200A97E4B /* SquareMatrix.cpp */,
+				27B413A820D6884200A97E4B /* SquareMatrix.h */,
 				27B413A420D6884200A97E4B /* Powers.cpp */,
 				27B413AB20D6884200A97E4B /* Powers.h */,
 				27B413A920D6884200A97E4B /* Statistics.cpp */,
@@ -138,7 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27B413AD20D6884200A97E4B /* Matrix.cpp in Sources */,
+				27B413AD20D6884200A97E4B /* SquareMatrix.cpp in Sources */,
 				27B413AE20D6884200A97E4B /* Vector.cpp in Sources */,
 				27B413AC20D6884200A97E4B /* Powers.cpp in Sources */,
 				279CC71920D74FD600E8690E /* main.cpp in Sources */,

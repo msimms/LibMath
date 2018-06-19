@@ -22,11 +22,11 @@
 #include <math.h>
 #include <iostream>
 
-#include "Matrix.h"
+#include "SquareMatrix.h"
 
 namespace LibMath
 {
-	Matrix::Matrix(size_t size)
+	SquareMatrix::SquareMatrix(size_t size)
 	{
 		register size_t i;
 		
@@ -36,7 +36,7 @@ namespace LibMath
 			m_data[i] = new double[m_size];
 	}
 
-	Matrix::~Matrix(void)
+	SquareMatrix::~SquareMatrix(void)
 	{
 		register size_t i;
 		
@@ -52,7 +52,7 @@ namespace LibMath
 		}
 	}
 
-	void Matrix::print(void)
+	void SquareMatrix::print(void)
 	{
 		register size_t i, j;
 		
@@ -71,7 +71,7 @@ namespace LibMath
 		}
 	}
 
-	void Matrix::multiply(const Matrix* B, Matrix* C)
+	void SquareMatrix::multiply(const SquareMatrix* B, SquareMatrix* C)
 	{
 		register size_t i, j, k;
 		
@@ -89,7 +89,7 @@ namespace LibMath
 		}
 	}
 
-	void Matrix::multiply(const Vector* B, Vector* C)
+	void SquareMatrix::multiply(const Vector* B, Vector* C)
 	{
 		register size_t i, j;
 		
@@ -104,7 +104,7 @@ namespace LibMath
 		}
 	}
 
-	void Matrix::multiply(double B)
+	void SquareMatrix::multiply(double B)
 	{
 		register size_t i, j;
 		
@@ -117,7 +117,7 @@ namespace LibMath
 		}
 	}
 
-	void Matrix::subtract(const Matrix* B, Matrix* C)
+	void SquareMatrix::subtract(const SquareMatrix* B, SquareMatrix* C)
 	{
 		register size_t i, j;
 		
@@ -131,7 +131,7 @@ namespace LibMath
 		}
 	}
 
-	void Matrix::zero(void)
+	void SquareMatrix::zero(void)
 	{
 		register size_t i, j;
 		
@@ -144,7 +144,7 @@ namespace LibMath
 		}
 	}
 
-	void Matrix::identity(void)
+	void SquareMatrix::identity(void)
 	{
 		register size_t i, j;
 		
@@ -160,7 +160,7 @@ namespace LibMath
 		}
 	}
 	
-	void Matrix::ones(void)
+	void SquareMatrix::ones(void)
 	{
 		register size_t i, j;
 		
@@ -173,7 +173,7 @@ namespace LibMath
 		}
 	}
 	
-	double Matrix::dot(const Matrix* B)
+	double SquareMatrix::dot(const SquareMatrix* B)
 	{
 		register size_t i, j;
 		double dot = 0.0;
