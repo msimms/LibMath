@@ -113,12 +113,22 @@ namespace LibMath
 
 	void SquareMatrix::subtract(const SquareMatrix* B, SquareMatrix* C)
 	{
-		// Compute C = A - B
 		for (auto i = 0; i < m_size; ++i)
 		{
 			for (auto j = 0; j < m_size; ++j)
 			{
 				C->m_data[i][j] = m_data[i][j] - B->m_data[i][j];
+			}
+		}
+	}
+
+	void SquareMatrix::subtract(double B)
+	{
+		for (auto i = 0; i < m_size; ++i)
+		{
+			for (auto j = 0; j < m_size; ++j)
+			{
+				m_data[i][j] -= B;
 			}
 		}
 	}
@@ -167,8 +177,7 @@ namespace LibMath
 		{
 			for (auto j = 0; j < m_size; ++j)
 			{
-				dot +=	*(m_data[i] + j * m_size) +
-				*(B->m_data[i] + j * B->m_size);
+				dot +=	*(m_data[i] + j * m_size) + *(B->m_data[i] + j * B->m_size);
 			}
 		}
 		return dot;

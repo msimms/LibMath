@@ -66,6 +66,11 @@ namespace LibMath
 		void subtract(const SquareMatrix* B, SquareMatrix* C);
 
 		/**
+		 * Subtracts the scalar from the matrix.
+		 */
+		void subtract(double B);
+
+		/**
 		 * Sets the value of A to the zero matrix.
 		 */
 		void zero(void);

@@ -126,12 +126,24 @@ void squareMatrixSubtract(const SquareMatrixPtr A, const SquareMatrixPtr B, Squa
 {
 	register size_t i, j;
 
-	// Compute C = A - B
 	for (i = 0; i < A->size; ++i)
 	{
-		for (j = 0; j < B->size; ++j)
+		for (j = 0; j < A->size; ++j)
 		{
 			C->data[i][j] = A->data[i][j] - B->data[i][j];
+		}
+	}
+}
+
+void squareMatrixSubtractScalar(SquareMatrixPtr A, double B)
+{
+	register size_t i, j;
+
+	for (i = 0; i < A->size; ++i)
+	{
+		for (j = 0; j < A->size; ++j)
+		{
+			A->data[i][j] = A->data[i][j] - B;
 		}
 	}
 }

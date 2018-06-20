@@ -47,11 +47,50 @@ impl SquareMatrix {
         }
     }
 
-    pub fn multiply(&mut self, b: f64) {
+    pub fn multiply_by_matrix(&mut self, b: SquareMatrix) {
+        for i in 0..self.size {
+            for j in 0..self.size {
+                self.data[i][j] = self.data[i][j] * b.data[i][j];
+            }
+        }
+    }
+
+    pub fn multiply_by_scalar(&mut self, b: f64) {
         for row in &mut self.data {
             for i in 0..self.size {
                 row[i] = row[i] * b;
             }
+        }
+    }
+
+    pub fn subtract_scalar(&mut self, b: f64) {
+        for row in &mut self.data {
+            for i in 0..self.size {
+                row[i] = row[i] - b;
+            }
+        }
+    }
+
+    pub fn zero(&mut self) {
+        for row in &mut self.data {
+            for i in 0..self.size {
+                row[i] = 0.0;
+            }
+        }
+    }
+
+    pub fn identity(&mut self) {
+        let mut i = 0;
+        for row in &mut self.data {
+            for j in 0..self.size {
+                if i == j {
+                    row[j] = 1.0;
+                }
+                else {
+                    row[j] = 0.0;
+                }
+            }
+            i = i + 1;
         }
     }
 
@@ -60,21 +99,6 @@ impl SquareMatrix {
             for i in 0..self.size {
                 row[i] = 1.0;
             }
-        }
-    }
-
-    pub fn identity(&mut self) {
-        let mut j = 0;
-        for row in &mut self.data {
-            for i in 0..self.size {
-                if i == j {
-                    row[i] = 1.0;
-                }
-                else {
-                    row[i] = 0.0;
-                }
-            }
-            j = j + 1;
         }
     }
 }

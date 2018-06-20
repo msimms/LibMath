@@ -69,6 +69,11 @@ void squareMatrixMultiplyByScalar(SquareMatrixPtr A, double B);
 void squareMatrixSubtract(const SquareMatrixPtr A, const SquareMatrixPtr B, SquareMatrixPtr C);
 
 /**
+ * Subtracts the scalar from the vector.
+ */
+void squareMatrixSubtractScalar(SquareMatrixPtr A, double B);
+
+/**
  * Sets the value of A to the zero matrix.
  */
 void squareMatrixZero(SquareMatrixPtr A);

@@ -26,13 +26,19 @@ int main(int argc, const char * argv[])
 {
 	LibMath::SquareMatrix* m = new LibMath::SquareMatrix(5);
 	m->identity();
+	std::cout << "Identity matrix:" << std::endl;
 	m->print();
 	delete m;
 
 	m = new LibMath::SquareMatrix(5);
-	m->ones();
+	m->zero();
+	std::cout << "Zero matrix:" << std::endl;
 	m->print();
-	m->multiply(2);
+	m->ones();
+	std::cout << "Ones matrix:" << std::endl;
+	m->print();
+	m->multiply(2.0);
+	std::cout << "Ones matrix multiplied by 2.0:" << std::endl;
 	m->print();
 	delete m;
 

@@ -26,11 +26,18 @@ fn main()
 {
 	let mut m = square_matrix::SquareMatrix::new(5);
 	m.identity();
+	println!("Identity matrix:");
 	m.print();
-
-	m = square_matrix::SquareMatrix::new(5);
+	m.zero();
+	println!("Zero matrix:");
+	m.print();
 	m.ones();
+	println!("Ones matrix:");
 	m.print();
-	m.multiply(2.0);
+	m.multiply_by_scalar(2.0);
+	println!("Ones matrix multiplied by 2.0:");
+	m.print();
+	m.subtract_scalar(1.0);
+	println!("2.0 matrix - 1.0:");
 	m.print();
 }

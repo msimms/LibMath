@@ -27,13 +27,19 @@ int main(int argc, const char * argv[])
 {
 	SquareMatrixPtr m = squareMatrixCreate(5);
 	squareMatrixIdentity(m);
+	printf("Identity matrix:\n");
 	squareMatrixPrint(m);
 	squareMatrixDestroy(m);
 
 	m = squareMatrixCreate(5);
-	squareMatrixOnes(m);
+	squareMatrixZero(m);
+	printf("Zero matrix:\n");
 	squareMatrixPrint(m);
-	squareMatrixMultiplyByScalar(m, 2);
+	squareMatrixOnes(m);
+	printf("Ones matrix:\n");
+	squareMatrixPrint(m);
+	squareMatrixMultiplyByScalar(m, 2.0);
+	printf("Ones matrix multiplied by 2.0:\n");
 	squareMatrixPrint(m);
 	squareMatrixDestroy(m);
 	
