@@ -20,10 +20,10 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 
-pub type MatrixCol = Vec<Vec<f64>>;
+pub type MatrixData = Vec<Vec<f64>>;
 
 pub struct SquareMatrix {
-    data: MatrixCol,
+    data: MatrixData,
     size: usize,
 }
 
@@ -32,11 +32,33 @@ impl SquareMatrix {
         SquareMatrix { size: size, data: SquareMatrix::create_matrix(size) }
     }
 
-    fn create_matrix(size: usize) -> MatrixCol {
-        let mut c: MatrixCol = Vec::new();
-        for i in 0..size {
-            c[i] = Vec::new();
-        }
+    fn create_matrix(size: usize) -> MatrixData {
+        let mut c: MatrixData = vec![vec![0.0; size]; size];
         c
+    }
+
+    pub fn print(&mut self) {
+        for row in &mut self.data {
+            print!("[");
+            for i in 0..self.size {
+    		    print!("{} ", row[i]);
+            }
+            println!("]");
+        }
+    }
+
+    pub fn ones(&mut self) {
+        for row in &mut self.data {
+            for i in 0..self.size {
+                row[i] = 1.0;
+            }
+        }
+    }
+
+    pub fn identity(&mut self) {
+        for row in &mut self.data {
+            for i in 0..self.size {
+            }
+        }
     }
 }

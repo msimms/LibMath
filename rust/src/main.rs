@@ -25,4 +25,6 @@ mod SquareMatrix;
 fn main()
 {
 	let mut m = SquareMatrix::SquareMatrix::new(10);
+	m.ones();
+	m.print();
 }
