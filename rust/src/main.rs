@@ -20,11 +20,17 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 
-mod SquareMatrix;
+mod square_matrix;
 
 fn main()
 {
-	let mut m = SquareMatrix::SquareMatrix::new(10);
+	let mut m = square_matrix::SquareMatrix::new(5);
+	m.identity();
+	m.print();
+
+	m = square_matrix::SquareMatrix::new(5);
 	m.ones();
+	m.print();
+	m.multiply(2.0);
 	m.print();
 }

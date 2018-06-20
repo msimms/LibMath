@@ -33,7 +33,7 @@ impl SquareMatrix {
     }
 
     fn create_matrix(size: usize) -> MatrixData {
-        let mut c: MatrixData = vec![vec![0.0; size]; size];
+        let c: MatrixData = vec![vec![0.0; size]; size];
         c
     }
 
@@ -47,6 +47,14 @@ impl SquareMatrix {
         }
     }
 
+    pub fn multiply(&mut self, b: f64) {
+        for row in &mut self.data {
+            for i in 0..self.size {
+                row[i] = row[i] * b;
+            }
+        }
+    }
+
     pub fn ones(&mut self) {
         for row in &mut self.data {
             for i in 0..self.size {
@@ -56,9 +64,17 @@ impl SquareMatrix {
     }
 
     pub fn identity(&mut self) {
+        let mut j = 0;
         for row in &mut self.data {
             for i in 0..self.size {
+                if i == j {
+                    row[i] = 1.0;
+                }
+                else {
+                    row[i] = 0.0;
+                }
             }
+            j = j + 1;
         }
     }
 }
