@@ -20,10 +20,15 @@
 // SOFTWARE.
 
 #include <iostream>
+#include "Powers.h"
 #include "SquareMatrix.h"
+#include "Statistics.h"
 
 int main(int argc, const char * argv[])
 {
+	std::cout << "Square Matrix Tests:" << std::endl;
+	std::cout << "--------------------" << std::endl;
+
 	LibMath::SquareMatrix* m = new LibMath::SquareMatrix(5);
 	m->identity();
 	std::cout << "Identity matrix:" << std::endl;
@@ -41,6 +46,27 @@ int main(int argc, const char * argv[])
 	std::cout << "Ones matrix multiplied by 2.0:" << std::endl;
 	m->print();
 	delete m;
+
+	std::cout << "Statistics Tests:" << std::endl;
+	std::cout << "-----------------" << std::endl;
+
+	long v_int[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	double v_int_avg = LibMath::Statistics::averageLong(v_int, 9);
+	std::cout << "Average: " << v_int_avg << std::endl;
+
+	double v_flt[] = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
+	double v_flt_avg = LibMath::Statistics::averageDouble(v_flt, 9);
+	std::cout << "Average: " << v_flt_avg << std::endl;
+	std::cout << "Variance: " << LibMath::Statistics::variance(v_flt, 9, v_flt_avg) << std::endl;
+	std::cout << "Standard Deviation: " << LibMath::Statistics::standardDeviation(v_flt, 9, v_flt_avg) << std::endl;
+	std::cout << "Max: " << LibMath::Statistics::max(v_flt, 9) << std::endl;
+	std::cout << "Min: " << LibMath::Statistics::min(v_flt, 9) << std::endl;
+
+	std::cout << "Power Tests:" << std::endl;
+	std::cout << "------------" << std::endl;
+
+	unsigned long nearest = LibMath::NearestPowerOf2(63);
+	std::cout << "Nearest power of 2 for 63 is " << nearest << "." << std::endl;
 
 	return 0;
 }

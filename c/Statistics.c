@@ -23,7 +23,7 @@
 
 #include "Statistics.h"
 
-double statisticsAverageLong(const long* data, unsigned long numPoints)
+double statisticsAverageLong(const long* data, size_t numPoints)
 {
 	register long index;
 	register long sum = 0;
@@ -33,7 +33,7 @@ double statisticsAverageLong(const long* data, unsigned long numPoints)
 	return (double)sum / (double)numPoints;
 }
 
-double statisticsAverageDouble(const double* data, unsigned long numPoints)
+double statisticsAverageDouble(const double* data, size_t numPoints)
 {
 	register long	index;
 	register double	sum = 0;
@@ -43,7 +43,7 @@ double statisticsAverageDouble(const double* data, unsigned long numPoints)
 	return sum / (double)numPoints;
 }
 
-double statisticsVariance(const double* data, unsigned long numPoints, double mean)
+double statisticsVariance(const double* data, size_t numPoints, double mean)
 {
 	register long	index;
 	register double	numerator = 0;
@@ -53,13 +53,13 @@ double statisticsVariance(const double* data, unsigned long numPoints, double me
 	return numerator / (double)(numPoints - 1);
 }
 
-double statisticsStandardDeviation(const double* data, unsigned long numPoints, double mean)
+double statisticsStandardDeviation(const double* data, size_t numPoints, double mean)
 {
 	double var = statisticsVariance(data, numPoints, mean);
 	return sqrt(var);
 }
 
-double statisticsMax(const double* data, unsigned long numPoints)
+double statisticsMax(const double* data, size_t numPoints)
 {
 	register long	index;
 	register double	result = data[0];
@@ -72,7 +72,7 @@ double statisticsMax(const double* data, unsigned long numPoints)
 	return result;
 }
 
-double statisticsMin(const double* data, unsigned long numPoints)
+double statisticsMin(const double* data, size_t numPoints)
 {
 	register long	index;
 	register double	result = data[0];

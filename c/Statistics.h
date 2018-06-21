@@ -24,34 +24,36 @@
 #ifndef _STATISTICS_
 #define _STATISTICS_
 
-/**
- * Computes the average value in the given array.
- */
-static double statisticsAverageLong(const long* data, unsigned long numPoints);
+#include <stddef.h>
 
 /**
  * Computes the average value in the given array.
  */
-static double statisticsAverageDouble(const double* data, unsigned long numPoints);
+double statisticsAverageLong(const long* data, size_t numPoints);
+
+/**
+ * Computes the average value in the given array.
+ */
+double statisticsAverageDouble(const double* data, size_t numPoints);
 
 /**
  * Computes the variance of the given array with the mean value supplied.
  */
-static double statisticsVariance(const double* data, unsigned long numPoints, double mean);
+double statisticsVariance(const double* data, size_t numPoints, double mean);
 
 /**
  * Computes the standard deviation of the given array with the mean value supplied.
  */
-static double statisticsStandardDeviation(const double* data, unsigned long numPoints, double mean);
+double statisticsStandardDeviation(const double* data, size_t numPoints, double mean);
 
 /**
  * Finds the largest value in the array.
  */
-static double statisticsMax(const double* data, unsigned long numPoints);
+double statisticsMax(const double* data, size_t numPoints);
 
 /**
  * Finds the smallest value in the array.
  */
-static double statisticsMin(const double* data, unsigned long numPoints);
+double statisticsMin(const double* data, size_t numPoints);
 
 #endif

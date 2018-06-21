@@ -21,10 +21,15 @@
 
 #include <stdio.h>
 
+#include "Powers.h"
 #include "SquareMatrix.h"
+#include "Statistics.h"
 
 int main(int argc, const char * argv[])
 {
+	printf("Square Matrix Tests:\n");
+	printf("--------------------\n");
+
 	SquareMatrixPtr m = squareMatrixCreate(5);
 	squareMatrixIdentity(m);
 	printf("Identity matrix:\n");
@@ -42,6 +47,27 @@ int main(int argc, const char * argv[])
 	printf("Ones matrix multiplied by 2.0:\n");
 	squareMatrixPrint(m);
 	squareMatrixDestroy(m);
-	
+
+	printf("Statistics Tests:\n");
+	printf("-----------------\n");
+
+	long v_int[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	double v_int_avg = statisticsAverageLong(v_int, 9);
+	printf("Average: %lf\n", v_int_avg);
+
+	double v_flt[] = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
+	double v_flt_avg = statisticsAverageDouble(v_flt, 9);
+	printf("Average: %lf\n", v_flt_avg);
+	printf("Variance: %lf\n", statisticsVariance(v_flt, 9, v_flt_avg));
+	printf("Standard Deviation: %lf\n", statisticsStandardDeviation(v_flt, 9, v_flt_avg));
+	printf("Max: %lf\n", statisticsMax(v_flt, 9));
+	printf("Min: %lf\n\n", statisticsMin(v_flt, 9));
+
+	printf("Power Tests:\n");
+	printf("------------\n");
+
+	unsigned long nearest = NearestPowerOf2(63);
+	printf("Nearest power of 2 for 63 is %ld.\n", nearest);
+
 	return 0;
 }
