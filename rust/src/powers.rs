@@ -20,46 +20,20 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 
-mod powers;
-mod square_matrix;
-mod statistics;
-
-fn main()
+pub fn nearest_power_of_2(num: u32) -> u32
 {
-	println!("Square Matrix Tests:");
-	println!("--------------------");
+    let mut n = 0;
 
-	let mut m = square_matrix::SquareMatrix::new(5);
-	m.identity();
-	println!("Identity matrix:");
-	m.print();
-	m.zero();
-	println!("Zero matrix:");
-	m.print();
-	m.ones();
-	println!("Ones matrix:");
-	m.print();
-	m.multiply_by_scalar(2.0);
-	println!("Ones matrix multiplied by 2.0:");
-	m.print();
-	m.subtract_scalar(1.0);
-	println!("2.0 matrix - 1.0:");
-	m.print();
+    if num > 0 {
+        n = num - 1;
+    }
 
-	println!("Statistics Tests:");
-	println!("-----------------");
+    n |= n >> 1;
+    n |= n >> 2;
+    n |= n >> 4;
+    n |= n >> 8;
+    n |= n >> 16;
+    n = n + 1;
 
-	let v_int = vec![1, 2, 3, 4, 5, 6, 7, 8, 9];
-	let v_int_avg = statistics::average_long(v_int);
-	println!("Average: {}", v_int_avg);
-
-	let v_flt = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0];
-	let v_flt_avg = statistics::average_float(v_flt);
-	println!("Average: {}", v_flt_avg);
-
-	println!("Power Tests:");
-	println!("------------");
-
-	let nearest = powers::nearest_power_of_2(63);
-	println!("Nearest power of 2 for {} is {}.", 63, nearest);
+    n
 }
