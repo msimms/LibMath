@@ -21,6 +21,7 @@
 //	SOFTWARE.
 
 mod square_matrix;
+mod statistics;
 
 fn main()
 {
@@ -40,4 +41,12 @@ fn main()
 	m.subtract_scalar(1.0);
 	println!("2.0 matrix - 1.0:");
 	m.print();
+
+	let v_int = vec![1, 2, 3, 4, 5, 6, 7, 8, 9];
+	let v_int_avg = statistics::average_long(v_int);
+	println!("Average: {}", v_int_avg);
+
+	let v_flt = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0];
+	let v_flt_avg = statistics::average_float(v_flt);
+	println!("Average: {}", v_flt_avg);
 }

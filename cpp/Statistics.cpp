@@ -1,5 +1,5 @@
 // by Michael J. Simms
-// Copyright (c) 1998 Michael J. Simms
+// Copyright (c) 1998-2018 Michael J. Simms
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,30 +27,27 @@ namespace LibMath
 {
 	double Statistics::averageLong(const long* data, unsigned long numPoints)
 	{
-		register long index;
 		register long sum = 0;
 
-		for (index = 0; index < numPoints; index++)
+		for (auto index = 0; index < numPoints; index++)
 			sum = sum + data[index];
 		return (double)sum / (double)numPoints;
 	}
 
 	double Statistics::averageDouble(const double* data, unsigned long numPoints)
 	{
-		register long	index;
 		register double	sum = 0;
 
-		for (index = 0; index < numPoints; index++)
+		for (auto index = 0; index < numPoints; index++)
 			sum = sum + data[index];
 		return sum / (double)numPoints;
 	}
 
 	double Statistics::variance(const double* data, unsigned long numPoints, double mean)
 	{
-		register long	index;
 		register double	numerator = 0;
 		
-		for (index = 0; index < numPoints; index++)
+		for (auto index = 0; index < numPoints; index++)
 			numerator = numerator + ((data[index] - mean) * (data[index] - mean));
 		return numerator / (double)(numPoints - 1);
 	}
@@ -63,10 +60,9 @@ namespace LibMath
 
 	double Statistics::max(const double* data, unsigned long numPoints)
 	{
-		register long	index;
 		register double	result = data[0];
 		
-		for (index = 1; index < numPoints; index++)
+		for (auto index = 1; index < numPoints; index++)
 		{
 			if (data[index] > result)
 				result = data[index];
@@ -76,10 +72,9 @@ namespace LibMath
 
 	double Statistics::min(const double* data, unsigned long numPoints)
 	{
-		register long	index;
 		register double	result = data[0];
 		
-		for (index = 1; index < numPoints; index++)
+		for (auto index = 1; index < numPoints; index++)
 		{
 			if (data[index] < result)
 				result = data[index];
