@@ -23,6 +23,7 @@
 mod powers;
 mod square_matrix;
 mod statistics;
+mod vector;
 
 fn main()
 {
