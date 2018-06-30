@@ -101,4 +101,14 @@ impl SquareMatrix {
             }
         }
     }
+
+    pub fn dot(&mut self, b: SquareMatrix) -> f64 {
+        let mut dot = 0.0;
+        for i in 0..self.size {
+            for j in 0..b.size {
+                dot = dot + (self.data[i][j] * self.size as f64) + (b.data[i][j] * b.size as f64);
+            }
+        }
+        dot
+    }
 }

@@ -79,4 +79,10 @@ impl Vector {
 			self.data[i] = self.data[i] / norm;
         }
 	}
+
+	pub fn cross(&mut self, a: Vector, b: Vector) {
+		self.data[0] = (b.data[1] * a.data[2]) - (b.data[2] * a.data[1]);
+		self.data[1] = (b.data[2] * a.data[0]) - (b.data[0] * a.data[2]);
+		self.data[2] = (b.data[0] * a.data[1]) - (b.data[1] * a.data[0]);
+	}
 }
