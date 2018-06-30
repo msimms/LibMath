@@ -25,7 +25,6 @@
 #define _SQUAREMATRIX_
 
 #include "Matrix.h"
-#include "Vector.h"
 
 namespace LibMath
 {
@@ -76,17 +75,17 @@ namespace LibMath
 		void zero(void);
 
 		/**
-		 * Sets the value of A to the identity matrix.
+		 * Sets the value of this matrix to the identity matrix.
 		 */
 		void identity(void);
 
 		/**
-		 * Sets the value of A to the matrix of all ones.
+		 * Sets the value of this matrix to the matrix of all ones.
 		 */
 		void ones(void);
 
 		/**
-		 * Returns the dot product of A (the current matrix) and B.
+		 * Returns the dot product of tthis matrix and B.
 		 */
 		double dot(const SquareMatrix* B);
 

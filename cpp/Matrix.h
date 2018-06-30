@@ -24,7 +24,8 @@
 #ifndef _MATRIX_
 #define _MATRIX_
 
-#include <stdio.h>
+#include <stdlib.h>
+#include "Vector.h"
 
 namespace LibMath
 {
@@ -34,7 +35,45 @@ namespace LibMath
 		Matrix(size_t w, size_t h);
 		virtual ~Matrix(void);
 
+		/**
+		 * Prints the matrix to standard out. Intended for testing and debugging.
+		 */
 		void print(void);
+
+		/**
+		 * Returns the width of the matrix.
+		 */		
+		size_t width(void) const { return m_w; };
+		
+		/**
+		 * Returns the height of the matrix.
+		 */		
+		size_t height(void) const { return m_h; };
+
+		/**
+		 * Returns C = A x B, where A is a matrix and B and C are vectors.
+		 */
+		void multiply(const Matrix* B, Vector* C);
+
+		/**
+		 * Multiplies the matrix by the supplied scalar.
+		 */
+		void multiply(double B);
+
+		/**
+		 * Returns C = A - B, where A, B, and C are matrices.
+		 */
+		void subtract(const Matrix* B, Matrix* C);
+
+		/**
+		 * Subtracts the scalar from the matrix.
+		 */
+		void subtract(double B);
+
+		/**
+		 * Sets the value of this matrix to the zero matrix.
+		 */
+		void zero(void);
 
 	protected:
 		size_t   m_w;

@@ -71,4 +71,59 @@ namespace LibMath
 			std::cout << std::endl;
 		}
 	}
+
+	void Matrix::multiply(const Matrix* B, Vector* C)
+	{
+		for (auto i = 0; i < m_w; ++i)
+		{
+			for (auto j = 0; j < m_h; ++j)
+			{
+				C->m_data[i] = this->m_data[i][j] * B->m_data[j][i];
+			}
+		}
+	}
+
+	void Matrix::multiply(double B)
+	{
+		for (auto i = 0; i < m_w; ++i)
+		{
+			for (auto j = 0; j < m_h; ++j)
+			{
+				m_data[i][j] *= B;
+			}
+		}
+	}
+
+	void Matrix::subtract(const Matrix* B, Matrix* C)
+	{
+		for (auto i = 0; i < m_w; ++i)
+		{
+			for (auto j = 0; j < m_h; ++j)
+			{
+				C->m_data[i][j] = this->m_data[i][j] - B->m_data[i][j];
+			}
+		}
+	}
+
+	void Matrix::subtract(double B)
+	{
+		for (auto i = 0; i < m_w; ++i)
+		{
+			for (auto j = 0; j < m_h; ++j)
+			{
+				m_data[i][j] -= B;
+			}
+		}
+	}
+
+	void Matrix::zero(void)
+	{
+		for (auto i = 0; i < m_w; ++i)
+		{
+			for (auto j = 0; j < m_h; ++j)
+			{
+				m_data[i][j] = 0.0;
+			}
+		}
+	}
 }
