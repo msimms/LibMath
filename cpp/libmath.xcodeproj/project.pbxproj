@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		272A3F5720FCE241000248AB /* Distance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 272A3F5520FCE241000248AB /* Distance.cpp */; };
 		279CC71920D74FD600E8690E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 279CC71820D74FD600E8690E /* main.cpp */; };
 		279CC71C20D8A4BC00E8690E /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 279CC71A20D8A4BC00E8690E /* Matrix.cpp */; };
 		27B413AC20D6884200A97E4B /* Powers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B413A420D6884200A97E4B /* Powers.cpp */; };
@@ -28,6 +29,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		272A3F5520FCE241000248AB /* Distance.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Distance.cpp; sourceTree = SOURCE_ROOT; };
+		272A3F5620FCE241000248AB /* Distance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Distance.h; sourceTree = SOURCE_ROOT; };
 		279CC71820D74FD600E8690E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
 		279CC71A20D8A4BC00E8690E /* Matrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = SOURCE_ROOT; };
 		279CC71B20D8A4BC00E8690E /* Matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = SOURCE_ROOT; };
@@ -73,6 +76,8 @@
 			isa = PBXGroup;
 			children = (
 				279CC71820D74FD600E8690E /* main.cpp */,
+				272A3F5520FCE241000248AB /* Distance.cpp */,
+				272A3F5620FCE241000248AB /* Distance.h */,
 				279CC71A20D8A4BC00E8690E /* Matrix.cpp */,
 				279CC71B20D8A4BC00E8690E /* Matrix.h */,
 				27B413A620D6884200A97E4B /* SquareMatrix.cpp */,
@@ -149,6 +154,7 @@
 				27B413AC20D6884200A97E4B /* Powers.cpp in Sources */,
 				279CC71920D74FD600E8690E /* main.cpp in Sources */,
 				27B413AF20D6884200A97E4B /* Statistics.cpp in Sources */,
+				272A3F5720FCE241000248AB /* Distance.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
