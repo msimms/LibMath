@@ -1,0 +1,46 @@
+#  MIT License
+#
+#  Copyright (c) 2018 Michael J Simms. All rights reserved.
+#
+#  Permission is hereby granted, free of charge, to any person obtaining a copy
+#  of this software and associated documentation files (the "Software"), to deal
+#  in the Software without restriction, including without limitation the rights
+#  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#  copies of the Software, and to permit persons to whom the Software is
+#  furnished to do so, subject to the following conditions:
+#
+#  The above copyright notice and this permission notice shall be included in all
+#  copies or substantial portions of the Software.
+#
+#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#  SOFTWARE.
+
+import math
+
+def to_rad(deg):
+    """Helper routine for the Haversine calculation."""
+    return deg * (math.pi / 180.0)
+
+def haversine_distance(loc1_lat, loc1_lon, loc1_alt, loc2_lat, loc2_lon, loc2_alt):
+    """Returns the Haversine distance between two points on the Earth's surface."""
+    R = 6372797.560856 # radius of the earth in meters
+    R = R + loc2_alt - loc1_alt
+
+    lat_arc = to_rad(loc1_lat - loc2_lat)
+    lon_arc = to_rad(loc1_lon - loc2_lon)
+
+    latH = math.sin(lat_arc * 0.5)
+    latH = latH * latH
+
+    lonH = math.sin(lon_arc * 0.5)
+    lonH = lonH * lonH
+
+    tmp = math.cos(to_rad(loc1_lat)) * math.cos(to_rad(loc2_lat))
+    rad = 2.0 * math.asin(math.sqrt(latH + tmp * lonH))
+
+    return rad * R
