@@ -20,6 +20,7 @@
 // SOFTWARE.
 
 #include <iostream>
+#include "Distance.h"
 #include "Powers.h"
 #include "SquareMatrix.h"
 #include "Statistics.h"
@@ -68,5 +69,7 @@ int main(int argc, const char * argv[])
 	unsigned long nearest = LibMath::NearestPowerOf2(63);
 	std::cout << "Nearest power of 2 for 63 is " << nearest << "." << std::endl;
 
+	
+	
 	return 0;
 }

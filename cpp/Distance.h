@@ -35,6 +35,11 @@ namespace LibMath
 		virtual ~Distance(void) {};
 
 		/**
+		 * Computes the Haversine distance between two points on Earth's surface.
+		 */
+		double haversineDistance(double loc1_lat, double loc1_lon, double loc1_alt, double loc2_lat, double loc2_lon, double loc2_alt);
+
+		/**
 		 * Computes the Hamming distance of the strings.
 		 */
 		size_t hammingDistance(const char* str1, const char* str2);
@@ -43,6 +48,9 @@ namespace LibMath
 		 * Computes the Levenshtein distance of str2 relative to str1.
 		 */
 		size_t levenshteinDistance(const char* str1, const char* str2);
+		
+	private:
+		double toRad(double deg);
 	};
 }
 

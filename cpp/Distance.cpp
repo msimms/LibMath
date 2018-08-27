@@ -21,9 +21,36 @@
 
 #include "Distance.h"
 #include <string.h>
+#include <math.h>
 
 namespace LibMath
 {
+	double Distance::toRad(double deg)
+	{
+		const double pi = (double)(3.141592653589793238);
+		return deg * (pi / (double)(180.0));
+	}
+
+	double Distance::haversineDistance(double loc1_lat, double loc1_lon, double loc1_alt, double loc2_lat, double loc2_lon, double loc2_alt)
+	{
+		double R = (double)6372797.560856; // radius of the earth in meters
+		R += loc2_alt - loc1_alt;
+		
+		double latArc = toRad(loc1_lat - loc2_lat);
+		double lonArc = toRad(loc1_lon - loc2_lon);
+		
+		double latH = sin(latArc * (double)0.5);
+		latH *= latH;
+		
+		double lonH = sin(lonArc * (double)0.5);
+		lonH *= lonH;
+		
+		double tmp = cos(toRad(loc1_lat)) * cos(toRad(loc2_lat));
+		double rad = (double)2.0 * asin(sqrt(latH + tmp * lonH));
+		
+		return rad * R;
+	}
+
 	size_t Distance::hammingDistance(const char* str1, const char* str2)
 	{
 		size_t len1 = strlen(str1);
