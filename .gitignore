@@ -20,6 +20,7 @@ DerivedData/
 
 # Rust
 rust/target/
+rust/Cargo.lock
 
 # Python
 *.pyc
