@@ -69,6 +69,10 @@ int main(int argc, const char * argv[])
 	unsigned long nearest = LibMath::NearestPowerOf2(63);
 	std::cout << "Nearest power of 2 for 63 is " << nearest << "." << std::endl;
 
+	std::cout << "Distance Tests:" << std::endl;
+	std::cout << "---------------" << std::endl;
+	
+	std::cout << "Hamming Distance: " << LibMath::Distance::hammingDistance("1011101", "1001001") << std::endl;
 	
 	
 	return 0;
