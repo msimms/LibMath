@@ -33,7 +33,7 @@ size_t hammingDistance(const char* str1, const char* str2)
 	
 	for (size_t i = 0; i < len1; ++i)
 	{
-		if (str1[i] == str2[i])
+		if (str1[i] != str2[i])
 			++distance;
 	}
 	return distance;

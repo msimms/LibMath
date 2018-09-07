@@ -21,6 +21,7 @@
 
 #include <stdio.h>
 
+#include "Distance.h"
 #include "Powers.h"
 #include "SquareMatrix.h"
 #include "Statistics.h"
@@ -69,5 +70,11 @@ int main(int argc, const char * argv[])
 	unsigned long nearest = NearestPowerOf2(63);
 	printf("Nearest power of 2 for 63 is %ld.\n", nearest);
 
+	printf("Distance Tests:\n");
+	printf("---------------\n");
+
+	size_t distance = hammingDistance("1011101", "1001001");
+	printf("Hamming Distance: %u\n", distance);
+	
 	return 0;
 }
