@@ -22,25 +22,39 @@
 
 import math
 
-def to_rad(deg):
-    """Helper routine for the Haversine calculation."""
-    return deg * (math.pi / 180.0)
-
 def haversine_distance(loc1_lat, loc1_lon, loc1_alt, loc2_lat, loc2_lon, loc2_alt):
     """Returns the Haversine distance between two points on the Earth's surface."""
     R = 6372797.560856 # radius of the earth in meters
     R = R + loc2_alt - loc1_alt
 
-    lat_arc = to_rad(loc1_lat - loc2_lat)
-    lon_arc = to_rad(loc1_lon - loc2_lon)
+    lat_arc = math.radians(loc1_lat - loc2_lat)
+    lon_arc = math.radians(loc1_lon - loc2_lon)
 
-    latH = math.sin(lat_arc * 0.5)
-    latH = latH * latH
+    lat_h = math.sin(lat_arc * 0.5)
+    lat_h = lat_h * lat_h
 
-    lonH = math.sin(lon_arc * 0.5)
-    lonH = lonH * lonH
+    lon_h = math.sin(lon_arc * 0.5)
+    lon_h = lon_h * lon_h
 
-    tmp = math.cos(to_rad(loc1_lat)) * math.cos(to_rad(loc2_lat))
-    rad = 2.0 * math.asin(math.sqrt(latH + tmp * lonH))
+    tmp = math.cos(math.radians(loc1_lat)) * math.cos(math.radians(loc2_lat))
+    rad = 2.0 * math.asin(math.sqrt(lat_h + tmp * lon_h))
+
+    return rad * R
+
+def haversine_distance_ignore_altitude(loc1_lat, loc1_lon, loc2_lat, loc2_lon):
+    """Returns the Haversine distance between two points on the Earth's surface."""
+    R = 6372797.560856 # radius of the earth in meters
+
+    lat_arc = math.radians(loc1_lat - loc2_lat)
+    lon_arc = math.radians(loc1_lon - loc2_lon)
+
+    lat_h = math.sin(lat_arc * 0.5)
+    lat_h = lat_h * lat_h
+
+    lon_h = math.sin(lon_arc * 0.5)
+    lon_h = lon_h * lon_h
+
+    tmp = math.cos(math.radians(loc1_lat)) * math.cos(math.radians(loc2_lat))
+    rad = 2.0 * math.asin(math.sqrt(lat_h + tmp * lon_h))
 
     return rad * R
