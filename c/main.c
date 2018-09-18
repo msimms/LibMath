@@ -74,7 +74,7 @@ int main(int argc, const char * argv[])
 	printf("---------------\n");
 
 	size_t distance = hammingDistance("1011101", "1001001");
-	printf("Hamming Distance: %u\n", distance);
+	printf("Hamming Distance: %zu\n", distance);
 	
 	return 0;
 }
