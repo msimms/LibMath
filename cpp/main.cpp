@@ -54,26 +54,35 @@ int main(int argc, const char * argv[])
 	long v_int[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	double v_int_avg = LibMath::Statistics::averageLong(v_int, 9);
 	std::cout << "Average: " << v_int_avg << std::endl;
-
+	assert(v_int_avg == 5.0);
 	double v_flt[] = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
 	double v_flt_avg = LibMath::Statistics::averageDouble(v_flt, 9);
 	std::cout << "Average: " << v_flt_avg << std::endl;
-	std::cout << "Variance: " << LibMath::Statistics::variance(v_flt, 9, v_flt_avg) << std::endl;
+	assert(v_flt_avg == 5.0);
+	double variance = LibMath::Statistics::variance(v_flt, 9, v_flt_avg);
+	std::cout << "Variance: " << variance << std::endl;
+	assert(variance == 7.5);
 	std::cout << "Standard Deviation: " << LibMath::Statistics::standardDeviation(v_flt, 9, v_flt_avg) << std::endl;
-	std::cout << "Max: " << LibMath::Statistics::max(v_flt, 9) << std::endl;
-	std::cout << "Min: " << LibMath::Statistics::min(v_flt, 9) << std::endl;
+	double max = LibMath::Statistics::max(v_flt, 9);
+	std::cout << "Max: " << max << std::endl;
+	assert(max == 9.0);
+	double min = LibMath::Statistics::min(v_flt, 9);
+	std::cout << "Min: " << min << std::endl << std::endl;
+	assert(min == 1.0);
 
 	std::cout << "Power Tests:" << std::endl;
 	std::cout << "------------" << std::endl;
 
 	unsigned long nearest = LibMath::NearestPowerOf2(63);
-	std::cout << "Nearest power of 2 for 63 is " << nearest << "." << std::endl;
+	std::cout << "Nearest power of 2 for 63 is " << nearest << "." << std::endl << std::endl;
+	assert(nearest == 64);
 
 	std::cout << "Distance Tests:" << std::endl;
 	std::cout << "---------------" << std::endl;
-	
-	std::cout << "Hamming Distance: " << LibMath::Distance::hammingDistance("1011101", "1001001") << std::endl;
-	
+
+	size_t distance = LibMath::Distance::hammingDistance("1011101", "1001001");
+	std::cout << "Hamming Distance: " << distance << std::endl << std::endl;
+	assert(distance == 2);
 	
 	return 0;
 }
