@@ -20,6 +20,7 @@
 // SOFTWARE.
 
 #include <stdio.h>
+#include <assert.h>
 
 #include "Distance.h"
 #include "Powers.h"
@@ -55,26 +56,36 @@ int main(int argc, const char * argv[])
 	long v_int[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	double v_int_avg = statisticsAverageLong(v_int, 9);
 	printf("Average: %lf\n", v_int_avg);
+	assert(v_int_avg == 5.0);
 
 	double v_flt[] = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
 	double v_flt_avg = statisticsAverageDouble(v_flt, 9);
 	printf("Average: %lf\n", v_flt_avg);
-	printf("Variance: %lf\n", statisticsVariance(v_flt, 9, v_flt_avg));
+	assert(v_flt_avg == 5.0);
+	double variance = statisticsVariance(v_flt, 9, v_flt_avg);
+	printf("Variance: %lf\n", variance);
+	assert(variance == 7.5);
 	printf("Standard Deviation: %lf\n", statisticsStandardDeviation(v_flt, 9, v_flt_avg));
-	printf("Max: %lf\n", statisticsMax(v_flt, 9));
-	printf("Min: %lf\n\n", statisticsMin(v_flt, 9));
+	double max = statisticsMax(v_flt, 9);
+	printf("Max: %lf\n", max);
+	assert(max == 9.0);
+	double min = statisticsMin(v_flt, 9);
+	printf("Min: %lf\n\n", min);
+	assert(min == 1.0);
 
 	printf("Power Tests:\n");
 	printf("------------\n");
 
 	unsigned long nearest = NearestPowerOf2(63);
-	printf("Nearest power of 2 for 63 is %ld.\n", nearest);
+	printf("Nearest power of 2 for 63 is %ld.\n\n", nearest);
+	assert(nearest == 64);
 
 	printf("Distance Tests:\n");
 	printf("---------------\n");
 
 	size_t distance = hammingDistance("1011101", "1001001");
-	printf("Hamming Distance: %zu\n", distance);
-	
+	printf("Hamming Distance: %zu\n\n", distance);
+	assert(distance == 2);
+
 	return 0;
 }
