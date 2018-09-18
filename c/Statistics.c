@@ -72,10 +72,36 @@ double statisticsMax(const double* data, size_t numPoints)
 	return result;
 }
 
+size_t statisticsMaxInt(const size_t* data, size_t numPoints)
+{
+	register long	index;
+	register size_t	result = data[0];
+	
+	for (index = 1; index < numPoints; index++)
+	{
+		if (data[index] > result)
+			result = data[index];
+	}
+	return result;
+}
+
 double statisticsMin(const double* data, size_t numPoints)
 {
 	register long	index;
 	register double	result = data[0];
+	
+	for (index = 1; index < numPoints; index++)
+	{
+		if (data[index] < result)
+			result = data[index];
+	}
+	return result;
+}
+
+size_t statisticsMinInt(const size_t* data, size_t numPoints)
+{
+	register long	index;
+	register size_t	result = data[0];
 	
 	for (index = 1; index < numPoints; index++)
 	{

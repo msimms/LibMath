@@ -50,10 +50,12 @@ double statisticsStandardDeviation(const double* data, size_t numPoints, double 
  * Finds the largest value in the array.
  */
 double statisticsMax(const double* data, size_t numPoints);
+size_t statisticsMaxInt(const size_t* data, size_t numPoints);
 
 /**
  * Finds the smallest value in the array.
  */
 double statisticsMin(const double* data, size_t numPoints);
+size_t statisticsMinInt(const size_t* data, size_t numPoints);
 
 #endif

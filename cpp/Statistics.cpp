@@ -25,42 +25,42 @@
 
 namespace LibMath
 {
-	double Statistics::averageLong(const long* data, unsigned long numPoints)
+	double Statistics::averageLong(const long* data, size_t numPoints)
 	{
-		register long sum = 0;
+		long sum = 0;
 
 		for (auto index = 0; index < numPoints; index++)
 			sum = sum + data[index];
 		return (double)sum / (double)numPoints;
 	}
 
-	double Statistics::averageDouble(const double* data, unsigned long numPoints)
+	double Statistics::averageDouble(const double* data, size_t numPoints)
 	{
-		register double	sum = 0;
+		double	sum = 0;
 
 		for (auto index = 0; index < numPoints; index++)
 			sum = sum + data[index];
 		return sum / (double)numPoints;
 	}
 
-	double Statistics::variance(const double* data, unsigned long numPoints, double mean)
+	double Statistics::variance(const double* data, size_t numPoints, double mean)
 	{
-		register double	numerator = 0;
+		double	numerator = 0;
 		
 		for (auto index = 0; index < numPoints; index++)
 			numerator = numerator + ((data[index] - mean) * (data[index] - mean));
 		return numerator / (double)(numPoints - 1);
 	}
 
-	double Statistics::standardDeviation(const double* data, unsigned long numPoints, double mean)
+	double Statistics::standardDeviation(const double* data, size_t numPoints, double mean)
 	{
 		double var = variance(data, numPoints, mean);
 		return sqrt(var);
 	}
 
-	double Statistics::max(const double* data, unsigned long numPoints)
+	double Statistics::max(const double* data, size_t numPoints)
 	{
-		register double	result = data[0];
+		double result = data[0];
 		
 		for (auto index = 1; index < numPoints; index++)
 		{
@@ -70,9 +70,33 @@ namespace LibMath
 		return result;
 	}
 
-	double Statistics::min(const double* data, unsigned long numPoints)
+	double Statistics::max(const size_t* data, size_t numPoints)
 	{
-		register double	result = data[0];
+		size_t result = data[0];
+		
+		for (auto index = 1; index < numPoints; index++)
+		{
+			if (data[index] > result)
+				result = data[index];
+		}
+		return result;
+	}
+
+	double Statistics::min(const double* data, size_t numPoints)
+	{
+		double result = data[0];
+		
+		for (auto index = 1; index < numPoints; index++)
+		{
+			if (data[index] < result)
+				result = data[index];
+		}
+		return result;
+	}
+
+	double Statistics::min(const size_t* data, size_t numPoints)
+	{
+		size_t result = data[0];
 		
 		for (auto index = 1; index < numPoints; index++)
 		{

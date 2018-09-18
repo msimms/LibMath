@@ -84,8 +84,11 @@ int main(int argc, const char * argv[])
 	printf("---------------\n");
 
 	size_t distance = hammingDistance("1011101", "1001001");
-	printf("Hamming Distance: %zu\n\n", distance);
+	printf("Hamming Distance: %zu\n", distance);
 	assert(distance == 2);
+	distance = levenshteinDistance("foo", "foobar");
+	printf("Levenshtein Distance: %zu\n\n", distance);
+	assert(distance == 3);
 
 	return 0;
 }

@@ -81,8 +81,11 @@ int main(int argc, const char * argv[])
 	std::cout << "---------------" << std::endl;
 
 	size_t distance = LibMath::Distance::hammingDistance("1011101", "1001001");
-	std::cout << "Hamming Distance: " << distance << std::endl << std::endl;
+	std::cout << "Hamming Distance: " << distance << std::endl;
 	assert(distance == 2);
-	
+	distance = LibMath::Distance::levenshteinDistance("foo", "foobar");
+	std::cout << "Levenshtein Distance: " << distance << std::endl << std::endl;
+	assert(distance == 3);
+
 	return 0;
 }

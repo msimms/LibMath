@@ -36,4 +36,14 @@ size_t hammingDistance(const char* str1, const char* str2);
  */
 size_t levenshteinDistance(const char* str1, const char* str2);
 
+/**
+ * Computes the Euclidian distance between two points in a 1D space.
+ */
+double euclidianDistance1D(double pt1, double pt2);
+
+/**
+ * Computes the Euclidian distance between two points in a 2D space.
+ */
+double euclidianDistance2D(double pt1X, double pt1Y, double pt2X, double pt2Y);
+
 #endif
