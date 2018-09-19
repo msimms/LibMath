@@ -21,6 +21,7 @@
 
 #include <iostream>
 #include "Distance.h"
+#include "KMeans.h"
 #include "Powers.h"
 #include "SquareMatrix.h"
 #include "Statistics.h"
@@ -86,6 +87,29 @@ int main(int argc, const char * argv[])
 	distance = LibMath::Distance::levenshteinDistance("foo", "foobar");
 	std::cout << "Levenshtein Distance: " << distance << std::endl << std::endl;
 	assert(distance == 3);
+
+	std::cout << "K-Means Tests:" << std::endl;
+	std::cout << "--------------" << std::endl;
+	double kMeansIn[10];
+	kMeansIn[0] = 7.123;
+	kMeansIn[1] = 0.999;
+	kMeansIn[2] = 0.001;
+	kMeansIn[3] = 0.5;
+	kMeansIn[4] = 0.75;
+	kMeansIn[5] = 0.002;
+	kMeansIn[6] = 3.0;
+	kMeansIn[7] = 2.0;
+	kMeansIn[8] = 5.0;
+	kMeansIn[9] = 0.001;
+	size_t* tags = LibMath::KMeans::withEquallySpacedCentroids1D(kMeansIn, 10, 3, (double)0.001, 3);
+	if (tags)
+	{
+		for (size_t i = 0; i < 10; ++i)
+		{
+			std::cout << tags[i] << std::endl;
+		}
+		delete tags;
+	}
 
 	return 0;
 }

@@ -10,6 +10,7 @@
 		272A3F5720FCE241000248AB /* Distance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 272A3F5520FCE241000248AB /* Distance.cpp */; };
 		279CC71920D74FD600E8690E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 279CC71820D74FD600E8690E /* main.cpp */; };
 		279CC71C20D8A4BC00E8690E /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 279CC71A20D8A4BC00E8690E /* Matrix.cpp */; };
+		27A71FC8215248C000995B56 /* KMeans.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27A71FC6215248C000995B56 /* KMeans.cpp */; };
 		27B413AC20D6884200A97E4B /* Powers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B413A420D6884200A97E4B /* Powers.cpp */; };
 		27B413AD20D6884200A97E4B /* SquareMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B413A620D6884200A97E4B /* SquareMatrix.cpp */; };
 		27B413AE20D6884200A97E4B /* Vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B413A720D6884200A97E4B /* Vector.cpp */; };
@@ -34,6 +35,8 @@
 		279CC71820D74FD600E8690E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
 		279CC71A20D8A4BC00E8690E /* Matrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = SOURCE_ROOT; };
 		279CC71B20D8A4BC00E8690E /* Matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = SOURCE_ROOT; };
+		27A71FC6215248C000995B56 /* KMeans.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KMeans.cpp; sourceTree = SOURCE_ROOT; };
+		27A71FC7215248C000995B56 /* KMeans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMeans.h; sourceTree = SOURCE_ROOT; };
 		27B4139A20D687FD00A97E4B /* libmath */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = libmath; sourceTree = BUILT_PRODUCTS_DIR; };
 		27B413A420D6884200A97E4B /* Powers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Powers.cpp; sourceTree = SOURCE_ROOT; };
 		27B413A520D6884200A97E4B /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statistics.h; sourceTree = SOURCE_ROOT; };
@@ -78,6 +81,8 @@
 				279CC71820D74FD600E8690E /* main.cpp */,
 				272A3F5520FCE241000248AB /* Distance.cpp */,
 				272A3F5620FCE241000248AB /* Distance.h */,
+				27A71FC6215248C000995B56 /* KMeans.cpp */,
+				27A71FC7215248C000995B56 /* KMeans.h */,
 				279CC71A20D8A4BC00E8690E /* Matrix.cpp */,
 				279CC71B20D8A4BC00E8690E /* Matrix.h */,
 				27B413A620D6884200A97E4B /* SquareMatrix.cpp */,
@@ -150,6 +155,7 @@
 			files = (
 				279CC71C20D8A4BC00E8690E /* Matrix.cpp in Sources */,
 				27B413AD20D6884200A97E4B /* SquareMatrix.cpp in Sources */,
+				27A71FC8215248C000995B56 /* KMeans.cpp in Sources */,
 				27B413AE20D6884200A97E4B /* Vector.cpp in Sources */,
 				27B413AC20D6884200A97E4B /* Powers.cpp in Sources */,
 				279CC71920D74FD600E8690E /* main.cpp in Sources */,
