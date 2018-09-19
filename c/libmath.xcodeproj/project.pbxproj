@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		272A3F5420FCDFE2000248AB /* Distance.c in Sources */ = {isa = PBXBuildFile; fileRef = 272A3F5320FCDFE2000248AB /* Distance.c */; };
+		27A71FC5215036D600995B56 /* KMeans.c in Sources */ = {isa = PBXBuildFile; fileRef = 27A71FC4215036D600995B56 /* KMeans.c */; };
 		27B413CC20D6D73700A97E4B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 27B413C320D6D73700A97E4B /* main.c */; };
 		27B413CD20D6D73700A97E4B /* Vector.c in Sources */ = {isa = PBXBuildFile; fileRef = 27B413C420D6D73700A97E4B /* Vector.c */; };
 		27B413CE20D6D73700A97E4B /* Statistics.c in Sources */ = {isa = PBXBuildFile; fileRef = 27B413C520D6D73700A97E4B /* Statistics.c */; };
@@ -30,6 +31,8 @@
 /* Begin PBXFileReference section */
 		272A3F5220FCDFE2000248AB /* Distance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Distance.h; sourceTree = SOURCE_ROOT; };
 		272A3F5320FCDFE2000248AB /* Distance.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Distance.c; sourceTree = SOURCE_ROOT; };
+		27A71FC3215036D600995B56 /* KMeans.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KMeans.h; sourceTree = SOURCE_ROOT; };
+		27A71FC4215036D600995B56 /* KMeans.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = KMeans.c; sourceTree = SOURCE_ROOT; };
 		27B413B920D6D6E800A97E4B /* libmath */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = libmath; sourceTree = BUILT_PRODUCTS_DIR; };
 		27B413C320D6D73700A97E4B /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = SOURCE_ROOT; };
 		27B413C420D6D73700A97E4B /* Vector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Vector.c; sourceTree = SOURCE_ROOT; };
@@ -75,6 +78,8 @@
 				27B413C320D6D73700A97E4B /* main.c */,
 				272A3F5320FCDFE2000248AB /* Distance.c */,
 				272A3F5220FCDFE2000248AB /* Distance.h */,
+				27A71FC4215036D600995B56 /* KMeans.c */,
+				27A71FC3215036D600995B56 /* KMeans.h */,
 				27B413C820D6D73700A97E4B /* SquareMatrix.c */,
 				27B413C620D6D73700A97E4B /* SquareMatrix.h */,
 				27B413C920D6D73700A97E4B /* Powers.c */,
@@ -148,6 +153,7 @@
 				27B413CC20D6D73700A97E4B /* main.c in Sources */,
 				27B413CF20D6D73700A97E4B /* SquareMatrix.c in Sources */,
 				272A3F5420FCDFE2000248AB /* Distance.c in Sources */,
+				27A71FC5215036D600995B56 /* KMeans.c in Sources */,
 				27B413CE20D6D73700A97E4B /* Statistics.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

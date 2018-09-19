@@ -23,6 +23,7 @@
 #include <assert.h>
 
 #include "Distance.h"
+#include "KMeans.h"
 #include "Powers.h"
 #include "SquareMatrix.h"
 #include "Statistics.h"
@@ -89,6 +90,29 @@ int main(int argc, const char * argv[])
 	distance = levenshteinDistance("foo", "foobar");
 	printf("Levenshtein Distance: %zu\n\n", distance);
 	assert(distance == 3);
+
+	printf("K-Means Tests:\n");
+	printf("--------------\n");
+	double kMeansIn[10];
+	kMeansIn[0] = 7.123;
+	kMeansIn[1] = 0.999;
+	kMeansIn[2] = 0.001;
+	kMeansIn[3] = 0.5;
+	kMeansIn[4] = 0.75;
+	kMeansIn[5] = 0.002;
+	kMeansIn[6] = 3.0;
+	kMeansIn[7] = 2.0;
+	kMeansIn[8] = 5.0;
+	kMeansIn[9] = 0.001;
+	size_t* tags = kMeansEquallySpacedCentroids1D(kMeansIn, 10, 3, (double)0.001, 3);
+	if (tags)
+	{
+		for (size_t i = 0; i < 10; ++i)
+		{
+			printf("%zu\n", tags[i]);
+		}
+		free((void*)tags);
+	}
 
 	return 0;
 }
