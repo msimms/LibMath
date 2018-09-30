@@ -20,6 +20,7 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 
+mod distance;
 mod powers;
 mod square_matrix;
 mod statistics;
@@ -47,20 +48,31 @@ fn main()
 	println!("2.0 matrix - 1.0:");
 	m.print();
 
-	println!("Statistics Tests:");
+	println!("\nStatistics Tests:");
 	println!("-----------------");
 
 	let v_int = vec![1, 2, 3, 4, 5, 6, 7, 8, 9];
-	let v_int_avg = statistics::average_long(v_int);
+	let v_int_avg = statistics::average_u32(v_int);
 	println!("Average: {}", v_int_avg);
 
 	let v_flt = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0];
-	let v_flt_avg = statistics::average_float(v_flt);
+	let v_flt_avg = statistics::average_f32(v_flt);
 	println!("Average: {}", v_flt_avg);
 
-	println!("Power Tests:");
+	println!("\nPower Tests:");
 	println!("------------");
 
 	let nearest = powers::nearest_power_of_2(63);
 	println!("Nearest power of 2 for {} is {}.", 63, nearest);
+	assert!(nearest == 64);
+
+	println!("\nDistance Tests:");
+	println!("---------------");
+
+	let mut distance = distance::hamming_distance("1011101", "1001001");
+	println!("Hamming Distance: {}", distance);
+	assert!(distance == 2);
+	distance = distance::levenshtein_distance("foo", "foobar");
+	println!("Levenshtein Distance: {}", distance);
+	assert!(distance == 3);
 }

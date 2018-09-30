@@ -20,7 +20,7 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 
-pub fn average_long(data: Vec<u32>) -> f32 {
+pub fn average_u32(data: Vec<u32>) -> f32 {
     let mut sum = 0;
 
     for item in &data {
@@ -31,7 +31,7 @@ pub fn average_long(data: Vec<u32>) -> f32 {
     avg
 }
 
-pub fn average_float(data: Vec<f32>) -> f32 {
+pub fn average_f32(data: Vec<f32>) -> f32 {
     let mut sum = 0.0;
 
     for item in &data {
@@ -61,7 +61,7 @@ pub fn standard_deviation(data: Vec<f32>, mean: f32) -> f32 {
     std_dev
 }
 
-pub fn max(data: Vec<f32>) -> f32 {
+pub fn max_f32(data: Vec<f32>) -> f32 {
     let mut result = data[0];
     
     for item in &data {
@@ -72,7 +72,29 @@ pub fn max(data: Vec<f32>) -> f32 {
     result
 }
 
-pub fn min(data: Vec<f32>) -> f32 {
+pub fn min_f32(data: Vec<f32>) -> f32 {
+    let mut result = data[0];
+    
+    for item in &data {
+        if *item < result {
+            result = *item;
+        }
+    }
+    result
+}
+
+pub fn max_usize(data: Vec<usize>) -> usize {
+    let mut result = data[0];
+    
+    for item in &data {
+        if *item > result {
+            result = *item;
+        }
+    }
+    result
+}
+
+pub fn min_usize(data: Vec<usize>) -> usize {
     let mut result = data[0];
     
     for item in &data {
