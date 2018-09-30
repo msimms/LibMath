@@ -98,7 +98,7 @@ size_t levenshteinDistance(const char* str1, const char* str2)
 		// Copy v1 to v0.
 		memcpy(tempV, v0, vecSize);
 		memcpy(v0, v1, vecSize);
-		memcpy(v1, v0, vecSize);
+		memcpy(v1, tempV, vecSize);
 	}
 
 	// Save the final distance calculation, before freeing the vector.
