@@ -20,10 +20,10 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 
-pub fn average_u32(data: Vec<u32>) -> f32 {
+pub fn average_u32(data: &Vec<u32>) -> f32 {
     let mut sum = 0;
 
-    for item in &data {
+    for item in data {
         sum = sum + *item;
     }
 
@@ -31,10 +31,10 @@ pub fn average_u32(data: Vec<u32>) -> f32 {
     avg
 }
 
-pub fn average_f32(data: Vec<f32>) -> f32 {
+pub fn average_f32(data: &Vec<f32>) -> f32 {
     let mut sum = 0.0;
 
-    for item in &data {
+    for item in data {
         sum = sum + *item;
     }
 
@@ -43,10 +43,10 @@ pub fn average_f32(data: Vec<f32>) -> f32 {
     sum
 }
 
-pub fn variance(data: Vec<f32>, mean: f32) -> f32 {
+pub fn variance(data: &Vec<f32>, mean: f32) -> f32 {
     let mut numerator = 0.0;
 
-    for item in &data {
+    for item in data {
         numerator = numerator + ((*item - mean) * (*item - mean));
     }
 
@@ -55,16 +55,16 @@ pub fn variance(data: Vec<f32>, mean: f32) -> f32 {
     variance
 }
 
-pub fn standard_deviation(data: Vec<f32>, mean: f32) -> f32 {
+pub fn standard_deviation(data: &Vec<f32>, mean: f32) -> f32 {
     let var = variance(data, mean);
     let std_dev = var.sqrt();
     std_dev
 }
 
-pub fn max_f32(data: Vec<f32>) -> f32 {
+pub fn max_f32(data: &Vec<f32>) -> f32 {
     let mut result = data[0];
     
-    for item in &data {
+    for item in data {
         if *item > result {
             result = *item;
         }
@@ -72,10 +72,10 @@ pub fn max_f32(data: Vec<f32>) -> f32 {
     result
 }
 
-pub fn min_f32(data: Vec<f32>) -> f32 {
+pub fn min_f32(data: &Vec<f32>) -> f32 {
     let mut result = data[0];
     
-    for item in &data {
+    for item in data {
         if *item < result {
             result = *item;
         }
@@ -83,10 +83,10 @@ pub fn min_f32(data: Vec<f32>) -> f32 {
     result
 }
 
-pub fn max_usize(data: Vec<usize>) -> usize {
+pub fn max_usize(data: &Vec<usize>) -> usize {
     let mut result = data[0];
     
-    for item in &data {
+    for item in data {
         if *item > result {
             result = *item;
         }
@@ -94,10 +94,10 @@ pub fn max_usize(data: Vec<usize>) -> usize {
     result
 }
 
-pub fn min_usize(data: Vec<usize>) -> usize {
+pub fn min_usize(data: &Vec<usize>) -> usize {
     let mut result = data[0];
     
-    for item in &data {
+    for item in data {
         if *item < result {
             result = *item;
         }

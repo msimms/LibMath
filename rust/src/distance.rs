@@ -31,8 +31,8 @@ pub fn hamming_distance(str1: &str, str2: &str) -> usize {
 
 	let mut distance = 0;
 
-    let mut str1_bytes = str1.as_bytes();
-    let mut str2_bytes = str2.as_bytes();
+    let str1_bytes = str1.as_bytes();
+    let str2_bytes = str2.as_bytes();
 	
     for i in 0..len1 {
 		if str1_bytes[i] != str2_bytes[i] {
@@ -58,8 +58,8 @@ pub fn levenshtein_distance(str1: &str, str2: &str) -> usize {
     let mut v0 = vec![0; n];
     let mut v1 = vec![0; n];
 
-    let mut str1_bytes = str1.as_bytes();
-    let mut str2_bytes = str2.as_bytes();
+    let str1_bytes = str1.as_bytes();
+    let str2_bytes = str2.as_bytes();
 
     for i in 0..n {
 		v0[i] = i;
@@ -77,7 +77,7 @@ pub fn levenshtein_distance(str1: &str, str2: &str) -> usize {
 			else {
 				costs[2] = v0[j] + 1;
             }
-			v1[j + 1] = statistics::min_usize(costs);
+			v1[j + 1] = statistics::min_usize(&costs);
 		}
 
 		// Copy v1 to v0.
