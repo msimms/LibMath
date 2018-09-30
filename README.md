@@ -8,18 +8,21 @@ This is a collection of small, and quick, math routines I've written for other h
 This library is primarily focused on C and C++. However, I have started adding Python and Rust implementations where appropriate, or when needed.
 
 ### Distance Calculations
-* Hamming Distance
-* Levenshtein Distance
-* Basic Euclidian Distances
-* Haversine Distance
+* Hamming Distance (C, C++, Rust)
+* Levenshtein Distance (C, C++, Rust)
+* Basic Euclidian Distances (C, C++, Rust)
+* Haversine Distance (C, C++, Rust, Python)
 
-### Matrix Operations (with optimizations for square matrices)
-
-### Vector Operations
+### Linear Algebra
+* Basic Matrix Operations - with optimizations for square matrices (C, C++, Rust)
+* Basic Vector Operations (C, C++, Rust)
 
 ### Statistical Functions
-* Mean and Standard Deviation
-* Min, Max
+* Mean, Standard Deviation, and Variance (C, C++, Rust)
+* Min, Max (C, C++, Rust)
+
+### K-Means
+* One dimensional K-Means (C, C++, Rust)
 
 ## Using
 Add this project as a submodule to your project and then add the files to your build, or just copy the source files.
