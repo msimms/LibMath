@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2707D2DC2162FB0A008CCE52 /* Peaks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2707D2DA2162FB0A008CCE52 /* Peaks.cpp */; };
 		272A3F5720FCE241000248AB /* Distance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 272A3F5520FCE241000248AB /* Distance.cpp */; };
 		279CC71920D74FD600E8690E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 279CC71820D74FD600E8690E /* main.cpp */; };
 		279CC71C20D8A4BC00E8690E /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 279CC71A20D8A4BC00E8690E /* Matrix.cpp */; };
@@ -30,6 +31,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2707D2DA2162FB0A008CCE52 /* Peaks.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Peaks.cpp; sourceTree = SOURCE_ROOT; };
+		2707D2DB2162FB0A008CCE52 /* Peaks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Peaks.h; sourceTree = SOURCE_ROOT; };
 		272A3F5520FCE241000248AB /* Distance.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Distance.cpp; sourceTree = SOURCE_ROOT; };
 		272A3F5620FCE241000248AB /* Distance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Distance.h; sourceTree = SOURCE_ROOT; };
 		279CC71820D74FD600E8690E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
@@ -87,6 +90,8 @@
 				279CC71B20D8A4BC00E8690E /* Matrix.h */,
 				27B413A620D6884200A97E4B /* SquareMatrix.cpp */,
 				27B413A820D6884200A97E4B /* SquareMatrix.h */,
+				2707D2DA2162FB0A008CCE52 /* Peaks.cpp */,
+				2707D2DB2162FB0A008CCE52 /* Peaks.h */,
 				27B413A420D6884200A97E4B /* Powers.cpp */,
 				27B413AB20D6884200A97E4B /* Powers.h */,
 				27B413A920D6884200A97E4B /* Statistics.cpp */,
@@ -156,6 +161,7 @@
 				279CC71C20D8A4BC00E8690E /* Matrix.cpp in Sources */,
 				27B413AD20D6884200A97E4B /* SquareMatrix.cpp in Sources */,
 				27A71FC8215248C000995B56 /* KMeans.cpp in Sources */,
+				2707D2DC2162FB0A008CCE52 /* Peaks.cpp in Sources */,
 				27B413AE20D6884200A97E4B /* Vector.cpp in Sources */,
 				27B413AC20D6884200A97E4B /* Powers.cpp in Sources */,
 				279CC71920D74FD600E8690E /* main.cpp in Sources */,

@@ -24,6 +24,8 @@
 #ifndef _VECTOR_
 #define _VECTOR_
 
+#include <stdlib.h>
+
 namespace LibMath
 {
 	class Vector

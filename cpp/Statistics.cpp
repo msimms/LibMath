@@ -34,27 +34,60 @@ namespace LibMath
 		return (double)sum / (double)numPoints;
 	}
 
+	double Statistics::averageLong(const std::vector<long>& data)
+	{
+		long sum = 0;
+		
+		for (auto iter = data.begin(); iter != data.end(); ++iter)
+			sum = sum + (*iter);
+		return sum / (double)data.size();
+	}
+
 	double Statistics::averageDouble(const double* data, size_t numPoints)
 	{
-		double	sum = 0;
+		double sum = 0;
 
 		for (auto index = 0; index < numPoints; index++)
 			sum = sum + data[index];
 		return sum / (double)numPoints;
 	}
 
+	double Statistics::averageDouble(const std::vector<double>& data)
+	{
+		double sum = 0;
+
+		for (auto iter = data.begin(); iter != data.end(); ++iter)
+			sum = sum + (*iter);
+		return sum / (double)data.size();
+	}
+
 	double Statistics::variance(const double* data, size_t numPoints, double mean)
 	{
-		double	numerator = 0;
+		double numerator = 0;
 		
 		for (auto index = 0; index < numPoints; index++)
 			numerator = numerator + ((data[index] - mean) * (data[index] - mean));
 		return numerator / (double)(numPoints - 1);
 	}
 
+	double Statistics::variance(const std::vector<double>& data, double mean)
+	{
+		double numerator = 0;
+		
+		for (auto iter = data.begin(); iter != data.end(); ++iter)
+			numerator = numerator + ((*iter - mean) * (*iter - mean));
+		return numerator / (double)(data.size() - 1);
+	}
+
 	double Statistics::standardDeviation(const double* data, size_t numPoints, double mean)
 	{
 		double var = variance(data, numPoints, mean);
+		return sqrt(var);
+	}
+
+	double Statistics::standardDeviation(const std::vector<double>& data, double mean)
+	{
+		double var = variance(data, mean);
 		return sqrt(var);
 	}
 
@@ -82,8 +115,30 @@ namespace LibMath
 		return result;
 	}
 
+	double Statistics::max(const std::vector<double>& data)
+	{
+		if (data.size() == 0)
+		{
+			return (double)0;
+		}
+
+		double result = data.at(0);
+
+		for (auto iter = data.begin(); iter != data.end(); ++iter)
+		{
+			if (*iter > result)
+				result = *iter;
+		}
+		return result;
+	}
+
 	double Statistics::min(const double* data, size_t numPoints)
 	{
+		if (numPoints == 0)
+		{
+			return (double)0;
+		}
+
 		double result = data[0];
 		
 		for (auto index = 1; index < numPoints; index++)
@@ -96,12 +151,34 @@ namespace LibMath
 
 	double Statistics::min(const size_t* data, size_t numPoints)
 	{
+		if (numPoints == 0)
+		{
+			return (double)0;
+		}
+
 		size_t result = data[0];
 		
 		for (auto index = 1; index < numPoints; index++)
 		{
 			if (data[index] < result)
 				result = data[index];
+		}
+		return result;
+	}
+
+	double Statistics::min(const std::vector<double>& data)
+	{
+		if (data.size() == 0)
+		{
+			return (double)0;
+		}
+
+		double result = data.at(0);
+		
+		for (auto iter = data.begin(); iter != data.end(); ++iter)
+		{
+			if (*iter < result)
+				result = *iter;
 		}
 		return result;
 	}

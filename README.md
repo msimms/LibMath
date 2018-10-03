@@ -24,6 +24,9 @@ This library is primarily focused on C and C++. However, I have started adding P
 ### K-Means
 * One dimensional K-Means (C, C++, Rust)
 
+### Peak Finding
+* Find peaks that rise more than one standard deviation above the mean for at least three consecutive points on the x axis. (C++)
+
 ## Using
 Add this project as a submodule to your project and then add the files to your build, or just copy the source files.
 

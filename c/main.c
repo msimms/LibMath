@@ -93,6 +93,7 @@ int main(int argc, const char * argv[])
 
 	printf("K-Means Tests:\n");
 	printf("--------------\n");
+
 	double kMeansIn[10];
 	kMeansIn[0] = 7.123;
 	kMeansIn[1] = 0.999;

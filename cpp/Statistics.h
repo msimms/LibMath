@@ -24,6 +24,9 @@
 #ifndef _STATISTICS_
 #define _STATISTICS_
 
+#include <stdlib.h>
+#include <vector>
+
 namespace LibMath
 {
 	class Statistics
@@ -33,33 +36,39 @@ namespace LibMath
 		 * Computes the average value in the given array.
 		 */
 		static double averageLong(const long* data, size_t numPoints);
+		static double averageLong(const std::vector<long>& data);
 		
 		/**
 		 * Computes the average value in the given array.
 		 */
 		static double averageDouble(const double* data, size_t numPoints);
+		static double averageDouble(const std::vector<double>& data);
 		
 		/**
 		 * Computes the variance of the given array with the mean value supplied.
 		 */
 		static double variance(const double* data, size_t numPoints, double mean);
-		
+		static double variance(const std::vector<double>& data, double mean);
+
 		/**
 		 * Computes the standard deviation of the given array with the mean value supplied.
 		 */
 		static double standardDeviation(const double* data, size_t numPoints, double mean);
+		static double standardDeviation(const std::vector<double>& data, double mean);
 		
 		/**
 		 * Finds the largest value in the array.
 		 */
 		static double max(const double* data, size_t numPoints);
 		static double max(const size_t* data, size_t numPoints);
+		static double max(const std::vector<double>& data);
 		
 		/**
 		 * Finds the smallest value in the array.
 		 */
 		static double min(const double* data, size_t numPoints);
 		static double min(const size_t* data, size_t numPoints);
+		static double min(const std::vector<double>& data);
 	};
 }
 
