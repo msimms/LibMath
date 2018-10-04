@@ -58,3 +58,11 @@ def haversine_distance_ignore_altitude(loc1_lat, loc1_lon, loc2_lat, loc2_lon):
     rad = 2.0 * math.asin(math.sqrt(lat_h + tmp * lon_h))
 
     return rad * R
+
+def euclidian_distance_1_d(pt1, pt2):
+    return abs(pt1 - pt2)
+
+def euclidian_distance_2_d(pt1_x, pt1_y, pt2_x, pt2_y):
+    temp_x = pt2_x - pt1_x
+    temp_y = pt2_y - pt1_y
+    return math.sqrt((temp_x * temp_x) + (temp_y * temp_y))

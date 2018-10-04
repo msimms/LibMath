@@ -22,7 +22,7 @@ This library is primarily focused on C and C++. However, I have started adding P
 * Min, Max (C, C++, Rust)
 
 ### K-Means
-* One dimensional K-Means (C, C++, Rust)
+* One dimensional K-Means (C, C++, Rust, Python)
 
 ### Peak Finding
 * Find peaks that rise more than one standard deviation above the mean for at least three consecutive points on the x axis. (C++)
