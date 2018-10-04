@@ -5,13 +5,13 @@ A collection of commonly used math routines, in C, C++, Python, and Rust program
 This is a collection of small, and quick, math routines I've written for other hobby projects over the years. I decided to organize them and place them all in one library so that they would be easier to reuse in the future. They're also available for anyone else that wants to use this code, isntead of a larger, heaveyweight math library.
 
 ## Features
-This library is primarily focused on C and C++. However, I have started adding Python and Rust implementations where appropriate, or when needed.
+This library is primarily focused on C and C++. However, I have started adding Python and Rust implementations where appropriate, or when needed. As python already has a large collection of libraries, there simply isn't as much need for python implementations for many of these algorithms.
 
 ### Distance Calculations
 * Hamming Distance (C, C++, Rust)
 * Levenshtein Distance (C, C++, Rust)
 * Basic Euclidian Distances (C, C++, Rust)
-* Haversine Distance (C, C++, Rust, Python)
+* Haversine Distance (C, C++, Rust, Python) - Distance between points on the Earth's surface.
 
 ### Linear Algebra
 * Basic Matrix Operations - with optimizations for square matrices (C, C++, Rust)
@@ -28,7 +28,7 @@ This library is primarily focused on C and C++. However, I have started adding P
 * Find peaks that rise more than one standard deviation above the mean for at least three consecutive points on the x axis. (C++)
 
 ## Using
-Add this project as a submodule to your project and then add the files to your build, or just copy the source files.
+Add this respository as a submodule to your own project and then add the file you want directly to your build, or just copy the source files directly into your project. This library is just meant to be a loose collection of files that you can do whatever you want with. This way you don't have to add code for algorithms you don't need to your project.
 
 ## License
 This library is released under the MIT license, see LICENSE for details.
