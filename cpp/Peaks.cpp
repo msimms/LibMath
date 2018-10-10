@@ -24,10 +24,11 @@
 #include "Statistics.h"
 
 #include <string.h>
+#include <math.h>
 
 namespace LibMath
 {
-	std::vector<GraphPeak> Peaks::findPeaks(double* data, size_t dataLen, size_t* numPeaks)
+	GraphPeakList Peaks::findPeaks(double* data, size_t dataLen, size_t* numPeaks)
 	{
 		std::vector<GraphPeak> peaks;
 
@@ -83,7 +84,7 @@ namespace LibMath
 		return peaks;
 	}
 
-	std::vector<GraphPeak> Peaks::findPeaks(const std::vector<double>& data)
+	GraphPeakList Peaks::findPeaks(const std::vector<double>& data)
 	{
 		std::vector<GraphPeak> peaks;
 
@@ -121,7 +122,7 @@ namespace LibMath
 					currentPeak.rightTrough.x = x;
 					currentPeak.rightTrough.y = y;
 				}
-				
+
 				else
 				{
 					currentPeak.clear();
@@ -138,6 +139,83 @@ namespace LibMath
 			}
 		}
 
+		return peaks;
+	}
+
+	double Peaks::average(const GraphLine& data)
+	{
+		double sum = 0;
+		
+		for (auto iter = data.begin(); iter != data.end(); ++iter)
+			sum = sum + (*iter).y;
+		return sum / (double)data.size();
+	}
+
+	double Peaks::variance(const GraphLine& data, double mean)
+	{
+		double numerator = 0;
+		
+		for (auto iter = data.begin(); iter != data.end(); ++iter)
+			numerator = numerator + (((*iter).y - mean) * ((*iter).y - mean));
+		return numerator / (double)(data.size() - 1);
+	}
+
+	double Peaks::standardDeviation(const GraphLine& data, double mean)
+	{
+		double var = variance(data, mean);
+		return sqrt(var);
+	}
+
+	GraphPeakList Peaks::findPeaks(const GraphLine& data)
+	{
+		std::vector<GraphPeak> peaks;
+		
+		GraphPeak currentPeak;
+		
+		double mean = average(data);
+		double stddev = standardDeviation(data, mean);
+		double oneSigma = mean + stddev;
+
+		for (auto iter = data.begin(); iter < data.end(); ++iter)
+		{
+			const GraphPoint& pt = *iter;
+			
+			if (pt.y < oneSigma)
+			{
+				// Have we found a peak? If so, add it and start looking for the next one.
+				if (currentPeak.rightTrough.x > 0)
+				{
+					peaks.push_back(currentPeak);
+					currentPeak.clear();
+				}
+				
+				// Are we looking for a left trough?
+				else if (currentPeak.leftTrough.x == 0)
+				{
+					currentPeak.leftTrough = pt;
+				}
+				
+				// If we have a left trough and an existing peak, assume this is the right trough - for now.
+				else if (currentPeak.peak.x > currentPeak.leftTrough.x)
+				{					
+					currentPeak.rightTrough = pt;
+				}
+
+				else
+				{
+					currentPeak.clear();
+				}
+			}
+			else
+			{
+				// Are we looking for a peak or is this bigger than the current peak?
+				if (currentPeak.peak.x == 0 || pt.y >= currentPeak.peak.y)
+				{
+					currentPeak.peak = pt;
+				}
+			}
+		}
+		
 		return peaks;
 	}
 }

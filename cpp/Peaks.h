@@ -54,6 +54,8 @@ namespace LibMath
 		}
 	};
 
+	typedef std::vector<GraphPoint> GraphLine;
+
 	class GraphPeak
 	{
 	public:
@@ -102,8 +104,14 @@ namespace LibMath
 		 * Returns a list of all statistically significant peaks in the given waveform.
 		 * These are defined as peaks that rise more than one standard deviation above the mean for at least three points on the x axis.
 		 */
-		static std::vector<GraphPeak> findPeaks(double* data, size_t dataLen, size_t* numPeaks);
-		static std::vector<GraphPeak> findPeaks(const std::vector<double>& data);
+		static GraphPeakList findPeaks(double* data, size_t dataLen, size_t* numPeaks);
+		static GraphPeakList findPeaks(const std::vector<double>& data);
+		static GraphPeakList findPeaks(const GraphLine& data);
+		
+	private:
+		static double average(const GraphLine& data);
+		static double variance(const GraphLine& data, double mean);
+		static double standardDeviation(const GraphLine& data, double mean);
 	};
 }
 
