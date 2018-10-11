@@ -28,6 +28,20 @@
 
 namespace LibMath
 {
+	void Peaks::computeArea(double* data, size_t dataLen, GraphPeak& currentPeak)
+	{
+		currentPeak.area = (double)0.0;
+		
+		if (currentPeak.leftTrough.x < currentPeak.rightTrough.x)
+		{
+			for (size_t index = currentPeak.leftTrough.x + 1; index <= currentPeak.rightTrough.x; ++index)
+			{
+				double b = data[index] + data[index - 1];
+				currentPeak.area += ((double)0.5 * b);
+			}
+		}
+	}
+	
 	GraphPeakList Peaks::findPeaks(double* data, size_t dataLen, size_t* numPeaks)
 	{
 		std::vector<GraphPeak> peaks;
@@ -47,16 +61,7 @@ namespace LibMath
 				// Have we found a peak? If so, add it and start looking for the next one.
 				if (currentPeak.rightTrough.x > 0)
 				{
-					// Compute the peak area.
-					if (currentPeak.leftTrough.x < currentPeak.rightTrough.x)
-					{
-						for (size_t index = currentPeak.leftTrough.x + 1; index <= currentPeak.rightTrough.x; ++index)
-						{
-							double b = data[index] + data[index - 1];
-							currentPeak.area += ((double)0.5 * b);
-						}
-					}
-					
+					Peaks::computeArea(data, dataLen, currentPeak);
 					peaks.push_back(currentPeak);
 					currentPeak.clear();
 				}
@@ -69,18 +74,18 @@ namespace LibMath
 				}
 				
 				// If we have a left trough and an existing peak, assume this is the right trough - for now.
-				else if (currentPeak.peak.x > currentPeak.leftTrough.x)
-				{					
+				else if ((currentPeak.peak.x > currentPeak.leftTrough.x) && (currentPeak.leftTrough.x > 0))
+				{
 					currentPeak.rightTrough.x = x;
 					currentPeak.rightTrough.y = y;
 				}
-				
 				else
 				{
-					currentPeak.clear();
+					currentPeak.leftTrough.x = x;
+					currentPeak.leftTrough.y = y;
 				}
 			}
-			else
+			else if (currentPeak.leftTrough.x > 0) // Left trough is set.
 			{
 				// Are we looking for a peak or is this bigger than the current peak?
 				if (currentPeak.peak.x == 0 || y >= currentPeak.peak.y)
@@ -89,9 +94,29 @@ namespace LibMath
 					currentPeak.peak.y = y;
 				}
 			}
+			else if (currentPeak.rightTrough.x > 0) // Right trough is set.
+			{
+				Peaks::computeArea(data, dataLen, currentPeak);
+				peaks.push_back(currentPeak);
+				currentPeak.clear();
+			}
 		}
 		
 		return peaks;
+	}
+	
+	void Peaks::computeArea(const std::vector<double>& data, GraphPeak& currentPeak)
+	{
+		currentPeak.area = (double)0.0;
+		
+		if (currentPeak.leftTrough.x < currentPeak.rightTrough.x)
+		{
+			for (size_t index = currentPeak.leftTrough.x + 1; index <= currentPeak.rightTrough.x; ++index)
+			{
+				double b = data.at(index) + data.at(index - 1);
+				currentPeak.area += ((double)0.5 * b);
+			}
+		}
 	}
 	
 	GraphPeakList Peaks::findPeaks(const std::vector<double>& data)
@@ -115,16 +140,7 @@ namespace LibMath
 				// Have we found a peak? If so, add it and start looking for the next one.
 				if (currentPeak.rightTrough.x > 0)
 				{
-					// Compute the peak area.
-					if (currentPeak.leftTrough.x < currentPeak.rightTrough.x)
-					{
-						for (size_t index = currentPeak.leftTrough.x + 1; index <= currentPeak.rightTrough.x; ++index)
-						{
-							double b = data.at(index) + data.at(index - 1);
-							currentPeak.area += ((double)0.5 * b);
-						}
-					}
-					
+					Peaks::computeArea(data, currentPeak);
 					peaks.push_back(currentPeak);
 					currentPeak.clear();
 				}
@@ -137,18 +153,18 @@ namespace LibMath
 				}
 				
 				// If we have a left trough and an existing peak, assume this is the right trough - for now.
-				else if (currentPeak.peak.x > currentPeak.leftTrough.x)
-				{					
+				else if ((currentPeak.peak.x > currentPeak.leftTrough.x) && (currentPeak.leftTrough.x > 0))
+				{
 					currentPeak.rightTrough.x = x;
 					currentPeak.rightTrough.y = y;
 				}
-				
 				else
 				{
-					currentPeak.clear();
+					currentPeak.leftTrough.x = x;
+					currentPeak.leftTrough.y = y;
 				}
 			}
-			else
+			else if (currentPeak.leftTrough.x > 0) // Left trough is set.
 			{
 				// Are we looking for a peak or is this bigger than the current peak?
 				if (currentPeak.peak.x == 0 || y >= currentPeak.peak.y)
@@ -157,6 +173,12 @@ namespace LibMath
 					currentPeak.peak.y = y;
 				}
 			}
+			else if (currentPeak.rightTrough.x > 0) // Right trough is set.
+			{
+				Peaks::computeArea(data, currentPeak);
+				peaks.push_back(currentPeak);
+				currentPeak.clear();
+			}
 		}
 		
 		return peaks;
@@ -164,7 +186,7 @@ namespace LibMath
 	
 	double Peaks::average(const GraphLine& data)
 	{
-		double sum = 0;
+		double sum = (double)0.0;
 		
 		for (auto iter = data.begin(); iter != data.end(); ++iter)
 			sum = sum + (*iter).y;
@@ -173,7 +195,7 @@ namespace LibMath
 	
 	double Peaks::variance(const GraphLine& data, double mean)
 	{
-		double numerator = 0;
+		double numerator = (double)0.0;
 		
 		for (auto iter = data.begin(); iter != data.end(); ++iter)
 			numerator = numerator + (((*iter).y - mean) * ((*iter).y - mean));
@@ -184,6 +206,28 @@ namespace LibMath
 	{
 		double var = variance(data, mean);
 		return sqrt(var);
+	}
+	
+	void Peaks::computeArea(const GraphLine& data, GraphPeak& currentPeak)
+	{
+		currentPeak.area = (double)0.0;
+		
+		if (currentPeak.leftTrough.x < currentPeak.rightTrough.x)
+		{
+			auto pointIter = std::find(data.begin(), data.end(), currentPeak.leftTrough);
+			if (pointIter != data.end())
+			{
+				GraphPoint prevPoint = (*pointIter);
+				++pointIter;
+				
+				for (; pointIter != data.end(); ++pointIter)
+				{
+					double b = (*pointIter).y + prevPoint.y;
+					currentPeak.area += ((double)0.5 * b);
+					prevPoint = (*pointIter);
+				}
+			}
+		}
 	}
 	
 	GraphPeakList Peaks::findPeaks(const GraphLine& data)
@@ -203,54 +247,42 @@ namespace LibMath
 			if (pt.y < oneSigma)
 			{
 				// Have we found a peak? If so, add it and start looking for the next one.
-				if (currentPeak.rightTrough.x > 0)
+				if (currentPeak.rightTrough.x > 0) // Right trough is set
 				{
-					// Compute the peak area.
-					if (currentPeak.leftTrough.x < currentPeak.rightTrough.x)
-					{
-						auto pointIter = std::find(data.begin(), data.end(), currentPeak.leftTrough);
-						if (pointIter != data.end())
-						{
-							GraphPoint prevPoint = (*pointIter);
-							++pointIter;
-							
-							for (; pointIter != data.end(); ++pointIter)
-							{
-								double b = (*pointIter).y + prevPoint.y;
-								currentPeak.area += ((double)0.5 * b);
-								prevPoint = (*pointIter);
-							}
-						}
-					}
-					
+					Peaks::computeArea(data, currentPeak);
 					peaks.push_back(currentPeak);
 					currentPeak.clear();
 				}
 				
 				// Are we looking for a left trough?
-				else if (currentPeak.leftTrough.x == 0)
+				else if (currentPeak.leftTrough.x == 0) // Left trough is not set.
 				{
 					currentPeak.leftTrough = pt;
 				}
 				
 				// If we have a left trough and an existing peak, assume this is the right trough - for now.
-				else if (currentPeak.peak.x > currentPeak.leftTrough.x)
-				{					
+				else if ((currentPeak.peak.x > currentPeak.leftTrough.x) && (currentPeak.leftTrough.x > 0))
+				{
 					currentPeak.rightTrough = pt;
 				}
-				
 				else
 				{
-					currentPeak.clear();
+					currentPeak.leftTrough = pt;
 				}
 			}
-			else
+			else if (currentPeak.leftTrough.x > 0) // Left trough is set.
 			{
-				// Are we looking for a peak or is this bigger than the current peak?
+				// Are we looking for a peak or is this bigger than the current peak, making it the real peak?
 				if (currentPeak.peak.x == 0 || pt.y >= currentPeak.peak.y)
 				{
 					currentPeak.peak = pt;
 				}
+			}
+			else if (currentPeak.rightTrough.x > 0) // Right trough is set.
+			{
+				Peaks::computeArea(data, currentPeak);
+				peaks.push_back(currentPeak);
+				currentPeak.clear();
 			}
 		}
 		

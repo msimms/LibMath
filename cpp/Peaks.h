@@ -122,6 +122,10 @@ namespace LibMath
 		static double average(const GraphLine& data);
 		static double variance(const GraphLine& data, double mean);
 		static double standardDeviation(const GraphLine& data, double mean);
+		
+		static void computeArea(double* data, size_t dataLen, GraphPeak& currentPeak);
+		static void computeArea(const std::vector<double>& data, GraphPeak& currentPeak);
+		static void computeArea(const GraphLine& data, GraphPeak& currentPeak);
 	};
 }
 
