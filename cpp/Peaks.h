@@ -35,27 +35,32 @@ namespace LibMath
 	public:
 		uint64_t x;
 		double y;
-
+		
 		GraphPoint() { x = 0; y = (double)0.0; }
 		GraphPoint(uint64_t newX, double newY) { x = newX; y = newY; }
 		GraphPoint(const GraphPoint& rhs) { x = rhs.x; y = rhs.y; }
-
+		
 		GraphPoint& operator=(const GraphPoint& rhs)
 		{
 			x = rhs.x;
 			y = rhs.y;
 			return *this;
 		}
-
+		
+		bool operator==(const GraphPoint& rhs) const
+		{
+			return (x == rhs.x) && (y == rhs.y);
+		}
+		
 		void clear()
 		{
 			x = 0;
 			y = (double)0.0;
 		}
 	};
-
+	
 	typedef std::vector<GraphPoint> GraphLine;
-
+	
 	class GraphPeak
 	{
 	public:
@@ -83,6 +88,11 @@ namespace LibMath
 			return *this;
 		}
 		
+		bool operator==(const GraphPeak& rhs) const
+		{
+			return (leftTrough == rhs.leftTrough) && (peak == rhs.peak) && (rightTrough == rhs.rightTrough);
+		}
+		
 		bool operator < (const GraphPeak& str) const { return (area < str.area); }
 		bool operator > (const GraphPeak& str) const { return (area > str.area); }
 		
@@ -94,9 +104,9 @@ namespace LibMath
 			area = (double)0.0;
 		}
 	};
-
+	
 	typedef std::vector<GraphPeak> GraphPeakList;
-
+	
 	class Peaks
 	{	
 	public:
