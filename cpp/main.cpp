@@ -199,15 +199,18 @@ int main(int argc, const char * argv[])
 		std::vector<NumVec> csvData = readCsv(csvFileName);
 		auto csvIter = csvData.begin();
 		++csvIter; // Skip over the timestamp column
+		uint16_t axisCount = 0;
 		for (; csvIter != csvData.end(); ++csvIter)
 		{
+			std::cout << "Axis " << ++axisCount << ":" << std::endl;
+
 			NumVec& columnData = (*csvIter);
 			uint64_t peakCount = 0;
 			std::vector<LibMath::GraphPeak> peaks = LibMath::Peaks::findPeaks(columnData);
 			for (auto peakIter = peaks.begin(); peakIter != peaks.end(); ++peakIter)
 			{
 				LibMath::GraphPeak& peak = (*peakIter);
-				std::cout << "Peak " << ++peakCount << ": {" << peak.leftTrough.x << ", " << peak.peak.x << ", " << peak.rightTrough.x << "}" << std::endl;
+				std::cout << "Peak " << ++peakCount << ": {" << peak.leftTrough.x << ", " << peak.peak.x << ", " << peak.rightTrough.x << ", " << peak.area << "}" << std::endl;
 			}
 			std::cout << std::endl;
 		}

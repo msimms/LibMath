@@ -47,6 +47,16 @@ namespace LibMath
 				// Have we found a peak? If so, add it and start looking for the next one.
 				if (currentPeak.rightTrough.x > 0)
 				{
+					// Compute the peak area.
+					if (currentPeak.leftTrough.x < currentPeak.rightTrough.x)
+					{
+						for (size_t index = currentPeak.leftTrough.x + 1; index <= currentPeak.rightTrough.x; ++index)
+						{
+							double b = data[index] + data[index - 1];
+							currentPeak.area += ((double)0.5 * b);
+						}
+					}
+
 					peaks.push_back(currentPeak);
 					currentPeak.clear();
 				}
@@ -105,6 +115,16 @@ namespace LibMath
 				// Have we found a peak? If so, add it and start looking for the next one.
 				if (currentPeak.rightTrough.x > 0)
 				{
+					// Compute the peak area.
+					if (currentPeak.leftTrough.x < currentPeak.rightTrough.x)
+					{
+						for (size_t index = currentPeak.leftTrough.x + 1; index <= currentPeak.rightTrough.x; ++index)
+						{
+							double b = data.at(index) + data.at(index - 1);
+							currentPeak.area += ((double)0.5 * b);
+						}
+					}
+
 					peaks.push_back(currentPeak);
 					currentPeak.clear();
 				}
@@ -185,6 +205,18 @@ namespace LibMath
 				// Have we found a peak? If so, add it and start looking for the next one.
 				if (currentPeak.rightTrough.x > 0)
 				{
+					// Compute the peak area.
+					if (currentPeak.leftTrough.x < currentPeak.rightTrough.x)
+					{
+						for (size_t index = currentPeak.leftTrough.x + 1; index <= currentPeak.rightTrough.x; ++index)
+						{
+							const GraphPoint& curPoint = data.at(index);
+							const GraphPoint& prevPoint = data.at(index - 1);
+							double b = curPoint.y + prevPoint.y;
+							currentPeak.area += ((double)0.5 * b);
+						}
+					}
+
 					peaks.push_back(currentPeak);
 					currentPeak.clear();
 				}
