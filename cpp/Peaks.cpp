@@ -20,7 +20,6 @@
 // SOFTWARE.
 
 #include "Peaks.h"
-#include "KMeans.h"
 #include "Statistics.h"
 
 #include <string.h>
@@ -42,14 +41,14 @@ namespace LibMath
 		}
 	}
 	
-	GraphPeakList Peaks::findPeaks(double* data, size_t dataLen, size_t* numPeaks)
+	GraphPeakList Peaks::findPeaks(double* data, size_t dataLen, size_t* numPeaks, double sigmas)
 	{
 		std::vector<GraphPeak> peaks;
 		
 		GraphPeak currentPeak;
 		
 		double mean = Statistics::averageDouble(data, dataLen);
-		double stddev = Statistics::standardDeviation(data, dataLen, mean);
+		double stddev = sigmas * Statistics::standardDeviation(data, dataLen, mean);
 		double oneSigma = mean + stddev;
 		
 		for (size_t x = 0; x < dataLen; ++x)
@@ -119,14 +118,14 @@ namespace LibMath
 		}
 	}
 	
-	GraphPeakList Peaks::findPeaks(const std::vector<double>& data)
+	GraphPeakList Peaks::findPeaks(const std::vector<double>& data, double sigmas)
 	{
 		std::vector<GraphPeak> peaks;
 		
 		GraphPeak currentPeak;
 		
 		double mean = Statistics::averageDouble(data);
-		double stddev = Statistics::standardDeviation(data, mean);
+		double stddev = sigmas * Statistics::standardDeviation(data, mean);
 		double oneSigma = mean + stddev;
 		
 		uint64_t x = 0;
@@ -230,14 +229,14 @@ namespace LibMath
 		}
 	}
 	
-	GraphPeakList Peaks::findPeaks(const GraphLine& data)
+	GraphPeakList Peaks::findPeaks(const GraphLine& data, double sigmas)
 	{
 		std::vector<GraphPeak> peaks;
 		
 		GraphPeak currentPeak;
 		
 		double mean = average(data);
-		double stddev = standardDeviation(data, mean);
+		double stddev = sigmas * standardDeviation(data, mean);
 		double oneSigma = mean + stddev;
 		
 		for (auto iter = data.begin(); iter < data.end(); ++iter)

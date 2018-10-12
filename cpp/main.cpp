@@ -206,7 +206,7 @@ int main(int argc, const char * argv[])
 
 			NumVec& columnData = (*csvIter);
 			uint64_t peakCount = 0;
-			std::vector<LibMath::GraphPeak> peaks = LibMath::Peaks::findPeaks(columnData);
+			std::vector<LibMath::GraphPeak> peaks = LibMath::Peaks::findPeaks(columnData, (double)2.0);
 			for (auto peakIter = peaks.begin(); peakIter != peaks.end(); ++peakIter)
 			{
 				LibMath::GraphPeak& peak = (*peakIter);
