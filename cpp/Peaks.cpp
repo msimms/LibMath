@@ -49,13 +49,13 @@ namespace LibMath
 		
 		double mean = Statistics::averageDouble(data, dataLen);
 		double stddev = sigmas * Statistics::standardDeviation(data, dataLen, mean);
-		double oneSigma = mean + stddev;
+		double threshold = mean + stddev;
 		
 		for (size_t x = 0; x < dataLen; ++x)
 		{
 			double y = data[x];
 			
-			if (y < oneSigma)
+			if (y < threshold)
 			{
 				// Have we found a peak? If so, add it and start looking for the next one.
 				if (currentPeak.rightTrough.x > 0)
@@ -126,7 +126,7 @@ namespace LibMath
 		
 		double mean = Statistics::averageDouble(data);
 		double stddev = sigmas * Statistics::standardDeviation(data, mean);
-		double oneSigma = mean + stddev;
+		double threshold = mean + stddev;
 		
 		uint64_t x = 0;
 		
@@ -134,7 +134,7 @@ namespace LibMath
 		{
 			double y = *iter;
 			
-			if (y < oneSigma)
+			if (y < threshold)
 			{
 				// Have we found a peak? If so, add it and start looking for the next one.
 				if (currentPeak.rightTrough.x > 0)
@@ -237,13 +237,13 @@ namespace LibMath
 		
 		double mean = average(data);
 		double stddev = sigmas * standardDeviation(data, mean);
-		double oneSigma = mean + stddev;
+		double threshold = mean + stddev;
 		
 		for (auto iter = data.begin(); iter < data.end(); ++iter)
 		{
 			const GraphPoint& pt = *iter;
 			
-			if (pt.y < oneSigma)
+			if (pt.y < threshold)
 			{
 				// Have we found a peak? If so, add it and start looking for the next one.
 				if (currentPeak.rightTrough.x > 0) // Right trough is set
