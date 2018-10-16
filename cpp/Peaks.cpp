@@ -99,6 +99,11 @@ namespace LibMath
 				peaks.push_back(currentPeak);
 				currentPeak.clear();
 			}
+			else // Nothing is set, but the value is above the threshold.
+			{
+				currentPeak.leftTrough.x = x;
+				currentPeak.leftTrough.y = y;
+			}
 		}
 		
 		return peaks;
@@ -177,6 +182,11 @@ namespace LibMath
 				Peaks::computeArea(data, currentPeak);
 				peaks.push_back(currentPeak);
 				currentPeak.clear();
+			}
+			else // Nothing is set, but the value is above the threshold.
+			{
+				currentPeak.leftTrough.x = x;
+				currentPeak.leftTrough.y = y;
 			}
 		}
 		
@@ -282,6 +292,10 @@ namespace LibMath
 				Peaks::computeArea(data, currentPeak);
 				peaks.push_back(currentPeak);
 				currentPeak.clear();
+			}
+			else // Nothing is set, but the value is above the threshold.
+			{
+				currentPeak.leftTrough = pt;
 			}
 		}
 		
