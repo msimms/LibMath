@@ -28,6 +28,7 @@
 #include "KMeans.h"
 #include "Peaks.h"
 #include "Powers.h"
+#include "Prime.h"
 #include "SquareMatrix.h"
 #include "Statistics.h"
 
@@ -215,6 +216,20 @@ int main(int argc, const char * argv[])
 			std::cout << std::endl;
 		}
 	}
+
+	std::cout << "Primlity Tests:" << std::endl;
+	std::cout << "---------------" << std::endl;
+
+	uint64_t gcd = LibMath::Prime::gcd(270, 192);
+	std::cout << "GCD of 270 and 192 is " << gcd << "." << std::endl;
+	uint64_t coprime = LibMath::Prime::generateCoprime(7);
+	std::cout << "Coprime of 7 is " << coprime << "." << std::endl;
+	uint64_t possiblePrime = 7;
+	bool isPrime = LibMath::Prime::isPrimeFermat(possiblePrime);
+	std::cout << possiblePrime << " is " << (isPrime ? "" : "not ") << "prime, according to the Fermat test." << std::endl;
+	possiblePrime = 1000;
+	isPrime = LibMath::Prime::isPrimeFermat(possiblePrime);
+	std::cout << possiblePrime << " is " << (isPrime ? "" : "not ") << "prime, according to the Fermat test." << std::endl;
 
 	return 0;
 }
