@@ -19,7 +19,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#pragma once
+
+#ifndef _POWERS_
+#define _POWERS_
+
 namespace LibMath
 {
 	unsigned long NearestPowerOf2(unsigned long num);
 }
+
+#endif

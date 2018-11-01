@@ -19,6 +19,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#pragma once
+
+#ifndef _PRIME_
+#define _PRIME_
+
 #include <stdint.h>
 
 namespace LibMath
@@ -36,3 +41,5 @@ namespace LibMath
 		static bool isPrimeMillerRabin(uint64_t num);
 	};
 }
+
+#endif
