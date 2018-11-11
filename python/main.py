@@ -23,6 +23,8 @@
 import random
 import distance
 import kmeans
+import math
+import statistics
 
 def main():
     #print("Distance Tests:")
@@ -35,7 +37,17 @@ def main():
     #print("Levenshtein Distance: " + distance_calc)
     #assert(distance_calc == 3)
 
-    print("K-Means Tests:")
+    print("Statistics Tests:")
+    print("-----------------")
+
+    v_flt = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 ]
+    v_flt_avg = statistics.mean(v_flt)
+    print("Average: " + str(v_flt_avg))
+    variance = statistics.variance(v_flt, v_flt_avg)
+    print("Variance: " + str(variance))
+    print("Standard Deviation: " + str(statistics.stddev(v_flt, v_flt_avg)))
+
+    print("\nK-Means Tests:")
     print("--------------")
 
     kMeansIn = [0] * 10
