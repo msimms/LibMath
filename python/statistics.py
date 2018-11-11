@@ -20,20 +20,25 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
+#  Note class is only useful in python2 as python3 includes it's own statistics class
+
 import math
 
 def mean(data):
+    """Computes the mean of the numbers in the array 'data'."""
     mean = 0.0
     for datum in data:
-		mean = mean + datum
+        mean = mean + datum
     return mean / len(data)
 
 def variance(data, mean):
+    """Computes the variance of the numbers in the array 'data'."""
     numerator = 0.0
     for datum in data:
-		numerator = numerator + ((datum - mean) * (datum - mean))
+        numerator = numerator + ((datum - mean) * (datum - mean))
     return numerator / (len(data) - 1)
 
 def stddev(data, mean):
-	var = variance(data, mean)
-	return math.sqrt(var)
+    """Computes the standard deviation of the numbers in the array 'data'."""
+    var = variance(data, mean)
+    return math.sqrt(var)
