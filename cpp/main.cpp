@@ -24,6 +24,7 @@
 #include <sstream>
 #include <vector>
 
+#include "BigInt.h"
 #include "Distance.h"
 #include "KMeans.h"
 #include "Peaks.h"
@@ -217,8 +218,8 @@ int main(int argc, const char * argv[])
 		}
 	}
 
-	std::cout << "Primlity Tests:" << std::endl;
-	std::cout << "---------------" << std::endl;
+	std::cout << "Primality Tests:" << std::endl;
+	std::cout << "----------------" << std::endl;
 
 	uint64_t gcd = LibMath::Prime::gcd(270, 192);
 	std::cout << "GCD of 270 and 192 is " << gcd << "." << std::endl;
@@ -229,7 +230,20 @@ int main(int argc, const char * argv[])
 	std::cout << possiblePrime << " is " << (isPrime ? "" : "not ") << "prime, according to the Fermat test." << std::endl;
 	possiblePrime = 1000;
 	isPrime = LibMath::Prime::isPrimeFermat(possiblePrime);
-	std::cout << possiblePrime << " is " << (isPrime ? "" : "not ") << "prime, according to the Fermat test." << std::endl;
+	std::cout << possiblePrime << " is " << (isPrime ? "" : "not ") << "prime, according to the Fermat test." << std::endl << std::endl;
+
+	std::cout << "BigInt Tests:" << std::endl;
+	std::cout << "-------------" << std::endl;
+
+	LibMath::BigInt big(2048);
+	big.setRand();
+	std::cout << "Random Big Int: " << big.toString() << std::endl;
+	big.setMax();
+	std::cout << "Maximum Big Int: " << big.toString() << std::endl;
+	big.clear();
+	std::cout << "Empty Big Int: " << big.toString() << std::endl;
+	big.set(100);
+	std::cout << "Small Value In a Big Int: " << big.toString() << std::endl;
 
 	return 0;
 }

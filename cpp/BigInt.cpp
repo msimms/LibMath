@@ -19,6 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <iomanip>
+#include <sstream>
 #include <string>
 #include <random>
 
@@ -31,48 +33,75 @@ namespace LibMath
 		init(2048);
 	}
 
-	BigInt::BigInt(uint64_t bits)
+	BigInt::BigInt(uint32_t bits)
 	{
 		init(bits);
 	}
 
 	BigInt::~BigInt()
 	{
-		clear();
+		free();
 	}
 
-	void BigInt::init(uint64_t bits)
+	void BigInt::init(uint32_t bits)
 	{
 		m_numBits = bits;
 		m_numWords = m_numBits / sizeof(m_numWords);
 		if (m_numWords % sizeof(m_numWords) > 0)
 			++m_numWords;
+		m_data = new uint32_t[m_numWords];
+		m_error = BIG_INT_NO_ERROR;
 	}
 
+	void BigInt::free()
+	{
+		if (m_data)
+		{
+			memset(m_data, 0, m_numWords * sizeof(uint32_t));
+			delete[] m_data;
+			m_data = NULL;
+			m_error = BIG_INT_NO_ERROR;
+		}
+	}
+	
 	void BigInt::clear()
 	{
 		if (m_data)
 		{
-			memset(m_data, 0, m_numWords * sizeof(uint64_t));
-			m_data = NULL;
+			memset(m_data, 0, m_numWords * sizeof(uint32_t));
+			m_error = BIG_INT_NO_ERROR;
 		}
 	}
 
-	void BigInt::rand()
+	void BigInt::set(uint32_t n)
+	{
+		clear();
+		m_data[0] = n;
+	}
+
+	void BigInt::setMax()
+	{
+		for (size_t i = 0; i < m_numWords; ++i)
+		{
+			m_data[i] = (uint32_t)-1;
+		}
+	}
+
+	void BigInt::setRand()
 	{
 		std::random_device rd;
 		std::mt19937 gen(rd());
-		std::uniform_int_distribution<unsigned long long> dis(0, (unsigned long long)-1);
+		std::uniform_int_distribution<unsigned long> dis(0, (uint32_t)-1);
 		
 		for (size_t i = 0; i < m_numWords; ++i)
 		{
-			m_data[i] = dis(gen);
+			m_data[i] = (uint32_t)dis(gen);
 		}
 	}
 
-	uint64_t BigInt::addWords(uint64_t& a, uint64_t b)
+	uint32_t BigInt::addWords(uint32_t& a, uint32_t b)
 	{
-		uint64_t headroom = (uint64_t)-1 - b - 1;
+		uint32_t headroom = (uint32_t)-1 - b - 1;
 
 		if (a <= headroom)
 		{
@@ -80,8 +109,20 @@ namespace LibMath
 			return 0;
 		}
 
-		a = (uint64_t)-1;
+		a = (uint32_t)-1;
 		return b - headroom;
+	}
+
+	uint32_t BigInt::subWords(uint32_t& a, uint32_t b)
+	{
+		if (b < a)
+		{
+			a -= b;
+			return 0;
+		}
+
+		a = (uint32_t)((uint64_t)0x100000000 - (uint64_t)b);
+		return 1;
 	}
 
 	void BigInt::add(const BigInt& n)
@@ -89,19 +130,52 @@ namespace LibMath
 		if (n.numBits() != m_numBits)
 			return;
 
-		uint64_t carry = 0;
+		uint32_t carry = 0;
 
 		for (size_t i = 0; i < m_numWords; ++i)
 		{
 			carry += addWords(m_data[i], carry);
 			carry += addWords(m_data[i], n.m_data[i]);
 		}
+		if (carry) // Overflow
+		{
+			m_error = BIG_INT_OVERFLOW;
+		}
 	}
 
 	void BigInt::subtract(const BigInt& n)
 	{
+		if (n.numBits() != m_numBits)
+			return;
+
+		uint32_t borrow = 0;
+
 		for (size_t i = 0; i < m_numWords; ++i)
 		{
+			if (borrow)
+			{
+				m_data[i] -= 1;
+			}
+			borrow = subWords(m_data[i], n.m_data[i]);
+		}
+		if (borrow) // Underflow
+		{
+			m_error = BIG_INT_UNDERFLOW;
+		}
+	}
+
+	void BigInt::multiply(uint32_t n)
+	{
+		uint32_t carry = 0;
+		for (size_t i = 0; i < m_numWords; ++i)
+		{
+			uint64_t temp = n * (uint64_t)m_data[i] + carry;
+			m_data[i] = (uint32_t)temp;
+			carry = temp >> 32;
+		}
+		if (carry) // Overflow
+		{
+			m_error = BIG_INT_OVERFLOW;
 		}
 	}
 
@@ -139,6 +213,14 @@ namespace LibMath
 
 	std::string BigInt::toString() const
 	{
-		return "";
+		std::ostringstream strStream;
+
+		strStream << "0x";
+		for (size_t i = m_numWords - 1; i > 0; --i)
+		{
+			strStream << std::setfill('0') << std::setw(8) << std::hex << m_data[i];
+		}
+		strStream << std::setfill('0') << std::setw(8) << std::hex << m_data[0];
+		return strStream.str();
 	}
 }

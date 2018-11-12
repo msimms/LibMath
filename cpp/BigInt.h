@@ -28,11 +28,18 @@
 
 namespace LibMath
 {
+	typedef enum BigIntError
+	{
+		BIG_INT_NO_ERROR = 0,
+		BIG_INT_OVERFLOW,
+		BIG_INT_UNDERFLOW
+	} BigIntError;
+
 	class BigInt
 	{
 	public:
 		BigInt();
-		BigInt(uint64_t bits);
+		BigInt(uint32_t bits);
 		virtual ~BigInt();
 
 		bool operator==(const BigInt& rhs) const { return compare(rhs); };
@@ -41,11 +48,15 @@ namespace LibMath
 		BigInt& operator*=(const BigInt& lhs) { multiply(lhs); return *this; };
 		BigInt& operator/=(const BigInt& lhs) { divide(lhs); return *this; };
 
-		uint64_t numBits() const { return m_numBits; };
+		uint32_t numBits() const { return m_numBits; };
 
-		void rand();
+		void clear();
+		void set(uint32_t n);
+		void setMax();
+		void setRand();
 		void add(const BigInt& n);
 		void subtract(const BigInt& n);
+		void multiply(uint32_t n);
 		void multiply(const BigInt& n);
 		void divide(const BigInt& n);
 
@@ -55,13 +66,16 @@ namespace LibMath
 		std::string toString() const;
 
 	private:
-		uint64_t m_numBits;
-		uint64_t m_numWords;
-		uint64_t* m_data; // m_data[0] is least significant, m_data[m_numWords - 1] is most significant
+		uint32_t m_numBits;
+		uint32_t m_numWords;
+		uint32_t* m_data; // m_data[0] is least significant, m_data[m_numWords - 1] is most significant
+		BigIntError m_error;
 
-		void init(uint64_t bits);
-		void clear();
-		uint64_t addWords(uint64_t& a, uint64_t b);
+		void init(uint32_t bits);
+		void free();
+
+		uint32_t addWords(uint32_t& a, uint32_t b);
+		uint32_t subWords(uint32_t& a, uint32_t b);
 	};
 }
 
