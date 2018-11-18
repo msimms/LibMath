@@ -20,13 +20,48 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
+import argparse
+import csv
 import random
 import distance
 import kmeans
 import math
+import peaks
 import statistics
+import sys
+
+def read_csv(csv_file_name):
+    columns = []
+    ts_list = []
+    x_list = []
+    y_list = []
+    z_list = []
+
+    with open(csv_file_name) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:
+            ts_list.append(float(row[0]))
+            x_list.append(float(row[1]))
+            y_list.append(float(row[2]))
+            z_list.append(float(row[3]))
+
+	columns.append(ts_list)
+	columns.append(x_list)
+	columns.append(y_list)
+	columns.append(z_list)
+	return columns
 
 def main():
+    # Parse command line options.
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--csv_file_name", default="", help="CSV file containing test peak data", required=False)
+
+    try:
+        args = parser.parse_args()
+    except IOError as e:
+        parser.error(e)
+        sys.exit(1)
+
     #print("Distance Tests:")
     #print("---------------")
 
@@ -63,6 +98,23 @@ def main():
     kMeansIn[9] = 0.001
     tags = kmeans.kmeans_equally_space_centroids_1_d(kMeansIn, 3, 0.001, 3)
     print(tags)
+
+    if len(args.csv_file_name) > 0:
+        print("\nPeak Finding Tests:")
+        print("-------------------")
+
+        csv_data = read_csv(args.csv_file_name)
+        csv_data = csv_data[1:]
+        axis_count = 0
+        for csv_column in csv_data:
+            print("Axis " + str(axis_count) + ":")
+            axis_count = axis_count + 1
+
+            peak_count = 0
+            peak_list = peaks.find_peaks_in_numeric_array(csv_column, 2.0)
+            for peak in peak_list:
+                print("Peak " + str(peak_count) + ": {" + str(peak.left_trough.x) + ", " + str(peak.peak.x) + ", " + str(peak.right_trough.x) + ", " + str(peak.area) + "}")
+                peak_count = peak_count + 1
 
 if __name__ == "__main__":
     main()
