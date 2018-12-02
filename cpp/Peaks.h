@@ -117,6 +117,7 @@ namespace LibMath
 		static GraphPeakList findPeaks(double* data, size_t dataLen, size_t* numPeaks, double sigmas = 1.0);
 		static GraphPeakList findPeaks(const std::vector<double>& data, double sigmas = 1.0);
 		static GraphPeakList findPeaks(const GraphLine& data, double sigmas = 1.0);
+		static GraphPeakList findPeaks(const GraphLine& data, double minPeakArea, double sigmas = 1.0);
 		
 	private:
 		static double average(const GraphLine& data);
