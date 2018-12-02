@@ -302,7 +302,7 @@ namespace LibMath
 		return peaks;
 	}
 
-	GraphPeakList Peaks::findPeaks(const GraphLine& data, double minPeakArea, double sigmas)
+	GraphPeakList Peaks::findPeaksOfSize(const GraphLine& data, double minPeakArea, double sigmas)
 	{
 		std::vector<GraphPeak> peaks;
 		
