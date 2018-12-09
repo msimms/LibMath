@@ -66,7 +66,10 @@ def kmeans_1_d(data, k, max_error, max_iters, centroids):
             centroids[cluster_index] = centroids[cluster_index] + data[data_index]
             cluster_sizes[cluster_index] = cluster_sizes[cluster_index] + 1
         for cluster_index in range(0, k):
-            centroids[cluster_index] = centroids[cluster_index] / cluster_sizes[cluster_index]
+            if abs(cluster_sizes[cluster_index]) < 0.001: # Check for possible floating point zero value
+                centroids[cluster_index] = 0.0
+            else:
+                centroids[cluster_index] = centroids[cluster_index] / cluster_sizes[cluster_index]
 
         # Measure each data point against it's own cluster mean, and all other cluster means.
         # Relocate the data point to the cluster that matches best.
