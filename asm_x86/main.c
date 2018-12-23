@@ -20,8 +20,10 @@
 // SOFTWARE.
 
 #include <stdio.h>
+#include <assert.h>
 
 extern long long GetRDTSC(void);
+extern unsigned long NearestPowerOf2(unsigned long num);
 
 int main(int argc, const char * argv[])
 {
@@ -40,7 +42,10 @@ int main(int argc, const char * argv[])
 	printf("Power Tests:\n");
 	printf("------------\n");
 	startTime = GetRDTSC();
+	unsigned long nearest = NearestPowerOf2(63);
 	endTime = GetRDTSC();
+	printf("Nearest power of 2 for 63 is %ld.\n\n", nearest);
+	assert(nearest == 64);
 	printf("Execution Time: %lld\n\n", endTime - startTime);
 
 	printf("Distance Tests:\n");

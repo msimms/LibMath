@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		273ACFF621C876C7003C5FB2 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 273ACFF521C876C7003C5FB2 /* main.c */; };
 		273ACFF821C878BE003C5FB2 /* rdtsc.asm in Sources */ = {isa = PBXBuildFile; fileRef = 273ACFF721C878BE003C5FB2 /* rdtsc.asm */; };
+		274EBC2C21CEF35A00A487FD /* powers.asm in Sources */ = {isa = PBXBuildFile; fileRef = 274EBC2B21CEF35A00A487FD /* powers.asm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -40,6 +41,7 @@
 		273ACFEB21C875D4003C5FB2 /* libmath */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = libmath; sourceTree = BUILT_PRODUCTS_DIR; };
 		273ACFF521C876C7003C5FB2 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = SOURCE_ROOT; };
 		273ACFF721C878BE003C5FB2 /* rdtsc.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = rdtsc.asm; sourceTree = SOURCE_ROOT; };
+		274EBC2B21CEF35A00A487FD /* powers.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = powers.asm; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			children = (
 				273ACFF521C876C7003C5FB2 /* main.c */,
 				273ACFF721C878BE003C5FB2 /* rdtsc.asm */,
+				274EBC2B21CEF35A00A487FD /* powers.asm */,
 			);
 			path = libmath;
 			sourceTree = "<group>";
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				273ACFF821C878BE003C5FB2 /* rdtsc.asm in Sources */,
+				274EBC2C21CEF35A00A487FD /* powers.asm in Sources */,
 				273ACFF621C876C7003C5FB2 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
