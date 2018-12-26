@@ -27,10 +27,28 @@
 #include "Powers.h"
 #include "SquareMatrix.h"
 #include "Statistics.h"
+#include "Vector.h"
 
 int main(int argc, const char * argv[])
 {
-	printf("Square Matrix Tests:\n");
+	printf("Vector Tests:\n");
+	printf("-------------\n");
+	
+	VectorPtr v1 = vectorCreate(3);
+	VectorPtr v2 = vectorCreate(3);
+	v1->data[0] = 1; v1->data[1] = 2; v1->data[2] = 3;
+	v2->data[0] = 1; v2->data[1] = 2; v2->data[2] = 3;
+	printf("v1:\n");
+	vectorPrint(v1);
+	printf("v2:\n");
+	vectorPrint(v2);
+	printf("v1 x v2 = %lf\n", vectorMultiply(v1, v2));
+	printf("v1 dot v2 = %lf\n", vectorDot(v1, v2));
+	printf("length of v1 = %lf\n", vectorLength(v1));
+	vectorDestroy(v1);
+	vectorDestroy(v2);
+
+	printf("\nSquare Matrix Tests:\n");
 	printf("--------------------\n");
 
 	SquareMatrixPtr m = squareMatrixCreate(5);

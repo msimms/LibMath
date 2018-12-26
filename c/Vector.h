@@ -76,4 +76,9 @@ void vectorNormalize(VectorPtr A);
  */
 void vectorCross(const VectorPtr A, const VectorPtr B, VectorPtr C);
 
+/**
+ * Prints the contents of vector A to stdout.
+ */
+void vectorPrint(VectorPtr A);
+
 #endif

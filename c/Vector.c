@@ -20,12 +20,13 @@
 // SOFTWARE.
 
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "Vector.h"
 
-VectorPtr createVector(size_t size)
+VectorPtr vectorCreate(size_t size)
 {
 	VectorPtr vector = (VectorPtr)malloc(sizeof(Vector));
 	if (vector)
@@ -103,4 +104,14 @@ void vectorCross(const VectorPtr A, const VectorPtr B, VectorPtr C)
 	C->data[0] = (B->data[1] * A->data[2]) - (B->data[2] * A->data[1]);
 	C->data[1] = (B->data[2] * A->data[0]) - (B->data[0] * A->data[2]);
 	C->data[2] = (B->data[0] * A->data[1]) - (B->data[1] * A->data[0]);
+}
+
+void vectorPrint(VectorPtr A)
+{
+	register size_t i;
+
+	printf("[");
+	for (i = 0; i < A->size; ++i)
+		printf("%s%lf", i > 0 ? " " : "", A->data[i]);
+	printf("]\n");
 }

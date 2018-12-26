@@ -32,6 +32,7 @@
 #include "Prime.h"
 #include "SquareMatrix.h"
 #include "Statistics.h"
+#include "Vector.h"
 
 typedef std::vector<double> NumVec;
 
@@ -84,6 +85,23 @@ int main(int argc, const char * argv[])
 		}
 	}
 
+	std::cout << "Vector Tests:" << std::endl;
+	std::cout << "-------------" << std::endl;
+
+	LibMath::Vector* v1 = new LibMath::Vector(3);
+	LibMath::Vector* v2 = new LibMath::Vector(3);
+	v1->m_data[0] = 1; v1->m_data[1] = 2; v1->m_data[2] = 3;
+	v2->m_data[0] = 1; v2->m_data[1] = 2; v2->m_data[2] = 3;
+	std::cout << "v1:" << std::endl;
+	v1->print();
+	std::cout << "v2:" << std::endl;
+	v2->print();
+	std::cout << "v1 x v2 = " << v1->multiply(v2) << std::endl;
+	std::cout << "v1 dot v2 = " << v1->dot(v2) << std::endl;
+	std::cout << "length of v1 = " << v1->length() << std::endl;
+	delete v1;
+	delete v2;	
+	
 	std::cout << "Square Matrix Tests:" << std::endl;
 	std::cout << "--------------------" << std::endl;
 

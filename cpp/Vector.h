@@ -74,12 +74,19 @@ namespace LibMath
 		 */
 		void cross(const Vector* A, const Vector* B);
 
+		/**
+		 * Print vector A to stdout.
+		 */
+		void print(void);
+
 		friend class Matrix;
 		friend class SquareMatrix;
 
+	public:
+		double* m_data;
+
 	protected:
 		size_t  m_size;
-		double* m_data;
 	};
 }
 

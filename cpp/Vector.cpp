@@ -19,6 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <iostream>
 #include <math.h>
 #include <string.h>
 
@@ -100,5 +101,17 @@ namespace LibMath
 		m_data[0] = (B->m_data[1] * A->m_data[2]) - (B->m_data[2] * A->m_data[1]);
 		m_data[1] = (B->m_data[2] * A->m_data[0]) - (B->m_data[0] * A->m_data[2]);
 		m_data[2] = (B->m_data[0] * A->m_data[1]) - (B->m_data[1] * A->m_data[0]);
+	}
+	
+	void Vector::print()
+	{
+		std::cout << "[";
+		for (auto i = 0; i < m_size; ++i)
+		{
+			if (i > 0)
+				std::cout << " ";
+			std::cout << m_data[i];
+		}
+		std::cout << "]" << std::endl;
 	}
 }

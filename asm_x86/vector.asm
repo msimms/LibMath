@@ -19,52 +19,50 @@
 ; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ; SOFTWARE.
 
-global _NearestPowerOf2
+global _VectorMultiply
+global _VectorSubtract
+global _VectorDot
+global _VectorLength
+global _VectorNormalize
+global _VectorCross
 
 section .text
 
-; unsigned long NearestPowerOf2(unsigned long num)
-_NearestPowerOf2:
+; double vectorMultiply(const double* A, const double* B, size_t vecLen)
+_VectorMultiply:
 	push rbp
 	mov rbp, rsp
+	mov rax, $0
+	ret
 
-	; n = num > 0 ? num - 1 : 0
-	xor rbx, rbx
-	; if rcx == 0 then jump to doing the shifts, rcx is the first parameter (i.e. num)
-	cmp rcx, $0
-	je shifts
-	; rbx = rcx - 1
-	mov rbx, rcx
-	sub rbx, $1
+; void vectorSubtract(const double* A, const double* B, double* C, size_t vecLen)
+_VectorSubtract:
+	push rbp
+	mov rbp, rsp
+	ret
 
-shifts:
-	; n |= n >> 1
-	mov rax, rbx
-	shr rax, $1
-	or rbx, rax
+; double vectorDot(const double* A, const double* B, size_t vecLen)
+_VectorDot:
+	push rbp
+	mov rbp, rsp
+	mov rax, $0
+	ret
 
-	; n |= n >> 2
-	mov rax, rbx
-	shr rax, $2
-	or rbx, rax
+; double vectorLength(const double* A, size_t vecLen)
+_VectorLength:
+	push rbp
+	mov rbp, rsp
+	mov rax, $0
+	ret
 
-	; n |= n >> 4
-	mov rax, rbx
-	shr rax, $4
-	or rbx, rax
+; void vectorNormalize(double* A, size_t vecLen)
+_VectorNormalize:
+	push rbp
+	mov rbp, rsp
+	ret
 
-	; n |= n >> 8
-	mov rax, rbx
-	shr rax, $8
-	or rbx, rax
-
-	; n |= n >> 16
-	mov rax, rbx
-	shr rax, $16
-	or rax, rbx
-
-	; n++
-	add rax, $1
-
-	pop rbp
+; void vectorCross(const double* A, const double* B, double* C, size_t vecLen)
+_VectorCross:
+	push rbp
+	mov rbp, rsp
 	ret
