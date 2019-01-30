@@ -1,3 +1,5 @@
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+
 # LibMath
 A collection of commonly used math routines, in C, C++, Python, and Rust programming languages.
 
