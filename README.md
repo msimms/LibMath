@@ -12,7 +12,7 @@ This library is primarily focused on C and C++. However, I have started adding P
 ### Distance Calculations
 * Hamming Distance (C, C++, Rust)
 * Levenshtein Distance (C, C++, Rust)
-* Basic Euclidian Distances (C, C++, Rust)
+* Basic Euclidian Distances (C, C++, Rust, Python)
 * Haversine Distance (C, C++, Rust, Python) - Distance between points on the Earth's surface.
 
 ### Linear Algebra
@@ -20,14 +20,14 @@ This library is primarily focused on C and C++. However, I have started adding P
 * Basic Vector Operations (C, C++, Rust)
 
 ### Statistical Functions
-* Mean, Standard Deviation, and Variance (C, C++, Rust)
+* Mean, Standard Deviation, and Variance (C, C++, Rust, Python2 - unnecesary in Python3)
 * Min, Max (C, C++, Rust)
 
 ### K-Means
 * One dimensional K-Means (C, C++, Rust, Python)
 
 ### Peak Finding
-* Find peaks that rise more than one standard deviation above the mean for at least three consecutive points on the x axis. (C++)
+* Find peaks that rise more than one standard deviation above the mean for at least three consecutive points on the x axis. (C++, Python)
 
 ## Using
 Add this respository as a submodule to your own project and then add the file you want directly to your build, or just copy the source files directly into your project. This library is just meant to be a loose collection of files that you can do whatever you want with. This way you don't have to add code for algorithms you don't need to your project.
