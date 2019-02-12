@@ -4,7 +4,7 @@
 A collection of commonly used math routines, in C, C++, Python, and Rust programming languages.
 
 ## Rationale
-This is a collection of small, and quick, math routines I've written for other hobby projects over the years. I decided to organize them and place them all in one library so that they would be easier to reuse in the future. They're also available for anyone else that wants to use this code, isntead of a larger, heaveyweight math library.
+This is a collection of small, and quick, math routines I've written for other hobby projects over the years. I decided to organize them and place them in one library so they would be easier to reuse in the future. They're also available for anyone else that wants to use this code, instead of a larger, heaveyweight math library. There are no project files in this library. It is just a loose collection of code. Include the files you need and ignore the ones you don't.
 
 ## Features
 This library is primarily focused on C and C++. However, I have started adding Python and Rust implementations where appropriate, or when needed. As python already has a large collection of libraries, there simply isn't as much need for python implementations for many of these algorithms.
