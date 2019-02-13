@@ -4,7 +4,7 @@
 A collection of commonly used math routines, in C, C++, Python, and Rust programming languages.
 
 ## Rationale
-This is a collection of small, and quick, math routines I've written for other hobby projects over the years. I decided to organize them and place them in one library so they would be easier to reuse in the future. They're also available for anyone else that wants to use this code, instead of a larger, heaveyweight math library. **There are no project files in this library. It is just a loose collection of code. Include the files you need and ignore the ones you don't.**
+This is a collection of small, and quick, math routines I've written for other hobby projects over the years. I decided to organize them and place them in one library so they would be easier to reuse in the future. They're also available for anyone else that wants to use this code, instead of a larger, heaveyweight math library. **There are no production project files in this library. It is just a loose collection of code. Include the files you need and ignore the ones you don't.** The project files and main files are included just for testing.
 
 ## Features
 This library is primarily focused on C and C++. However, I have started adding Python and Rust implementations where appropriate, or when needed. As python already has a large collection of libraries, there simply isn't as much need for python implementations for many of these algorithms.
@@ -28,6 +28,9 @@ This library is primarily focused on C and C++. However, I have started adding P
 
 ### Peak Finding
 * Find peaks that rise more than one standard deviation above the mean for at least three consecutive points on the x axis. (C++, Python)
+
+### Graphics
+* Ray Casting (Python) - Determines if a point is within a polygon.
 
 ## Using
 Add this respository as a submodule to your own project and then add the file you want directly to your build, or just copy the source files directly into your project. This library is just meant to be a loose collection of files that you can do whatever you want with. This way you don't have to add code for algorithms you don't need to your project.

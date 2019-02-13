@@ -24,13 +24,30 @@ import argparse
 import csv
 import random
 import distance
+import graphics
 import kmeans
 import math
+import os
 import peaks
 import statistics
 import sys
 
-def read_csv(csv_file_name):
+def read_polygon_csv(csv_file_name):
+    """Loads the polygon data test file."""
+    points = []
+
+    with open(csv_file_name) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:
+            new_point = {}
+            new_point['x'] = float(row[0]) # longitude
+            new_point['y'] = float(row[1]) # latitude
+            new_point['z'] = float(row[2]) # altitude
+            points.append(new_point)
+	return points
+
+def read_peak_data_csv(csv_file_name):
+    """Loads the peak data test file."""
     columns = []
     ts_list = []
     x_list = []
@@ -40,10 +57,10 @@ def read_csv(csv_file_name):
     with open(csv_file_name) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
-            ts_list.append(float(row[0]))
-            x_list.append(float(row[1]))
-            y_list.append(float(row[2]))
-            z_list.append(float(row[3]))
+            ts_list.append(float(row[0])) # timestamp
+            x_list.append(float(row[1]))  # x
+            y_list.append(float(row[2]))  # y
+            z_list.append(float(row[3]))  # z
 
 	columns.append(ts_list)
 	columns.append(x_list)
@@ -54,7 +71,8 @@ def read_csv(csv_file_name):
 def main():
     # Parse command line options.
     parser = argparse.ArgumentParser()
-    parser.add_argument("--csv_file_name", default="", help="CSV file containing test peak data", required=False)
+    parser.add_argument("--peak_csv_file", default="../data/10_pullups.csv", help="CSV file containing test peak data", required=False)
+    parser.add_argument("--poly_csv_file", default="../data/florida.csv", help="CSV file containing polygon data", required=False)
 
     try:
         args = parser.parse_args()
@@ -99,11 +117,12 @@ def main():
     tags = kmeans.kmeans_equally_space_centroids_1_d(kMeansIn, 3, 0.001, 3)
     print(tags)
 
-    if len(args.csv_file_name) > 0:
+    if len(args.peak_csv_file) > 0:
         print("\nPeak Finding Tests:")
         print("-------------------")
 
-        csv_data = read_csv(args.csv_file_name)
+        real_path = os.path.realpath(args.peak_csv_file)
+        csv_data = read_peak_data_csv(real_path)
         csv_data = csv_data[1:]
         axis_count = 0
         for csv_column in csv_data:
@@ -115,6 +134,27 @@ def main():
             for peak in peak_list:
                 print("Peak " + str(peak_count) + ": {" + str(peak.left_trough.x) + ", " + str(peak.peak.x) + ", " + str(peak.right_trough.x) + ", " + str(peak.area) + "}")
                 peak_count = peak_count + 1
+
+    if len(args.poly_csv_file) > 0:
+        print("\nGraphics Tests:")
+        print("---------------")
+
+        orlando = {}
+        orlando['x'] = -81.38 # longitude
+        orlando['y'] = 28.54 # latitude
+        orlando['z'] = 0.0
+        
+        new_orleans = {}
+        new_orleans['x'] = -90.08 # longitude
+        new_orleans['y'] = 29.95 # latitude
+        new_orleans['z'] = 0.0
+
+        real_path = os.path.realpath(args.poly_csv_file)
+        florida = read_polygon_csv(real_path)
+        in_poly = graphics.is_point_in_polygon(orlando, florida)
+        print("Is Orlando is in Florida: " + str(in_poly))
+        in_poly = graphics.is_point_in_polygon(new_orleans, florida)
+        print("Is New Orleans is in Florida: " + str(in_poly))
 
 if __name__ == "__main__":
     main()
