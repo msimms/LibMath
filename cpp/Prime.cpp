@@ -72,7 +72,7 @@ namespace LibMath
 
 	bool Prime::isPrimeMillerRabin(uint64_t num)
 	{
-		bool isPrime = false;
-		return isPrime;
+//		size_t a = 2 + rand() % (num - 4); // random int in range [2, num - 2]
+		return false;
 	}
 }

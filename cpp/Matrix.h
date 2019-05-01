@@ -43,17 +43,17 @@ namespace LibMath
 		/**
 		 * Returns the width of the matrix.
 		 */		
-		size_t width(void) const { return m_w; };
+		size_t width(void) const { return m_w; }
 
 		/**
 		 * Returns the height of the matrix.
 		 */		
-		size_t height(void) const { return m_h; };
+		size_t height(void) const { return m_h; }
 
 		/**
 		 * Sets the value of the specified element.
 		 */		
-		void set(size_t i, size_t j, double value) { m_data[i][j] = value; };
+		void set(size_t i, size_t j, double value) { m_data[i][j] = value; }
 
 		/**
 		 * Returns C = A x B, where A is a matrix and B and C are vectors.

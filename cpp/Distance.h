@@ -31,8 +31,8 @@ namespace LibMath
 	class Distance
 	{
 	public:
-		Distance() {};
-		virtual ~Distance(void) {};
+		Distance() {}
+		virtual ~Distance(void) {}
 
 		/**
 		 * Computes the Haversine distance between two points on Earth's surface.

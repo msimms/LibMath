@@ -25,6 +25,7 @@
 #define _BIGINT_
 
 #include <stdint.h>
+#include <string>
 
 namespace LibMath
 {
@@ -42,13 +43,13 @@ namespace LibMath
 		BigInt(uint32_t bits);
 		virtual ~BigInt();
 
-		bool operator==(const BigInt& rhs) const { return compare(rhs); };
-		BigInt& operator+=(const BigInt& rhs) { add(rhs); return *this; };
-		BigInt& operator-=(const BigInt& lhs) { subtract(lhs); return *this; };
-		BigInt& operator*=(const BigInt& lhs) { multiply(lhs); return *this; };
-		BigInt& operator/=(const BigInt& lhs) { divide(lhs); return *this; };
+		bool operator==(const BigInt& rhs) const { return compare(rhs); }
+		BigInt& operator+=(const BigInt& rhs) { add(rhs); return *this; }
+		BigInt& operator-=(const BigInt& lhs) { subtract(lhs); return *this; }
+		BigInt& operator*=(const BigInt& lhs) { multiply(lhs); return *this; }
+		BigInt& operator/=(const BigInt& lhs) { divide(lhs); return *this; }
 
-		uint32_t numBits() const { return m_numBits; };
+		uint32_t numBits() const { return m_numBits; }
 
 		void clear();
 		void set(uint32_t n);
