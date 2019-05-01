@@ -28,6 +28,8 @@
 #include <stdlib.h>
 #include <vector>
 
+#include "Double.h"
+
 namespace LibMath
 {
 	class GraphPoint
@@ -49,7 +51,9 @@ namespace LibMath
 		
 		bool operator==(const GraphPoint& rhs) const
 		{
-			return (x == rhs.x) && (y == rhs.y);
+			double xEqual = roughlyEqual(x, rhs.x, (double)0.0001);
+			double yEqual = roughlyEqual(y, rhs.y, (double)0.0001);
+			return xEqual && yEqual;
 		}
 		
 		void clear()
