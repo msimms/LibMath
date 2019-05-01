@@ -42,7 +42,7 @@ namespace LibMath
 		/**
 		 * Returns the number of elements in the matrix.
 		 */		
-		size_t size(void) const { return m_size; };
+		size_t size(void) const { return m_size; }
 
 		/**
 		 * Returns C = A x B, where A, B, and C are matrices.

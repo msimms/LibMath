@@ -31,9 +31,6 @@ namespace LibMath
 	class Prime
 	{
 	public:
-		Prime() {}
-		virtual ~Prime() {}
-
 		static uint64_t gcd(uint64_t a, uint64_t b);
 		static uint64_t randOdd(uint64_t a);
 		static uint64_t generateCoprime(uint64_t num);
