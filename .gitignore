@@ -42,3 +42,6 @@ target
 
 # Eclipse
 .settings/
+
+# VSCode
+.vscode/ipch/
