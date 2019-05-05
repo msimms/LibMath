@@ -51,8 +51,8 @@ namespace LibMath
 		
 		bool operator==(const GraphPoint& rhs) const
 		{
-			double xEqual = roughlyEqual(x, rhs.x, (double)0.0001);
-			double yEqual = roughlyEqual(y, rhs.y, (double)0.0001);
+			bool xEqual = roughlyEqual(x, rhs.x, (double)0.0001);
+			bool yEqual = roughlyEqual(y, rhs.y, (double)0.0001);
 			return xEqual && yEqual;
 		}
 		

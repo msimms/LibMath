@@ -37,7 +37,7 @@ namespace LibMath
 		/**
 		 * Returns the number of elements in the vector.
 		 */		
-		size_t size(void) const { return m_size; };
+		size_t size(void) const { return m_size; }
 
 		/**
 		 * Returns a copy of vector B in vector A.
