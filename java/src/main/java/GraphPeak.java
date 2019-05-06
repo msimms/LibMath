@@ -36,34 +36,37 @@ public class GraphPeak
      * Constructor.
      */
     GraphPeak() {
-        clear();
+        this.leftTrough = new GraphPoint();
+        this.peak = new GraphPoint();
+        this.rightTrough = new GraphPoint();
+        this.area = (double)0.0;
     }
 
     /**
      * Copy constructor.
      */
     GraphPeak(GraphPeak rhs) {
-        leftTrough = rhs.leftTrough;
-        peak = rhs.peak;
-        rightTrough = rhs.rightTrough;
-        area = rhs.area;
+        this.leftTrough = rhs.leftTrough;
+        this.peak = rhs.peak;
+        this.rightTrough = rhs.rightTrough;
+        this.area = rhs.area;
     }
 
     /**
      * Copy constructor.
      */
     public void copy(GraphPeak rhs) {
-        leftTrough = rhs.leftTrough;
-        peak = rhs.peak;
-        rightTrough = rhs.rightTrough;
-        area = rhs.area;
+        this.leftTrough = rhs.leftTrough;
+        this.peak = rhs.peak;
+        this.rightTrough = rhs.rightTrough;
+        this.area = rhs.area;
     }
 
     /**
      * Comparitor. Peaks are the same if they have the same troughts and peak.
      */
     public boolean compare(GraphPeak rhs) {
-        return (leftTrough == rhs.leftTrough) && (peak == rhs.peak) && (rightTrough == rhs.rightTrough);
+        return (this.leftTrough == rhs.leftTrough) && (this.peak == rhs.peak) && (this.rightTrough == rhs.rightTrough);
     }
 
     /**
@@ -76,9 +79,9 @@ public class GraphPeak
      * Sets all the values associated with the peak to zero.
      */
     public void clear() {
-        leftTrough.clear();
-        peak.clear();
-        rightTrough.clear();
-        area = (double)0.0;
+        this.leftTrough.clear();
+        this.peak.clear();
+        this.rightTrough.clear();
+        this.area = (double)0.0;
     }
 };

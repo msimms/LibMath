@@ -32,7 +32,7 @@ import java.util.ArrayList;
  */
 public class CsvReader
 {
-    public static ArrayList<String[]> read(String fileName) throws IOException {
+    public static ArrayList<String[]> readAsStrings(String fileName) throws IOException {
         ArrayList<String[]> rows = new ArrayList<String[]>();
         BufferedReader br = null;
 
@@ -52,5 +52,57 @@ public class CsvReader
             }
         }
         return rows;
+    }
+
+    public static ArrayList<double[]> readAsDoubles(String fileName) throws IOException {
+        ArrayList<double[]> rows = new ArrayList<double[]>();
+        BufferedReader br = null;
+
+        try {
+            String rowStr = "";
+            br = new BufferedReader(new FileReader(fileName));
+            while ((rowStr = br.readLine()) != null) {
+                String[] row = rowStr.split(",");
+                double[] numRow = new double[row.length];
+                int numRowIndex = 0;
+                for (String item:row) {
+                    double numItem = Double.parseDouble(item);
+                    numRow[numRowIndex++] = numItem;
+                }
+                rows.add(numRow);
+            }
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                }
+            }
+        }
+        return rows;
+    }
+
+    public static ArrayList<double[]> readAsDoublesColumnwise(String fileName) throws IOException {
+        ArrayList<double[]> columns = new ArrayList<double[]>();
+        ArrayList<double[]> rows = readAsDoubles(fileName);
+
+        double[] tsList = new double[rows.size()];
+        double[] xList = new double[rows.size()];
+        double[] yList = new double[rows.size()];
+        double[] zList = new double[rows.size()];
+
+        for (int i = 0; i < rows.size(); ++i) {
+            double[] row = rows.get(i);
+            tsList[i] = row[0];
+            xList[i] = row[1];
+            yList[i] = row[2];
+            zList[i] = row[3];
+        }
+
+        columns.add(tsList);
+        columns.add(xList);
+        columns.add(yList);
+        columns.add(zList);
+        return columns;
     }
 }
