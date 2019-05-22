@@ -46,6 +46,8 @@ public class LibMathTests
         double v_flt[] = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
         double v_flt_avg = Statistics.averageDouble(v_flt);
         System.out.println("Average: " + v_flt_avg);
+        double variance = Statistics.variance(v_flt, v_flt_avg);
+        System.out.println("Variance: " + variance);
 
         if (csvFileName.length() > 0) {
             System.out.println("\nPeak Finding Tests:");

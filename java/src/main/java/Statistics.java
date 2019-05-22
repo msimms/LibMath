@@ -47,6 +47,13 @@ public class Statistics {
 		return sum / (double)data.length;
 	}
 
+	public static double[] noramlize(double[] data, double mean, double variance) {
+        double[] normalized = new double[data.length];
+		for (int index = 0; index < data.length; index++)
+            normalized[index] = (data[index] - mean) / variance;
+        return normalized;
+	}
+
 	public static double variance(double[] data, double mean) {
 		double numerator = 0;
 		
