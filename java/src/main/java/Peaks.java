@@ -34,6 +34,14 @@ public class Peaks {
     Peaks() {
     }
 
+    /**
+     * Computes the area of the specified peak.
+     * 
+     * @param data
+     *             The x axis data comprising the entire line.
+     * @param currentPeak
+     *             The peak whose area is to be computed.
+     */
 	public static void computeArea(double[] data, GraphPeak currentPeak) {
 		currentPeak.area = (double)0.0;
 		
@@ -45,6 +53,17 @@ public class Peaks {
 		}
 	}
 	
+    /**
+     * Returns all peaks in the graph line. A peak is defined as having a left trough, a peak,
+     * a right trough, with the peak rising above a line defined by 'sigmas' standard deviations
+     * above the mean.
+     * 
+     * @param data
+     *             The point data comprising the entire line.
+     * @param sigmas
+     *             The number of standard deviations above which peak values will be considered.
+     * @return An array of peak objects.
+     */
 	public static ArrayList<GraphPeak> findPeaks(double[] data, double sigmas) {
 		ArrayList<GraphPeak> peaks = new ArrayList<GraphPeak>();
 		
@@ -102,6 +121,13 @@ public class Peaks {
 		return peaks;
 	}
 	
+    /**
+     * Returns the average value of the specified points.
+     * 
+     * @param data
+     *             The points whose areas are to be averaged.
+     * @return The mean.
+     */
 	public static double average(ArrayList<GraphPoint> data) {
 		double sum = (double)0.0;
 		
@@ -113,6 +139,15 @@ public class Peaks {
 		return sum / (double)data.size();
 	}
 	
+    /**
+     * Returns the variance of the specified points.
+     * 
+     * @param data
+     *             The points whose areas are to be averaged.
+     * @param mean
+     *             The mean value of the given points.
+     * @return The variance.
+     */
 	public static double variance(ArrayList<GraphPoint> data, double mean) {
 		double numerator = (double)0.0;
 		
@@ -124,11 +159,28 @@ public class Peaks {
 		return numerator / (double)(data.size() - 1);
 	}
 	
+    /**
+     * Returns the standard deviation of the specified points.
+     * 
+     * @param data
+     *             The points whose areas are to be averaged.
+     * @param mean
+     *             The mean value of the given points.
+     * @return The standard deviation.
+     */
 	public static double standardDeviation(ArrayList<GraphPoint> data, double mean) {
 		double var = variance(data, mean);
 		return Math.sqrt(var);
 	}
 	
+    /**
+     * Computes the area of the specified peak.
+     * 
+     * @param data
+     *             The point data comprising the entire line.
+     * @param currentPeak
+     *             The peak whose area is to be computed.
+     */
 	public static void computeArea(ArrayList<GraphPoint> data, GraphPeak currentPeak) {
 		currentPeak.area = (double)0.0;
 		
@@ -149,6 +201,19 @@ public class Peaks {
 		}
 	}
     
+    /**
+     * Returns all peaks above a certain area. A peak is defined as having a left trough, a peak,
+     * a right trough, with the peak rising above a line defined by 'sigmas' standard deviations
+     * above the mean.
+     * 
+     * @param data
+     *             The point data comprising the entire line.
+     * @param minPeakArea
+     *             All peaks greater than or equal to this will be appended to the output.
+     * @param sigmas
+     *             The number of standard deviations above which peak values will be considered.
+     * @return An array of peak objects.
+     */
 	public static ArrayList<GraphPeak> findPeaksOfSize(ArrayList<GraphPoint> data, double minPeakArea, double sigmas) {
 		ArrayList<GraphPeak> peaks = new ArrayList<GraphPeak>();
 		

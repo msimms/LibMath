@@ -44,6 +44,9 @@ public class GraphPeak
 
     /**
      * Copy constructor.
+     * 
+     * @param rhs
+     *             Peak to be copied.
      */
     GraphPeak(GraphPeak rhs) {
         this.leftTrough = rhs.leftTrough;
@@ -54,6 +57,9 @@ public class GraphPeak
 
     /**
      * Copy constructor.
+     * 
+     * @param rhs
+     *             Peak to be copied.
      */
     public void copy(GraphPeak rhs) {
         this.leftTrough = rhs.leftTrough;
@@ -64,6 +70,9 @@ public class GraphPeak
 
     /**
      * Comparitor. Peaks are the same if they have the same troughts and peak.
+     * 
+     * @param rhs
+     *             Peak to be compared.
      */
     public boolean compare(GraphPeak rhs) {
         return (this.leftTrough == rhs.leftTrough) && (this.peak == rhs.peak) && (this.rightTrough == rhs.rightTrough);
@@ -71,6 +80,9 @@ public class GraphPeak
 
     /**
      * Comparison by area.
+     * 
+     * @param rhs
+     *             Peak to be compared.
      */
     public boolean lessThan(GraphPeak str) { return (area < str.area); }
     public boolean greaterThan(GraphPeak str) { return (area > str.area); }

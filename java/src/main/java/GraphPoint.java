@@ -31,6 +31,13 @@ public class GraphPoint
 
     /**
      * Constructor.
+     * 
+     * @param newX
+     *             x value of the new point.
+     * @param newY
+     *             y value of the new point.
+     * @param rhs
+     *             Point to be copied.
      */
     GraphPoint() {
         x = 0;
