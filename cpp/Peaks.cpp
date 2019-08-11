@@ -33,7 +33,7 @@ namespace LibMath
 		
 		if (currentPeak.leftTrough.x < currentPeak.rightTrough.x)
 		{
-			for (size_t index = currentPeak.leftTrough.x + 1; index <= currentPeak.rightTrough.x; ++index)
+			for (size_t index = (size_t)currentPeak.leftTrough.x + 1; index <= currentPeak.rightTrough.x; ++index)
 			{
 				double b = data[index] + data[index - 1];
 				currentPeak.area += ((double)0.5 * b);
@@ -115,7 +115,7 @@ namespace LibMath
 		
 		if (currentPeak.leftTrough.x < currentPeak.rightTrough.x)
 		{
-			for (size_t index = currentPeak.leftTrough.x + 1; index <= currentPeak.rightTrough.x; ++index)
+			for (size_t index = (size_t)currentPeak.leftTrough.x + 1; index <= currentPeak.rightTrough.x; ++index)
 			{
 				double b = data.at(index) + data.at(index - 1);
 				currentPeak.area += ((double)0.5 * b);
