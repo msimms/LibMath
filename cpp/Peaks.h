@@ -97,8 +97,8 @@ namespace LibMath
 			return (leftTrough == rhs.leftTrough) && (peak == rhs.peak) && (rightTrough == rhs.rightTrough);
 		}
 		
-		bool operator < (const GraphPeak& str) const { return (area < str.area); }
-		bool operator > (const GraphPeak& str) const { return (area > str.area); }
+		bool operator < (const GraphPeak& rhs) const { return (area < rhs.area); }
+		bool operator > (const GraphPeak& rhs) const { return (area > rhs.area); }
 		
 		void clear()
 		{

@@ -40,7 +40,7 @@ namespace LibMath
 			}
 		}
 	}
-	
+
 	GraphPeakList Peaks::findPeaks(double* data, size_t dataLen, size_t* numPeaks, double sigmas)
 	{
 		std::vector<GraphPeak> peaks;
