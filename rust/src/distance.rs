@@ -81,7 +81,7 @@ pub fn levenshtein_distance(str1: &str, str2: &str) -> usize {
 		}
 
 		// Copy v1 to v0.
-        let mut temp_v = v0.clone();
+        let temp_v = v0.clone();
         v0 = v1.clone();
         v1 = temp_v.clone();
 	}
