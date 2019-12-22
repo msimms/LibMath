@@ -22,13 +22,56 @@
 
 mod distance;
 mod kmeans;
+mod peaks;
 mod powers;
 mod square_matrix;
 mod statistics;
 mod vector;
 
-fn main()
-{
+use std::env;
+
+extern crate csv;
+
+pub type AccelerometerData = Vec<Vec<f64>>;
+
+fn read_accelerometer_csv(file_name: &str) -> AccelerometerData {
+    let mut accel_data = AccelerometerData::new();
+
+    let csv = "timestamp,x,y,z";
+    let mut reader = csv::Reader::from_reader(csv.as_bytes());
+
+    for record in reader.records() {
+    }
+
+    accel_data
+}
+
+fn help() {
+}
+
+fn vector_tests() {
+	println!("Vector Tests:");
+	println!("-------------");
+
+	let mut v1 = vector::Vector::new(3);
+	let mut v2 = vector::Vector::new(3);
+
+	v1.set(0, 1.0);
+	v1.set(1, 2.0);
+	v1.set(2, 3.0);
+
+	v2.set(0, 1.0);
+	v2.set(1, 2.0);
+	v2.set(2, 3.0);
+
+    v1.print();
+    v2.print();
+
+    let v_mult = v1.multiply(v2);
+    //let v_dot = v1.dot(v2);
+}
+
+fn square_matrix_tests() {
 	println!("Square Matrix Tests:");
 	println!("--------------------");
 
@@ -48,7 +91,9 @@ fn main()
 	m.subtract_scalar(1.0);
 	println!("2.0 matrix - 1.0:");
 	m.print();
+}
 
+fn statistics_tests() {
 	println!("\nStatistics Tests:");
 	println!("-----------------");
 
@@ -59,14 +104,18 @@ fn main()
 	let v_flt = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0];
 	let v_flt_avg = statistics::average_f32(&v_flt);
 	println!("Average: {}", v_flt_avg);
+}
 
+fn power_tests() {
 	println!("\nPower Tests:");
 	println!("------------");
 
 	let nearest = powers::nearest_power_of_2(63);
 	println!("Nearest power of 2 for {} is {}.", 63, nearest);
 	assert!(nearest == 64);
+}
 
+fn distance_tests() {
 	println!("\nDistance Tests:");
 	println!("---------------");
 
@@ -76,12 +125,58 @@ fn main()
 	distance = distance::levenshtein_distance("foo", "foobar");
 	println!("Levenshtein Distance: {}", distance);
 	assert!(distance == 3);
+}
 
+fn kmeans_tests() {
 	println!("\nK-Means Tests:");
 	println!("--------------");
+
 	let kmeans_in = vec![7.123, 0.999, 0.001, 0.5, 0.75, 0.002, 3.0, 2.0, 5.0, 0.001];
 	let tags = kmeans::kmeans_equally_space_centroids_1_d(kmeans_in, 3, 0.001, 3);
 	for tag in tags {
 		println!("{}", tag);
 	}
+}
+
+fn peak_finding_tests(accel_data: &AccelerometerData) {
+    println!("\nPeak Finding Tests:");
+    println!("-------------------");
+
+}
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+    let mut csv_file_name = "";
+
+    match args.len() {
+        // no arguments passed
+        1 => {
+            help();
+        },
+        // one argument passed
+        2 => {
+            help();
+        },
+        // one command and one argument passed
+        3 => {
+            let cmd = &args[1];
+            csv_file_name = &args[2];
+        },
+        // all the other cases
+        _ => {
+            help();
+        }
+    }
+
+    vector_tests();
+    square_matrix_tests();
+    statistics_tests();
+    power_tests();
+    distance_tests();
+    kmeans_tests();
+
+	if csv_file_name.len() > 0 {
+        let accel_data = read_accelerometer_csv(csv_file_name);
+        peak_finding_tests(&accel_data);
+    }
 }

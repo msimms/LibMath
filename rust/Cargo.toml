@@ -5,3 +5,4 @@ authors = ["Michael J Simms <msimms01@gmail.com>"]
 
 [dependencies]
 rand = "*"
+csv = "*"

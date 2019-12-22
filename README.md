@@ -27,7 +27,7 @@ This library is primarily focused on C and C++. However, I have started adding P
 * One dimensional K-Means (C, C++, Rust, Python)
 
 ### Peak Finding
-* Find peaks that rise more than one standard deviation above the mean for at least three consecutive points on the x axis. (C++, Python)
+* Find peaks that rise more than one standard deviation above the mean for at least three consecutive points on the x axis. (C++, Rust, Python)
 
 ### Graphics
 * Ray Casting (Python) - Determines if a point is within a polygon.

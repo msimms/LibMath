@@ -43,7 +43,19 @@ pub fn average_f32(data: &Vec<f32>) -> f32 {
     sum
 }
 
-pub fn variance(data: &Vec<f32>, mean: f32) -> f32 {
+pub fn average_f64(data: &Vec<f64>) -> f64 {
+    let mut sum = 0.0;
+
+    for item in data {
+        sum = sum + *item;
+    }
+
+    let denominator = data.len();
+    sum = sum / denominator as f64;
+    sum
+}
+
+pub fn variance_f32(data: &Vec<f32>, mean: f32) -> f32 {
     let mut numerator = 0.0;
 
     for item in data {
@@ -55,8 +67,26 @@ pub fn variance(data: &Vec<f32>, mean: f32) -> f32 {
     variance
 }
 
-pub fn standard_deviation(data: &Vec<f32>, mean: f32) -> f32 {
-    let var = variance(data, mean);
+pub fn variance_f64(data: &Vec<f64>, mean: f64) -> f64 {
+    let mut numerator = 0.0;
+
+    for item in data {
+        numerator = numerator + ((*item - mean) * (*item - mean));
+    }
+
+    let denominator = (data.len() - 1) as f64;
+    let variance = numerator / denominator;
+    variance
+}
+
+pub fn standard_deviation_f32(data: &Vec<f32>, mean: f32) -> f32 {
+    let var = variance_f32(data, mean);
+    let std_dev = var.sqrt();
+    std_dev
+}
+
+pub fn standard_deviation_f64(data: &Vec<f64>, mean: f64) -> f64 {
+    let var = variance_f64(data, mean);
     let std_dev = var.sqrt();
     std_dev
 }
