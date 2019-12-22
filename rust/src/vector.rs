@@ -37,6 +37,18 @@ impl Vector {
         v
     }
 
+    pub fn print(&mut self) {
+        print!("[");
+        for i in 0..self.size {
+            print!("{} ", self.data[i]);
+        }
+        println!("]");
+    }
+
+    pub fn set(&mut self, index: usize, val: f64) {
+        self.data[index] = val;
+    }
+
     pub fn multiply(&mut self, b: Vector) -> f64 {
         let mut c = 0.0;
 
