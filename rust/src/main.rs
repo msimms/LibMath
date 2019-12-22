@@ -67,8 +67,11 @@ fn vector_tests() {
     v1.print();
     v2.print();
 
+    let v3 = v2.clone();
     let v_mult = v1.multiply(v2);
-    //let v_dot = v1.dot(v2);
+    println!("{}", v_mult);
+    let v_dot = v1.dot(v3);
+    println!("{}", v_dot);
 }
 
 fn square_matrix_tests() {
@@ -169,11 +172,17 @@ fn main() {
     }
 
     vector_tests();
+    println!("\n");
     square_matrix_tests();
+    println!("\n");
     statistics_tests();
+    println!("\n");
     power_tests();
+    println!("\n");
     distance_tests();
+    println!("\n");
     kmeans_tests();
+    println!("\n");
 
 	if csv_file_name.len() > 0 {
         let accel_data = read_accelerometer_csv(csv_file_name);

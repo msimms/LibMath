@@ -22,6 +22,7 @@
 
 pub type VectorData = Vec<f64>;
 
+#[derive(Clone)]
 pub struct Vector {
     data: VectorData,
     size: usize,
