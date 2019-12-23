@@ -25,6 +25,7 @@
 #include <vector>
 
 #include "BigInt.h"
+#include "Calculus.h"
 #include "Distance.h"
 #include "KMeans.h"
 #include "Peaks.h"
@@ -36,7 +37,7 @@
 
 typedef std::vector<double> NumVec;
 
-std::vector<NumVec> readCsv(const std::string& fileName)
+std::vector<NumVec> readAccelerometerCsv(const std::string& fileName)
 {
 	std::vector<NumVec> columns;
 	std::vector<double> tsList, xList, yList, zList;
@@ -71,25 +72,14 @@ std::vector<NumVec> readCsv(const std::string& fileName)
 	return columns;
 }
 
-int main(int argc, const char * argv[])
+void vectorTests()
 {
-	const std::string OPTION_CSV_FILE = "--csv";
-
-	std::string csvFileName;
-	
-	for (size_t i = 1; i < argc; ++i)
-	{
-		if ((OPTION_CSV_FILE.compare(argv[i]) == 0) && (i + 1 < argc))
-		{
-			csvFileName = argv[++i];
-		}
-	}
-
 	std::cout << "Vector Tests:" << std::endl;
 	std::cout << "-------------" << std::endl;
 
 	LibMath::Vector* v1 = new LibMath::Vector(3);
 	LibMath::Vector* v2 = new LibMath::Vector(3);
+
 	v1->m_data[0] = 1; v1->m_data[1] = 2; v1->m_data[2] = 3;
 	v2->m_data[0] = 1; v2->m_data[1] = 2; v2->m_data[2] = 3;
 	std::cout << "v1:" << std::endl;
@@ -99,9 +89,13 @@ int main(int argc, const char * argv[])
 	std::cout << "v1 x v2 = " << v1->multiply(v2) << std::endl;
 	std::cout << "v1 dot v2 = " << v1->dot(v2) << std::endl;
 	std::cout << "length of v1 = " << v1->length() << std::endl;
+
 	delete v1;
-	delete v2;	
-	
+	delete v2;
+}
+
+void squareMatrixTests()
+{
 	std::cout << "Square Matrix Tests:" << std::endl;
 	std::cout << "--------------------" << std::endl;
 
@@ -128,7 +122,10 @@ int main(int argc, const char * argv[])
 		m->print();
 		delete m;
 	}
+}
 
+void statisticsTests()
+{
 	std::cout << "Statistics Tests:" << std::endl;
 	std::cout << "-----------------" << std::endl;
 
@@ -168,14 +165,20 @@ int main(int argc, const char * argv[])
 	min = LibMath::Statistics::min(v_flt2);
 	std::cout << "Min: " << min << std::endl << std::endl;
 	assert(min == 1.0);
+}
 
+void powerTests()
+{
 	std::cout << "Power Tests:" << std::endl;
 	std::cout << "------------" << std::endl;
 
 	unsigned long nearest = LibMath::NearestPowerOf2(63);
 	std::cout << "Nearest power of 2 for 63 is " << nearest << "." << std::endl << std::endl;
 	assert(nearest == 64);
+}
 
+void distanceTests()
+{
 	std::cout << "Distance Tests:" << std::endl;
 	std::cout << "---------------" << std::endl;
 
@@ -185,7 +188,10 @@ int main(int argc, const char * argv[])
 	distance = LibMath::Distance::levenshteinDistance("foo", "foobar");
 	std::cout << "Levenshtein Distance: " << distance << std::endl << std::endl;
 	assert(distance == 3);
+}
 
+void kmeansTests()
+{
 	std::cout << "K-Means Tests:" << std::endl;
 	std::cout << "--------------" << std::endl;
 
@@ -200,6 +206,7 @@ int main(int argc, const char * argv[])
 	kMeansIn[7] = 2.0;
 	kMeansIn[8] = 5.0;
 	kMeansIn[9] = 0.001;
+
 	size_t* tags = LibMath::KMeans::withEquallySpacedCentroids1D(kMeansIn, 10, 3, (double)0.001, 3);
 	if (tags)
 	{
@@ -210,32 +217,51 @@ int main(int argc, const char * argv[])
 		delete tags;
 	}
 	std::cout << std::endl;
+}
 
-	if (csvFileName.length() > 0)
+void peakFindingTests(const std::vector<NumVec>& csvData)
+{
+	std::cout << "Peak Finding Tests:" << std::endl;
+	std::cout << "-------------------" << std::endl;
+	
+	auto csvIter = csvData.begin();
+	++csvIter; // Skip over the timestamp column
+
+	uint16_t axisCount = 0;
+	for (; csvIter != csvData.end(); ++csvIter)
 	{
-		std::cout << "Peak Finding Tests:" << std::endl;
-		std::cout << "-------------------" << std::endl;
-		
-		std::vector<NumVec> csvData = readCsv(csvFileName);
-		auto csvIter = csvData.begin();
-		++csvIter; // Skip over the timestamp column
-		uint16_t axisCount = 0;
-		for (; csvIter != csvData.end(); ++csvIter)
+		std::cout << "Axis " << ++axisCount << ":" << std::endl;
+
+		const NumVec& columnData = (*csvIter);
+		uint64_t peakCount = 0;
+		std::vector<LibMath::GraphPeak> peaks = LibMath::Peaks::findPeaks(columnData, (double)2.0);
+		for (auto peakIter = peaks.begin(); peakIter != peaks.end(); ++peakIter)
 		{
-			std::cout << "Axis " << ++axisCount << ":" << std::endl;
-
-			NumVec& columnData = (*csvIter);
-			uint64_t peakCount = 0;
-			std::vector<LibMath::GraphPeak> peaks = LibMath::Peaks::findPeaks(columnData, (double)2.0);
-			for (auto peakIter = peaks.begin(); peakIter != peaks.end(); ++peakIter)
-			{
-				LibMath::GraphPeak& peak = (*peakIter);
-				std::cout << "Peak " << ++peakCount << ": {" << peak.leftTrough.x << ", " << peak.peak.x << ", " << peak.rightTrough.x << ", " << peak.area << "}" << std::endl;
-			}
-			std::cout << std::endl;
+			LibMath::GraphPeak& peak = (*peakIter);
+			std::cout << "Peak " << ++peakCount << ": {" << peak.leftTrough.x << ", " << peak.peak.x << ", " << peak.rightTrough.x << ", " << peak.area << "}" << std::endl;
 		}
+		std::cout << std::endl;
 	}
+}
 
+void calculusTests(const std::vector<NumVec>& csvData)
+{
+	std::cout << "Calculus Tests:" << std::endl;
+	std::cout << "---------------" << std::endl;
+
+	auto csvIter = csvData.begin();
+	++csvIter; // Skip over the timestamp column
+
+	uint16_t axisCount = 0;
+	for (; csvIter != csvData.end(); ++csvIter)
+	{
+		std::cout << "Axis " << ++axisCount << ":" << std::endl;
+		std::cout << std::endl;
+	}
+}
+
+void primalityTests()
+{
 	std::cout << "Primality Tests:" << std::endl;
 	std::cout << "----------------" << std::endl;
 
@@ -249,7 +275,10 @@ int main(int argc, const char * argv[])
 	possiblePrime = 1000;
 	isPrime = LibMath::Prime::isPrimeFermat(possiblePrime);
 	std::cout << possiblePrime << " is " << (isPrime ? "" : "not ") << "prime, according to the Fermat test." << std::endl << std::endl;
+}
 
+void bigIntTests()
+{
 	std::cout << "BigInt Tests:" << std::endl;
 	std::cout << "-------------" << std::endl;
 
@@ -262,6 +291,48 @@ int main(int argc, const char * argv[])
 	std::cout << "Empty Big Int: " << big.toString() << std::endl;
 	big.set(100);
 	std::cout << "Small Value In a Big Int: " << big.toString() << std::endl;
+}
+
+int main(int argc, const char * argv[])
+{
+	const std::string OPTION_CSV_FILE = "--csv";
+
+	std::string csvFileName;
+	
+	for (size_t i = 1; i < argc; ++i)
+	{
+		if ((OPTION_CSV_FILE.compare(argv[i]) == 0) && (i + 1 < argc))
+		{
+			csvFileName = argv[++i];
+		}
+	}
+
+    vectorTests();
+	std::cout << std::endl;
+	squareMatrixTests();
+	std::cout << std::endl;
+	statisticsTests();
+	std::cout << std::endl;
+	powerTests();
+	std::cout << std::endl;
+	distanceTests();
+	std::cout << std::endl;
+	kmeansTests();
+	std::cout << std::endl;
+
+	if (csvFileName.length() > 0)
+	{
+		std::vector<NumVec> csvData = readAccelerometerCsv(csvFileName);
+		peakFindingTests(csvData);
+		std::cout << std::endl;
+		calculusTests(csvData);
+		std::cout << std::endl;
+	}
+
+	primalityTests();
+	std::cout << std::endl;
+	bigIntTests();
+	std::cout << std::endl;
 
 	return 0;
 }
