@@ -29,24 +29,51 @@ mod statistics;
 mod vector;
 
 use std::env;
+use std::error::Error;
+use std::ffi::OsString;
+use std::fs::File;
 
 extern crate csv;
 
-pub type AccelerometerData = Vec<Vec<f64>>;
+struct AccelerometerData {
+    ts: Vec<f64>,
+    x: Vec<f64>,
+    y: Vec<f64>,
+    z: Vec<f64>,
+}
 
-fn read_accelerometer_csv(file_name: &str) -> AccelerometerData {
-    let mut accel_data = AccelerometerData::new();
+impl AccelerometerData {
+    pub fn new() -> AccelerometerData {
+        AccelerometerData { ts: Vec::new(), x: Vec::new(), y: Vec::new(), z: Vec::new() }
+    }
+}
 
-    let csv = "timestamp,x,y,z";
-    let mut reader = csv::Reader::from_reader(csv.as_bytes());
+fn read_accelerometer_csv(file_path: &str) -> AccelerometerData {
+    let mut accel_vector = AccelerometerData::new();
+    let mut file = match File::open(&file_path) {
+        Err(why) => panic!("couldn't open {}: {}", file_path, why.description()),
+        Ok(file) => file,
+    };
+    let mut reader = csv::Reader::from_reader(file);
 
     for record in reader.records() {
+        for field in record.iter() {
+            let ts: f64 = field[0].parse().unwrap();
+            let x: f64 = field[1].parse().unwrap();
+            let y: f64 = field[2].parse().unwrap();
+            let z: f64 = field[3].parse().unwrap();
+            accel_vector.ts.push(ts);
+            accel_vector.x.push(x);
+            accel_vector.y.push(y);
+            accel_vector.z.push(z);
+        }
     }
-
-    accel_data
+    accel_vector
 }
 
 fn help() {
+	println!("Usage:");
+	println!("\t--csv <csv file name for peak tests>");
 }
 
 fn vector_tests() {
@@ -145,6 +172,22 @@ fn peak_finding_tests(accel_data: &AccelerometerData) {
     println!("\nPeak Finding Tests:");
     println!("-------------------");
 
+    let x_peaks = peaks::find_peaks(&accel_data.x, 2.0);
+    let y_peaks = peaks::find_peaks(&accel_data.y, 2.0);
+    let z_peaks = peaks::find_peaks(&accel_data.z, 2.0);
+
+    println!("\nX Peaks:");
+    for peak in x_peaks {
+        peak.print();
+    }
+    println!("\nY Peaks:");
+    for peak in y_peaks {
+        peak.print();
+    }
+    println!("\nZ Peaks:");
+    for peak in z_peaks {
+        peak.print();
+    }
 }
 
 fn main() {

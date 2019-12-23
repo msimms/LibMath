@@ -55,8 +55,7 @@ pub struct GraphPeak {
     area: f64,
 }
 
-impl GraphPeak
-{
+impl GraphPeak {
     pub fn new() -> GraphPeak {
         GraphPeak { left_trough: GraphPoint::new(), peak: GraphPoint::new(), right_trough: GraphPoint::new(), area: 0.0 }
     }
@@ -66,6 +65,10 @@ impl GraphPeak
         self.peak = rhs.peak;
         self.right_trough = rhs.right_trough;
         self.area = rhs.area;
+    }
+
+    pub fn print(&self) {
+        println!("L {}, P {}, R {}", self.left_trough.x, self.peak.x, self.right_trough.x);
     }
 
     pub fn equals(&mut self, rhs: GraphPeak) -> bool {
@@ -142,6 +145,7 @@ pub fn find_peaks(data: &Vec<f64>, sigmas: f64) -> Vec<GraphPeak> {
         }
         else if current_peak.right_trough.x > 0 { // Right trough is set.
             compute_area(data, &mut current_peak);
+            peaks.push(current_peak);
             current_peak.clear();
         }
         else { // Nothing is set, but the value is above the threshold.
