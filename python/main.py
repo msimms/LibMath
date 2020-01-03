@@ -29,6 +29,7 @@ import kmeans
 import math
 import os
 import peaks
+import signals
 import statistics
 import sys
 
@@ -68,18 +69,8 @@ def read_peak_data_csv(csv_file_name):
 	columns.append(z_list)
 	return columns
 
-def main():
-    # Parse command line options.
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--peak_csv_file", default="../data/10_pullups.csv", help="CSV file containing test peak data", required=False)
-    parser.add_argument("--poly_csv_file", default="../data/florida.csv", help="CSV file containing polygon data", required=False)
-
-    try:
-        args = parser.parse_args()
-    except IOError as e:
-        parser.error(e)
-        sys.exit(1)
-
+def perform_distance_tests():
+    """Performs unit tests on the distance module and prints the results."""
     #print("Distance Tests:")
     #print("---------------")
 
@@ -89,7 +80,10 @@ def main():
     #distance_calc = distance.levenshtein_distance("foo", "foobar")
     #print("Levenshtein Distance: " + distance_calc)
     #assert(distance_calc == 3)
+    pass
 
+def perform_statistics_tests():
+    """Performs unit tests on the statistics module and prints the results."""
     print("Statistics Tests:")
     print("-----------------")
 
@@ -100,6 +94,8 @@ def main():
     print("Variance: " + str(variance))
     print("Standard Deviation: " + str(statistics.stddev(v_flt, v_flt_avg)))
 
+def perform_kmeans_tests():
+    """Performs unit tests on the kmeans module and prints the results."""
     print("\nK-Means Tests:")
     print("--------------")
 
@@ -117,44 +113,79 @@ def main():
     tags = kmeans.kmeans_equally_space_centroids_1_d(kMeansIn, 3, 0.001, 3)
     print(tags)
 
+def perform_peak_finding_tests(csv_file_name):
+    """Performs unit tests on the peak finding module and prints the results."""
+    print("\nPeak Finding Tests:")
+    print("-------------------")
+
+    real_path = os.path.realpath(csv_file_name)
+    csv_data = read_peak_data_csv(real_path)
+    csv_data = csv_data[1:]
+    axis_count = 0
+    for csv_column in csv_data:
+        print("Axis " + str(axis_count) + ":")
+        axis_count = axis_count + 1
+
+        peak_count = 0
+        peak_list = peaks.find_peaks_in_numeric_array(csv_column, 2.0)
+        for peak in peak_list:
+            print("Peak " + str(peak_count) + ": {" + str(peak.left_trough.x) + ", " + str(peak.peak.x) + ", " + str(peak.right_trough.x) + ", " + str(peak.area) + "}")
+            peak_count = peak_count + 1
+
+def perform_graphics_tests(poly_file_name):
+    """Performs unit tests on the graphics module and prints the results."""
+    print("\nGraphics Tests:")
+    print("---------------")
+
+    orlando = {}
+    orlando['x'] = -81.38 # longitude
+    orlando['y'] = 28.54 # latitude
+    orlando['z'] = 0.0
+    
+    new_orleans = {}
+    new_orleans['x'] = -90.08 # longitude
+    new_orleans['y'] = 29.95 # latitude
+    new_orleans['z'] = 0.0
+
+    real_path = os.path.realpath(poly_file_name)
+    florida = read_polygon_csv(real_path)
+    in_poly = graphics.is_point_in_polygon(orlando, florida)
+    print("Is Orlando is in Florida: " + str(in_poly))
+    in_poly = graphics.is_point_in_polygon(new_orleans, florida)
+    print("Is New Orleans is in Florida: " + str(in_poly))
+
+def perform_signal_tests():
+    """Performs unit tests on the signals module and prints the results."""
+    print("\nSignals Tests:")
+    print("---------------")
+    data = [1,2,3,4,5,6,7]
+    print(data)
+    print(signals.smooth(data, 1))
+    print(signals.smooth(data, 2))
+    print(signals.smooth(data, 3))
+
+def main():
+    # Parse command line options.
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--peak_csv_file", default="../data/10_pullups.csv", help="CSV file containing test peak data", required=False)
+    parser.add_argument("--poly_csv_file", default="../data/florida.csv", help="CSV file containing polygon data", required=False)
+
+    try:
+        args = parser.parse_args()
+    except IOError as e:
+        parser.error(e)
+        sys.exit(1)
+
+    perform_distance_tests()
+    perform_statistics_tests()
+    perform_kmeans_tests()
+
     if len(args.peak_csv_file) > 0:
-        print("\nPeak Finding Tests:")
-        print("-------------------")
-
-        real_path = os.path.realpath(args.peak_csv_file)
-        csv_data = read_peak_data_csv(real_path)
-        csv_data = csv_data[1:]
-        axis_count = 0
-        for csv_column in csv_data:
-            print("Axis " + str(axis_count) + ":")
-            axis_count = axis_count + 1
-
-            peak_count = 0
-            peak_list = peaks.find_peaks_in_numeric_array(csv_column, 2.0)
-            for peak in peak_list:
-                print("Peak " + str(peak_count) + ": {" + str(peak.left_trough.x) + ", " + str(peak.peak.x) + ", " + str(peak.right_trough.x) + ", " + str(peak.area) + "}")
-                peak_count = peak_count + 1
-
+        perform_peak_finding_tests(args.peak_csv_file)
     if len(args.poly_csv_file) > 0:
-        print("\nGraphics Tests:")
-        print("---------------")
+        perform_graphics_tests(args.poly_csv_file)
 
-        orlando = {}
-        orlando['x'] = -81.38 # longitude
-        orlando['y'] = 28.54 # latitude
-        orlando['z'] = 0.0
-        
-        new_orleans = {}
-        new_orleans['x'] = -90.08 # longitude
-        new_orleans['y'] = 29.95 # latitude
-        new_orleans['z'] = 0.0
-
-        real_path = os.path.realpath(args.poly_csv_file)
-        florida = read_polygon_csv(real_path)
-        in_poly = graphics.is_point_in_polygon(orlando, florida)
-        print("Is Orlando is in Florida: " + str(in_poly))
-        in_poly = graphics.is_point_in_polygon(new_orleans, florida)
-        print("Is New Orleans is in Florida: " + str(in_poly))
+    perform_signal_tests()
 
 if __name__ == "__main__":
     main()
