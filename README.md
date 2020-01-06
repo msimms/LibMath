@@ -23,6 +23,9 @@ This library is primarily focused on C and C++. However, I have started adding P
 * Mean, Standard Deviation, and Variance (C, C++, Rust, Python2 - unnecesary in Python3)
 * Min, Max (C, C++, Rust)
 
+### Signals Functions
+* Simple Signal Smoothing (C, C++, Python)
+
 ### K-Means
 * One dimensional K-Means (C, C++, Rust, Python)
 

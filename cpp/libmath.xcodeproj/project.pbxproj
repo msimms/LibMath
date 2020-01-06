@@ -10,6 +10,7 @@
 		2707D2DC2162FB0A008CCE52 /* Peaks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2707D2DA2162FB0A008CCE52 /* Peaks.cpp */; };
 		2718DC65227A25E000746F4D /* Double.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2718DC64227A25E000746F4D /* Double.cpp */; };
 		272A3F5720FCE241000248AB /* Distance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 272A3F5520FCE241000248AB /* Distance.cpp */; };
+		276BC88023C3B59500102112 /* Signals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276BC87E23C3B59400102112 /* Signals.cpp */; };
 		277E9B99218A418C00C75AE9 /* Prime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 277E9B97218A418C00C75AE9 /* Prime.cpp */; };
 		277E9B9C218B6BCC00C75AE9 /* BigInt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 277E9B9A218B6BCC00C75AE9 /* BigInt.cpp */; };
 		279CC71920D74FD600E8690E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 279CC71820D74FD600E8690E /* main.cpp */; };
@@ -41,6 +42,8 @@
 		2718DC64227A25E000746F4D /* Double.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Double.cpp; sourceTree = SOURCE_ROOT; };
 		272A3F5520FCE241000248AB /* Distance.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Distance.cpp; sourceTree = SOURCE_ROOT; };
 		272A3F5620FCE241000248AB /* Distance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Distance.h; sourceTree = SOURCE_ROOT; };
+		276BC87E23C3B59400102112 /* Signals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Signals.cpp; sourceTree = SOURCE_ROOT; };
+		276BC87F23C3B59400102112 /* Signals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Signals.h; sourceTree = SOURCE_ROOT; };
 		277E9B97218A418C00C75AE9 /* Prime.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Prime.cpp; sourceTree = SOURCE_ROOT; };
 		277E9B98218A418C00C75AE9 /* Prime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prime.h; sourceTree = SOURCE_ROOT; };
 		277E9B9A218B6BCC00C75AE9 /* BigInt.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BigInt.cpp; sourceTree = SOURCE_ROOT; };
@@ -114,6 +117,8 @@
 				27B413AB20D6884200A97E4B /* Powers.h */,
 				277E9B97218A418C00C75AE9 /* Prime.cpp */,
 				277E9B98218A418C00C75AE9 /* Prime.h */,
+				276BC87E23C3B59400102112 /* Signals.cpp */,
+				276BC87F23C3B59400102112 /* Signals.h */,
 				27B413A920D6884200A97E4B /* Statistics.cpp */,
 				27B413A520D6884200A97E4B /* Statistics.h */,
 				27B413A720D6884200A97E4B /* Vector.cpp */,
@@ -187,6 +192,7 @@
 				27A761FC23ADAD890043ED3D /* Calculus.cpp in Sources */,
 				27B413AE20D6884200A97E4B /* Vector.cpp in Sources */,
 				27B413AC20D6884200A97E4B /* Powers.cpp in Sources */,
+				276BC88023C3B59500102112 /* Signals.cpp in Sources */,
 				279CC71920D74FD600E8690E /* main.cpp in Sources */,
 				277E9B99218A418C00C75AE9 /* Prime.cpp in Sources */,
 				27B413AF20D6884200A97E4B /* Statistics.cpp in Sources */,

@@ -31,6 +31,7 @@
 #include "Peaks.h"
 #include "Powers.h"
 #include "Prime.h"
+#include "Signals.h"
 #include "SquareMatrix.h"
 #include "Statistics.h"
 #include "Vector.h"
@@ -165,6 +166,22 @@ void statisticsTests()
 	min = LibMath::Statistics::min(v_flt2);
 	std::cout << "Min: " << min << std::endl << std::endl;
 	assert(min == 1.0);
+}
+
+void signalsTests()
+{
+	std::cout << "Signals Tests:" << std::endl;
+	std::cout << "--------------" << std::endl;
+
+	std::vector<double> inData = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
+	std::vector<double> outData = LibMath::Signals::smooth(inData, 2);
+
+	std::cout << "[";
+	for (auto iter = outData.begin(); iter != outData.end(); ++iter)
+	{
+		std::cout << (*iter) << " ";
+	}
+	std::cout << "]" << std::endl;
 }
 
 void powerTests()
@@ -312,6 +329,8 @@ int main(int argc, const char * argv[])
 	squareMatrixTests();
 	std::cout << std::endl;
 	statisticsTests();
+	std::cout << std::endl;
+	signalsTests();
 	std::cout << std::endl;
 	powerTests();
 	std::cout << std::endl;
