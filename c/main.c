@@ -25,11 +25,12 @@
 #include "Distance.h"
 #include "KMeans.h"
 #include "Powers.h"
+#include "Signals.h"
 #include "SquareMatrix.h"
 #include "Statistics.h"
 #include "Vector.h"
 
-int main(int argc, const char * argv[])
+void vectorTests()
 {
 	printf("Vector Tests:\n");
 	printf("-------------\n");
@@ -47,7 +48,10 @@ int main(int argc, const char * argv[])
 	printf("length of v1 = %lf\n", vectorLength(v1));
 	vectorDestroy(v1);
 	vectorDestroy(v2);
+}
 
+void squareMatrixTests()
+{
 	printf("\nSquare Matrix Tests:\n");
 	printf("--------------------\n");
 
@@ -68,7 +72,10 @@ int main(int argc, const char * argv[])
 	printf("Ones matrix multiplied by 2.0:\n");
 	squareMatrixPrint(m);
 	squareMatrixDestroy(m);
+}
 
+void statisticsTests()
+{
 	printf("Statistics Tests:\n");
 	printf("-----------------\n");
 
@@ -91,14 +98,38 @@ int main(int argc, const char * argv[])
 	double min = statisticsMin(v_flt, 9);
 	printf("Min: %lf\n\n", min);
 	assert(min == 1.0);
+}
 
+void signalsTests()
+{
+	printf("Signals Tests:\n");
+	printf("--------------\n");
+
+	double inData[] = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
+	size_t inDataLen = 9;
+	size_t windowSize = 2;
+	double* outData = smooth(inData, inDataLen, windowSize);
+	
+	printf("[");
+	for (size_t i = 0; i < inDataLen - windowSize; ++i)
+	{
+		printf("%lf ", outData[i]);
+	}
+	printf("]\n\n");
+}
+
+void powerTests()
+{
 	printf("Power Tests:\n");
 	printf("------------\n");
 
 	unsigned long nearest = NearestPowerOf2(63);
 	printf("Nearest power of 2 for 63 is %ld.\n\n", nearest);
 	assert(nearest == 64);
+}
 
+void distanceTests()
+{
 	printf("Distance Tests:\n");
 	printf("---------------\n");
 
@@ -108,7 +139,10 @@ int main(int argc, const char * argv[])
 	distance = levenshteinDistance("foo", "foobar");
 	printf("Levenshtein Distance: %zu\n\n", distance);
 	assert(distance == 3);
+}
 
+void kmeansTests()
+{
 	printf("K-Means Tests:\n");
 	printf("--------------\n");
 
@@ -132,6 +166,16 @@ int main(int argc, const char * argv[])
 		}
 		free((void*)tags);
 	}
+}
 
+int main(int argc, const char * argv[])
+{
+	vectorTests();
+	squareMatrixTests();
+	statisticsTests();
+	signalsTests();
+	powerTests();
+	distanceTests();
+	kmeansTests();
 	return 0;
 }
