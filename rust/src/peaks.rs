@@ -90,6 +90,7 @@ impl GraphPeak {
     }
 }
 
+// Computes the area of the given peak.
 pub fn compute_area(data: &Vec<f64>, current_peak: &mut GraphPeak) {
     current_peak.area = 0.0;
     
@@ -101,6 +102,7 @@ pub fn compute_area(data: &Vec<f64>, current_peak: &mut GraphPeak) {
     }
 }
 
+// Returns a list of peaks in the given vector of numeric values. Only peaks that go above the given sigma line will be counted.
 pub fn find_peaks(data: &Vec<f64>, sigmas: f64) -> Vec<GraphPeak> {
     let mut peaks: Vec<GraphPeak> = Vec::new();
     let mut current_peak = GraphPeak::new();

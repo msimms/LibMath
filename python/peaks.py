@@ -23,6 +23,7 @@
 import statistics
 
 class GraphPoint(object):
+    """Represents an x,y point value."""
     
     def __init__(self, x, y):
         self.x = x
@@ -33,6 +34,7 @@ class GraphPoint(object):
         self.y = 0.0
 
 class GraphPeak(object):
+    """Represents a peak, consisting of a left trough, peak, and right trough."""
 
     def __init__(self):
         self.left_trough = GraphPoint(0, 0.0)
@@ -47,6 +49,7 @@ class GraphPeak(object):
         self.area = 0.0
 
 def compute_area_from_graph_point_array(data, current_peak):
+    """Computes the area of the given peak."""
     current_peak.area = 0.0
 
     if current_peak.left_trough.x < current_peak.right_trough.x:
@@ -57,6 +60,7 @@ def compute_area_from_graph_point_array(data, current_peak):
             prev_point = current_point
 
 def compute_area_from_numeric_array(data, current_peak):
+    """Computes the area of the given peak."""
     current_peak.area = 0.0
 
     if current_peak.left_trough.x < current_peak.right_trough.x:
@@ -67,6 +71,7 @@ def compute_area_from_numeric_array(data, current_peak):
             prev_point = current_point
 
 def find_peaks_in_numeric_array(data, sigmas):
+    """Returns a list of peaks in the given array of numeric values. Only peaks that go above the given sigma line will be counted."""
     peaks = []
     current_peak = GraphPeak()
 
