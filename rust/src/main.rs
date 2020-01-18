@@ -30,7 +30,6 @@ mod vector;
 
 use std::env;
 use std::error::Error;
-use std::ffi::OsString;
 use std::fs::File;
 
 extern crate csv;
