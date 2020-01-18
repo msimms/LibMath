@@ -33,7 +33,7 @@ This library is primarily focused on C and C++. However, I have started adding P
 * Find peaks that rise more than one standard deviation above the mean for at least three consecutive points on the x axis. (C++, Rust, Python)
 
 ### Graphics
-* Ray Casting (Python) - Determines if a point is within a polygon.
+* Ray Casting (Python, Rust) - Determines if a point is within a polygon.
 
 ## Using
 Add this respository as a submodule to your own project and then add the file you want directly to your build, or just copy the source files directly into your project. This library is just meant to be a loose collection of files that you can do whatever you want with. This way you don't have to add code for algorithms you don't need to your project.
