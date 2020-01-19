@@ -37,7 +37,9 @@ pub fn is_point_in_polygon(test_point: Point, poly: &Vec<Point>) -> bool {
     // Sanity checks.
     let mut num_crossings = 0;
     let num_vertices = poly.len();
-    if num_vertices < 3 { // Need at least three points to make a polygon
+
+    // Need at least three points to make a polygon.
+    if num_vertices < 3 {
         return false;
     }
 
@@ -68,7 +70,7 @@ pub fn is_point_in_polygon(test_point: Point, poly: &Vec<Point>) -> bool {
         if crosses_y {
 
             // Test if the ray extending to the right of the point crosses the edge.
-            let poly_pt1_x = (poly[i]).x;
+            let poly_pt1_x = poly[i].x;
             if test_x <  poly_pt1_x + ((test_y - poly_pt1_y) / (poly_pt2_y - poly_pt1_y)) * (poly_pt2_x - poly_pt1_x) {
                 num_crossings = num_crossings + 1;
             }
@@ -84,7 +86,9 @@ pub fn is_point_in_poly_array(test_x: f64, test_y: f64, poly: &Vec<Point>) -> bo
     // Sanity checks.
     let mut num_crossings = 0;
     let num_vertices = poly.len();
-    if num_vertices < 3 { // Need at least three points to make a polygon
+
+    // Need at least three points to make a polygon
+    if num_vertices < 3 {
         return false;
     }
 
@@ -113,7 +117,7 @@ pub fn is_point_in_poly_array(test_x: f64, test_y: f64, poly: &Vec<Point>) -> bo
         if crosses_y {
 
             // Test if the ray extending to the right of the point crosses the edge.
-            let poly_pt1_x = (poly[i]).x;
+            let poly_pt1_x = poly[i].x;
             if test_x <  poly_pt1_x + ((test_y - poly_pt1_y) / (poly_pt2_y - poly_pt1_y)) * (poly_pt2_x - poly_pt1_x) {
                 num_crossings = num_crossings + 1;
             }

@@ -21,6 +21,7 @@
 //	SOFTWARE.
 
 mod distance;
+mod graphics;
 mod kmeans;
 mod peaks;
 mod powers;
@@ -33,6 +34,26 @@ use std::error::Error;
 use std::fs::File;
 
 extern crate csv;
+
+fn read_polygon_csv(file_path: &str) -> Vec<graphics::Point> {
+    let mut points = Vec::new(); 
+
+    let mut file = match File::open(&file_path) {
+        Err(why) => panic!("couldn't open {}: {}", file_path, why.description()),
+        Ok(file) => file,
+    };
+    let mut reader = csv::Reader::from_reader(file);
+
+    for record in reader.records() {
+        for field in record.iter() {
+            let mut new_point = graphics::Point::new();
+            new_point.x = field[0].parse().unwrap();
+            new_point.y = field[1].parse().unwrap();
+            points.push(new_point);
+        }
+    }
+    points
+}
 
 struct AccelerometerData {
     ts: Vec<f64>,
@@ -72,7 +93,7 @@ fn read_accelerometer_csv(file_path: &str) -> AccelerometerData {
 
 fn help() {
 	println!("Usage:");
-	println!("\t--csv <csv file name for peak tests>");
+	println!("\t--<csv file name for peak tests> <csv file name for polygon tests>");
 }
 
 fn vector_tests() {
@@ -189,9 +210,29 @@ fn peak_finding_tests(accel_data: &AccelerometerData) {
     }
 }
 
+fn perform_graphics_tests(poly_data: &Vec<graphics::Point>) {
+    // Performs unit tests on the graphics module and prints the results.
+    println!("\nGraphics Tests:");
+    println!("----------------");
+
+    let mut orlando = graphics::Point::new();
+    orlando.x = -81.38; // longitude
+    orlando.y = 28.54; // latitude
+    
+    let mut new_orleans = graphics::Point::new();
+    new_orleans.x = -90.08; // longitude
+    new_orleans.y = 29.95; // latitude
+
+    let mut in_poly = graphics::is_point_in_polygon(orlando, poly_data);
+    println!("Is Orlando is in Florida: {}", in_poly);
+    in_poly = graphics::is_point_in_polygon(new_orleans, poly_data);
+    println!("Is New Orleans is in Florida: {}", in_poly);
+}
+
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let mut csv_file_name = "";
+    let mut accel_csv_file_name = "";
+    let mut poly_csv_file_name = "";
 
     match args.len() {
         // no arguments passed
@@ -200,12 +241,11 @@ fn main() {
         },
         // one argument passed
         2 => {
-            help();
+            accel_csv_file_name = &args[1];
         },
-        // one command and one argument passed
+        // two argument passeds
         3 => {
-            let cmd = &args[1];
-            csv_file_name = &args[2];
+            poly_csv_file_name = &args[2];
         },
         // all the other cases
         _ => {
@@ -226,8 +266,12 @@ fn main() {
     kmeans_tests();
     println!("\n");
 
-	if csv_file_name.len() > 0 {
-        let accel_data = read_accelerometer_csv(csv_file_name);
+	if accel_csv_file_name.len() > 0 {
+        let accel_data = read_accelerometer_csv(accel_csv_file_name);
         peak_finding_tests(&accel_data);
+    }
+    if poly_csv_file_name.len() > 0 {
+        let poly_data = read_polygon_csv(poly_csv_file_name);
+        perform_graphics_tests(&poly_data);
     }
 }
