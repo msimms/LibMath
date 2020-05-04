@@ -110,8 +110,11 @@ def perform_kmeans_tests():
     kMeansIn[7] = 2.0
     kMeansIn[8] = 5.0
     kMeansIn[9] = 0.001
-    tags = kmeans.kmeans_equally_space_centroids_1_d(kMeansIn, 3, 0.001, 3)
-    print(tags)
+    for k in range(2, 5):
+        print("K = " + str(k))
+        tags, avg_error = kmeans.kmeans_equally_space_centroids_1_d(kMeansIn, k, 0.001, 3)
+        print("Tags: " + str(tags))
+        print("Average Error: " + str(avg_error))
 
 def perform_peak_finding_tests(csv_file_name):
     """Performs unit tests on the peak finding module and prints the results."""
@@ -157,7 +160,7 @@ def perform_graphics_tests(poly_file_name):
 def perform_signal_tests():
     """Performs unit tests on the signals module and prints the results."""
     print("\nSignals Tests:")
-    print("---------------")
+    print("--------------")
     data = [1,2,3,4,5,6,7]
     print(data)
     print(signals.smooth(data, 1))

@@ -90,7 +90,7 @@ def kmeans_1_d(data, k, max_error, max_iters, centroids):
         if (avg_error <= max_error) or (iter_count >= max_iters) or (num_relocations <= 0):
             break
 
-    return tags
+    return tags, avg_error
 
 def kmeans_equally_space_centroids_1_d(data, k, max_error, max_iters):
     """Performs K-Means analysis on a one dimensional array, starting with centroids that are equally distributed across the rnage of input set."""
