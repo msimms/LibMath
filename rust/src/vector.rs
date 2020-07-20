@@ -24,73 +24,73 @@ pub type VectorData = Vec<f64>;
 
 #[derive(Clone)]
 pub struct Vector {
-    data: VectorData,
-    size: usize,
+	data: VectorData,
+	size: usize,
 }
 
 impl Vector {
-    pub fn new(size: usize) -> Vector {
-        Vector { size: size, data: Vector::create_vector(size) }
-    }
+	pub fn new(size: usize) -> Vector {
+		Vector { size: size, data: Vector::create_vector(size) }
+	}
 
-    fn create_vector(size: usize) -> VectorData {
-        let v: VectorData = vec![0.0; size];
-        v
-    }
+	fn create_vector(size: usize) -> VectorData {
+		let v: VectorData = vec![0.0; size];
+		v
+	}
 
-    pub fn print(&mut self) {
-        print!("[");
-        for i in 0..self.size {
-            print!("{} ", self.data[i]);
-        }
-        println!("]");
-    }
+	pub fn print(&mut self) {
+		print!("[");
+		for i in 0..self.size {
+			print!("{} ", self.data[i]);
+		}
+		println!("]");
+	}
 
-    pub fn set(&mut self, index: usize, val: f64) {
-        self.data[index] = val;
-    }
+	pub fn set(&mut self, index: usize, val: f64) {
+		self.data[index] = val;
+	}
 
-    pub fn multiply(&mut self, b: Vector) -> f64 {
-        let mut c = 0.0;
+	pub fn multiply(&mut self, b: Vector) -> f64 {
+		let mut c = 0.0;
 
-        for i in 0..self.size {
-            c = c + self.data[i] * b.data[i];
-        }
-        c
-    }
+		for i in 0..self.size {
+			c = c + self.data[i] * b.data[i];
+		}
+		c
+	}
 
 	pub fn subtract(&mut self, b: Vector, c: &mut Vector) {
-        for i in 0..self.size {
+		for i in 0..self.size {
 			c.data[i] = self.data[i] - b.data[i];
-        }
+		}
 	}
 
 	pub fn dot(&mut self, b: Vector) -> f64 {
 		let mut result = 0.0;
 
 		// Compute the dot product
-        for i in 0..self.size {
+		for i in 0..self.size {
 			result = result + (self.data[i] * b.data[i]);
-        }
-        result
+		}
+		result
 	}
 
 	pub fn length(&mut self) -> f64 {
 		let mut sum = 0.0;
 
-        for i in 0..self.size {
+		for i in 0..self.size {
 			sum = sum + (self.data[i] * self.data[i]);
-        }
+		}
 		let length = sum.sqrt();
-        length
+		length
 	}
 
 	pub fn normalize(&mut self) {
 		let norm = self.data.len() as f64;
 		
-        for i in 0..self.size {
+		for i in 0..self.size {
 			self.data[i] = self.data[i] / norm;
-        }
+		}
 	}
 
 	pub fn cross(&mut self, a: Vector, b: Vector) {

@@ -167,6 +167,7 @@ namespace LibMath
 	void BigInt::multiply(uint32_t n)
 	{
 		uint32_t carry = 0;
+
 		for (size_t i = 0; i < m_numWords; ++i)
 		{
 			uint64_t temp = n * (uint64_t)m_data[i] + carry;

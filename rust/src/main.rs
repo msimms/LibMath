@@ -36,59 +36,59 @@ use std::fs::File;
 extern crate csv;
 
 fn read_polygon_csv(file_path: &str) -> Vec<graphics::Point> {
-    let mut points = Vec::new(); 
+	let mut points = Vec::new(); 
 
-    let mut file = match File::open(&file_path) {
-        Err(why) => panic!("couldn't open {}: {}", file_path, why.description()),
-        Ok(file) => file,
-    };
-    let mut reader = csv::Reader::from_reader(file);
+	let mut file = match File::open(&file_path) {
+		Err(why) => panic!("couldn't open {}: {}", file_path, why.description()),
+		Ok(file) => file,
+	};
+	let mut reader = csv::Reader::from_reader(file);
 
-    for record in reader.records() {
-        for field in record.iter() {
-            let mut new_point = graphics::Point::new();
-            new_point.x = field[0].parse().unwrap();
-            new_point.y = field[1].parse().unwrap();
-            points.push(new_point);
-        }
-    }
-    points
+	for record in reader.records() {
+		for field in record.iter() {
+			let mut new_point = graphics::Point::new();
+			new_point.x = field[0].parse().unwrap();
+			new_point.y = field[1].parse().unwrap();
+			points.push(new_point);
+		}
+	}
+	points
 }
 
 struct AccelerometerData {
-    ts: Vec<f64>,
-    x: Vec<f64>,
-    y: Vec<f64>,
-    z: Vec<f64>,
+	ts: Vec<f64>,
+	x: Vec<f64>,
+	y: Vec<f64>,
+	z: Vec<f64>,
 }
 
 impl AccelerometerData {
-    pub fn new() -> AccelerometerData {
-        AccelerometerData { ts: Vec::new(), x: Vec::new(), y: Vec::new(), z: Vec::new() }
-    }
+	pub fn new() -> AccelerometerData {
+		AccelerometerData { ts: Vec::new(), x: Vec::new(), y: Vec::new(), z: Vec::new() }
+	}
 }
 
 fn read_accelerometer_csv(file_path: &str) -> AccelerometerData {
-    let mut accel_vector = AccelerometerData::new();
-    let mut file = match File::open(&file_path) {
-        Err(why) => panic!("couldn't open {}: {}", file_path, why.description()),
-        Ok(file) => file,
-    };
-    let mut reader = csv::Reader::from_reader(file);
+	let mut accel_vector = AccelerometerData::new();
+	let mut file = match File::open(&file_path) {
+		Err(why) => panic!("couldn't open {}: {}", file_path, why.description()),
+		Ok(file) => file,
+	};
+	let mut reader = csv::Reader::from_reader(file);
 
-    for record in reader.records() {
-        for field in record.iter() {
-            let ts: f64 = field[0].parse().unwrap();
-            let x: f64 = field[1].parse().unwrap();
-            let y: f64 = field[2].parse().unwrap();
-            let z: f64 = field[3].parse().unwrap();
-            accel_vector.ts.push(ts);
-            accel_vector.x.push(x);
-            accel_vector.y.push(y);
-            accel_vector.z.push(z);
-        }
-    }
-    accel_vector
+	for record in reader.records() {
+		for field in record.iter() {
+			let ts: f64 = field[0].parse().unwrap();
+			let x: f64 = field[1].parse().unwrap();
+			let y: f64 = field[2].parse().unwrap();
+			let z: f64 = field[3].parse().unwrap();
+			accel_vector.ts.push(ts);
+			accel_vector.x.push(x);
+			accel_vector.y.push(y);
+			accel_vector.z.push(z);
+		}
+	}
+	accel_vector
 }
 
 fn help() {
@@ -111,14 +111,14 @@ fn vector_tests() {
 	v2.set(1, 2.0);
 	v2.set(2, 3.0);
 
-    v1.print();
-    v2.print();
+	v1.print();
+	v2.print();
 
-    let v3 = v2.clone();
-    let v_mult = v1.multiply(v2);
-    println!("{}", v_mult);
-    let v_dot = v1.dot(v3);
-    println!("{}", v_dot);
+	let v3 = v2.clone();
+	let v_mult = v1.multiply(v2);
+	println!("{}", v_mult);
+	let v_dot = v1.dot(v3);
+	println!("{}", v_dot);
 }
 
 fn square_matrix_tests() {
@@ -189,89 +189,89 @@ fn kmeans_tests() {
 }
 
 fn peak_finding_tests(accel_data: &AccelerometerData) {
-    println!("\nPeak Finding Tests:");
-    println!("-------------------");
+	println!("\nPeak Finding Tests:");
+	println!("-------------------");
 
-    let x_peaks = peaks::find_peaks(&accel_data.x, 2.0);
-    let y_peaks = peaks::find_peaks(&accel_data.y, 2.0);
-    let z_peaks = peaks::find_peaks(&accel_data.z, 2.0);
+	let x_peaks = peaks::find_peaks(&accel_data.x, 2.0);
+	let y_peaks = peaks::find_peaks(&accel_data.y, 2.0);
+	let z_peaks = peaks::find_peaks(&accel_data.z, 2.0);
 
-    println!("\nX Peaks:");
-    for peak in x_peaks {
-        peak.print();
-    }
-    println!("\nY Peaks:");
-    for peak in y_peaks {
-        peak.print();
-    }
-    println!("\nZ Peaks:");
-    for peak in z_peaks {
-        peak.print();
-    }
+	println!("\nX Peaks:");
+	for peak in x_peaks {
+		peak.print();
+	}
+	println!("\nY Peaks:");
+	for peak in y_peaks {
+		peak.print();
+	}
+	println!("\nZ Peaks:");
+	for peak in z_peaks {
+		peak.print();
+	}
 }
 
 fn perform_graphics_tests(poly_data: &Vec<graphics::Point>) {
-    // Performs unit tests on the graphics module and prints the results.
-    println!("\nGraphics Tests:");
-    println!("----------------");
+	// Performs unit tests on the graphics module and prints the results.
+	println!("\nGraphics Tests:");
+	println!("----------------");
 
-    let mut orlando = graphics::Point::new();
-    orlando.x = -81.38; // longitude
-    orlando.y = 28.54; // latitude
-    
-    let mut new_orleans = graphics::Point::new();
-    new_orleans.x = -90.08; // longitude
-    new_orleans.y = 29.95; // latitude
+	let mut orlando = graphics::Point::new();
+	orlando.x = -81.38; // longitude
+	orlando.y = 28.54; // latitude
+	
+	let mut new_orleans = graphics::Point::new();
+	new_orleans.x = -90.08; // longitude
+	new_orleans.y = 29.95; // latitude
 
-    let mut in_poly = graphics::is_point_in_polygon(orlando, poly_data);
-    println!("Is Orlando is in Florida: {}", in_poly);
-    in_poly = graphics::is_point_in_polygon(new_orleans, poly_data);
-    println!("Is New Orleans is in Florida: {}", in_poly);
+	let mut in_poly = graphics::is_point_in_polygon(orlando, poly_data);
+	println!("Is Orlando is in Florida: {}", in_poly);
+	in_poly = graphics::is_point_in_polygon(new_orleans, poly_data);
+	println!("Is New Orleans is in Florida: {}", in_poly);
 }
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    let mut accel_csv_file_name = "";
-    let mut poly_csv_file_name = "";
+	let args: Vec<String> = env::args().collect();
+	let mut accel_csv_file_name = "";
+	let mut poly_csv_file_name = "";
 
-    match args.len() {
-        // no arguments passed
-        1 => {
-            help();
-        },
-        // one argument passed
-        2 => {
-            accel_csv_file_name = &args[1];
-        },
-        // two argument passeds
-        3 => {
-            poly_csv_file_name = &args[2];
-        },
-        // all the other cases
-        _ => {
-            help();
-        }
-    }
+	match args.len() {
+		// no arguments passed
+		1 => {
+			help();
+		},
+		// one argument passed
+		2 => {
+			accel_csv_file_name = &args[1];
+		},
+		// two argument passeds
+		3 => {
+			poly_csv_file_name = &args[2];
+		},
+		// all the other cases
+		_ => {
+			help();
+		}
+	}
 
-    vector_tests();
-    println!("\n");
-    square_matrix_tests();
-    println!("\n");
-    statistics_tests();
-    println!("\n");
-    power_tests();
-    println!("\n");
-    distance_tests();
-    println!("\n");
-    kmeans_tests();
-    println!("\n");
+	vector_tests();
+	println!("\n");
+	square_matrix_tests();
+	println!("\n");
+	statistics_tests();
+	println!("\n");
+	power_tests();
+	println!("\n");
+	distance_tests();
+	println!("\n");
+	kmeans_tests();
+	println!("\n");
 
 	if accel_csv_file_name.len() > 0 {
-        let accel_data = read_accelerometer_csv(accel_csv_file_name);
-        peak_finding_tests(&accel_data);
-    }
-    if poly_csv_file_name.len() > 0 {
-        let poly_data = read_polygon_csv(poly_csv_file_name);
-        perform_graphics_tests(&poly_data);
-    }
+		let accel_data = read_accelerometer_csv(accel_csv_file_name);
+		peak_finding_tests(&accel_data);
+	}
+	if poly_csv_file_name.len() > 0 {
+		let poly_data = read_polygon_csv(poly_csv_file_name);
+		perform_graphics_tests(&poly_data);
+	}
 }
