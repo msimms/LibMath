@@ -29,9 +29,9 @@ def kmeans_1_d(data, k, max_error, max_iters, centroids):
     # Sanity check.
     data_len = len(data)
     if data_len <= 1:
-        return []
+        return [], None
     if k > data_len:
-        return []
+        return [], None
 
     # Create the output error array; describes the error for each data point.
     errors = [0.0] * data_len
@@ -98,9 +98,9 @@ def kmeans_equally_space_centroids_1_d(data, k, max_error, max_iters):
     # Sanity check.
     data_len = len(data)
     if data_len <= 1:
-        return []
+        return [], None
     if k > data_len:
-        return []
+        return [], None
 
     centroids = [0.0] * k
 
