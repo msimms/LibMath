@@ -20,29 +20,19 @@
 #	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #	SOFTWARE.
 
-include("Distance.jl")
-include("Powers.jl")
+module Powers
 
-function distanceTests()
-	println("Distance Tests:")
-	println("---------------")
-
-	distance = Distance.hammingDistance("1011101", "1001001")
-	println("Hamming Distance: ", distance)
-	@assert distance == 2
-	distance = Distance.levenshteinDistance("foo", "foobar")
-	println("Levenshtein Distance: ", distance)
-	@assert distance == 3
+function NearestPowerOf2(num)
+	n = num > 0 ? num - 1 : 0
+	
+	n |= n >> 1
+	n |= n >> 2
+	n |= n >> 4
+	n |= n >> 8
+	n |= n >> 16
+	n = n + 1
+	
+	n
 end
 
-function powerTests()
-	println("Power Tests:")
-	println("------------")
-
-	nearest = Powers.NearestPowerOf2(63)
-	println("Nearest power of 2 for 63 is ", nearest)
-	@assert nearest == 64
 end
-
-distanceTests()
-powerTests()

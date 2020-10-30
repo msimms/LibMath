@@ -11,7 +11,7 @@ This library is primarily focused on C and C++. However, I have started adding P
 
 ### Distance Calculations
 * Hamming Distance (C, C++, Rust, Julia)
-* Levenshtein Distance (C, C++, Rust)
+* Levenshtein Distance (C, C++, Rust, Julia)
 * Basic Euclidian Distances (C, C++, Rust, Python, Julia)
 * Haversine Distance (C, C++, Rust, Python) - Distance between points on the Earth's surface.
 
@@ -31,6 +31,9 @@ This library is primarily focused on C and C++. However, I have started adding P
 
 ### Peak Finding
 * Find peaks that rise more than one standard deviation above the mean for at least three consecutive points on the x axis. (C++, Rust, Python)
+
+### Power
+* Find the nearest power of two (C, C++, Julia)
 
 ### Graphics
 * Ray Casting (Python, Rust) - Determines if a point is within a polygon.

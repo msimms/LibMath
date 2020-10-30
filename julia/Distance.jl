@@ -1,4 +1,3 @@
-
 #	MIT License
 #
 #  Copyright © 2020 Michael J Simms. All rights reserved.
