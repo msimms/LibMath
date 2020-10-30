@@ -1,7 +1,7 @@
 [![asm_x86-64](https://img.shields.io/badge/asm-x86_64-brightgreen.svg)]() [![C](https://img.shields.io/badge/c-brightgreen.svg)]() [![C++](https://img.shields.io/badge/cpp-brightgreen.svg)]() [![Rust](https://img.shields.io/badge/rust-brightgreen.svg)](https://www.rust-lang.org) [![Python 2.7|3.7](https://img.shields.io/badge/python-2.7%2F3.7-brightgreen.svg)](https://www.python.org/) [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 # LibMath
-A collection of commonly used math routines, in C, C++, Python, and Rust programming languages.
+A collection of commonly used math routines, in C, C++, Python, Rust, and Julia programming languages.
 
 ## Rationale
 This is a collection of small, and quick, math routines I've written for other hobby projects over the years. I decided to organize them and place them in one library so they would be easier to reuse in the future. They're also available for anyone else that wants to use this code, instead of a larger, heaveyweight math library. **There are no production project files in this library. It is just a loose collection of code. Include the files you need and ignore the ones you don't.** The project files and main files are included just for testing.
@@ -10,9 +10,9 @@ This is a collection of small, and quick, math routines I've written for other h
 This library is primarily focused on C and C++. However, I have started adding Python and Rust implementations where appropriate, or when needed. As python already has a large collection of libraries, there simply isn't as much need for python implementations for many of these algorithms.
 
 ### Distance Calculations
-* Hamming Distance (C, C++, Rust)
+* Hamming Distance (C, C++, Rust, Julia)
 * Levenshtein Distance (C, C++, Rust)
-* Basic Euclidian Distances (C, C++, Rust, Python)
+* Basic Euclidian Distances (C, C++, Rust, Python, Julia)
 * Haversine Distance (C, C++, Rust, Python) - Distance between points on the Earth's surface.
 
 ### Linear Algebra

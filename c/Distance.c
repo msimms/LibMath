@@ -25,6 +25,7 @@
 #include <string.h>
 #include <math.h>
 
+// Hamming Distance
 size_t hammingDistance(const char* str1, const char* str2)
 {
 	size_t len1 = strlen(str1);
@@ -43,6 +44,7 @@ size_t hammingDistance(const char* str1, const char* str2)
 	return distance;
 }
 
+// Levenshtein Distance
 size_t levenshteinDistance(const char* str1, const char* str2)
 {
 	size_t m = strlen(str1);
@@ -112,11 +114,13 @@ size_t levenshteinDistance(const char* str1, const char* str2)
 	return distance;
 }
 
+// 1 dimensional Euclidian distance
 double euclidianDistance1D(double pt1, double pt2)
 {
 	return fabs(pt1 - pt2);
 }
 
+// 2 dimensional Euclidian distance
 double euclidianDistance2D(double pt1X, double pt1Y, double pt2X, double pt2Y)
 {
 	double tempX = pt2X - pt1X;
