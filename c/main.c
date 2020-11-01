@@ -88,13 +88,16 @@ void statisticsTests()
 	double v_flt_avg = statisticsAverageDouble(v_flt, 9);
 	printf("Average: %lf\n", v_flt_avg);
 	assert(v_flt_avg == 5.0);
+
 	double variance = statisticsVariance(v_flt, 9, v_flt_avg);
 	printf("Variance: %lf\n", variance);
 	assert(variance == 7.5);
+
 	printf("Standard Deviation: %lf\n", statisticsStandardDeviation(v_flt, 9, v_flt_avg));
 	double max = statisticsMax(v_flt, 9);
 	printf("Max: %lf\n", max);
 	assert(max == 9.0);
+
 	double min = statisticsMin(v_flt, 9);
 	printf("Min: %lf\n\n", min);
 	assert(min == 1.0);
@@ -136,6 +139,7 @@ void distanceTests()
 	size_t distance = hammingDistance("1011101", "1001001");
 	printf("Hamming Distance: %zu\n", distance);
 	assert(distance == 2);
+
 	distance = levenshteinDistance("foo", "foobar");
 	printf("Levenshtein Distance: %zu\n\n", distance);
 	assert(distance == 3);

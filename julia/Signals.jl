@@ -20,52 +20,26 @@
 #	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #	SOFTWARE.
 
-include("Distance.jl")
-include("Peaks.jl")
-include("Powers.jl")
-include("Signals.jl")
+module Signals
 
-function distanceTests()
-	println("Distance Tests:")
-	println("---------------")
+import Statistics
+export smooth
 
-	distance = Distance.hammingDistance("1011101", "1001001")
-	println("Hamming Distance: ", distance)
-	@assert distance == 2
+# Smooths the data, which should be a list, by averaging with the given window size.
+function smooth(inData, windowSize)
+    outData = []
+    outDataLen = length(inData) - windowSize
+    if outDataLen <= 0
+        return outData
+    end
 
-	distance = Distance.levenshteinDistance("foo", "foobar")
-	println("Levenshtein Distance: ", distance)
-	@assert distance == 3
+    for i in 1:outDataLen
+        tempData = inData[i:i + windowSize]
+        val = Statistics.mean(tempData)
+        push!(outData, val)
+    end
+
+    outData
 end
 
-function signalsTests()
-	println("Signals Tests:");
-	println("--------------");
-
-	inData = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 ]
-    windowSize = 2
-    outData = Signals.smooth(inData, windowSize)
-	
-    println(outData)
 end
-
-function powerTests()
-	println("Power Tests:")
-	println("------------")
-
-	nearest = Powers.NearestPowerOf2(63)
-	println("Nearest power of 2 for 63 is ", nearest)
-	@assert nearest == 64
-end
-
-function peakFindingTests()
-end
-
-distanceTests()
-println("")
-signalsTests()
-println("")
-powerTests()
-println("")
-peakFindingTests()
-println("")

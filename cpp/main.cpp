@@ -45,6 +45,7 @@ std::vector<NumVec> readAccelerometerCsv(const std::string& fileName)
 
 	std::string line;
 	std::ifstream infile(fileName);
+
 	while (std::getline(infile, line, '\n'))
 	{
 		std::istringstream iss(line);
@@ -134,35 +135,44 @@ void statisticsTests()
 	double v_int_avg = LibMath::Statistics::averageLong(v_int, 9);
 	std::cout << "Average: " << v_int_avg << std::endl;
 	assert(v_int_avg == 5.0);
+
 	std::vector<long> v_int2 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	v_int_avg = LibMath::Statistics::averageLong(v_int2);
 	std::cout << "Average: " << v_int_avg << std::endl;
 	assert(v_int_avg == 5.0);
+
 	double v_flt[] = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
 	double v_flt_avg = LibMath::Statistics::averageDouble(v_flt, 9);
 	std::cout << "Average: " << v_flt_avg << std::endl;
 	assert(v_flt_avg == 5.0);
+
 	std::vector<double> v_flt2 = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
 	v_flt_avg = LibMath::Statistics::averageDouble(v_flt2);
 	std::cout << "Average: " << v_flt_avg << std::endl;
 	assert(v_flt_avg == 5.0);
+
 	double variance = LibMath::Statistics::variance(v_flt, 9, v_flt_avg);
 	std::cout << "Variance: " << variance << std::endl;
 	assert(variance == 7.5);
+
 	variance = LibMath::Statistics::variance(v_flt2, v_flt_avg);
 	std::cout << "Variance: " << variance << std::endl;
 	assert(variance == 7.5);
+
 	std::cout << "Standard Deviation: " << LibMath::Statistics::standardDeviation(v_flt, 9, v_flt_avg) << std::endl;
 	std::cout << "Standard Deviation: " << LibMath::Statistics::standardDeviation(v_flt2, v_flt_avg) << std::endl;
 	double max = LibMath::Statistics::max(v_flt, 9);
 	std::cout << "Max: " << max << std::endl;
 	assert(max == 9.0);
+
 	max = LibMath::Statistics::max(v_flt2);
 	std::cout << "Max: " << max << std::endl;
 	assert(max == 9.0);
+
 	double min = LibMath::Statistics::min(v_flt, 9);
 	std::cout << "Min: " << min << std::endl;
 	assert(min == 1.0);
+
 	min = LibMath::Statistics::min(v_flt2);
 	std::cout << "Min: " << min << std::endl << std::endl;
 	assert(min == 1.0);
@@ -202,6 +212,7 @@ void distanceTests()
 	size_t distance = LibMath::Distance::hammingDistance("1011101", "1001001");
 	std::cout << "Hamming Distance: " << distance << std::endl;
 	assert(distance == 2);
+
 	distance = LibMath::Distance::levenshteinDistance("foo", "foobar");
 	std::cout << "Levenshtein Distance: " << distance << std::endl << std::endl;
 	assert(distance == 3);

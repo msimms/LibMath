@@ -24,7 +24,7 @@ This library is primarily focused on C and C++. However, I have started adding P
 * Min, Max (C, C++, Rust)
 
 ### Signals Functions
-* Simple Signal Smoothing (C, C++, Python)
+* Simple Signal Smoothing (C, C++, Python, Julia)
 
 ### K-Means
 * One dimensional K-Means (C, C++, Rust, Python)
