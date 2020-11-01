@@ -59,8 +59,11 @@ function powerTests()
 end
 
 function peakFindingTests()
+	println("Peak Finding Tests:")
+	println("-------------------")
 end
 
+# Run all the unit tests
 distanceTests()
 println("")
 signalsTests()

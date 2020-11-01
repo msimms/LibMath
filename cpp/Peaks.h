@@ -32,6 +32,9 @@
 
 namespace LibMath
 {
+    /**
+     * Defines a point. X values are integers. Y values are floating point.
+     */
 	class GraphPoint
 	{
 	public:
@@ -62,9 +65,15 @@ namespace LibMath
 			y = (double)0.0;
 		}
 	};
-	
+
+    /**
+     * List of points.
+     */
 	typedef std::vector<GraphPoint> GraphLine;
-	
+
+    /**
+     * Defines a peak. A peak is described by three points: a left trough, a peak, and a right trough.
+     */
 	class GraphPeak
 	{
 	public:
@@ -108,9 +117,15 @@ namespace LibMath
 			area = (double)0.0;
 		}
 	};
-	
+
+    /**
+     * List of peaks.
+     */
 	typedef std::vector<GraphPeak> GraphPeakList;
-	
+
+    /**
+     * Collection of peak finding algorithms.
+     */
 	class Peaks
 	{	
 	public:
