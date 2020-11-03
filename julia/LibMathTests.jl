@@ -25,6 +25,22 @@ include("Peaks.jl")
 include("Powers.jl")
 include("Signals.jl")
 
+using Pkg
+Pkg.add("ArgParse")
+using ArgParse
+Pkg.add("CSV")
+using CSV
+
+function readAccelerometerCsv(fileName::String)
+    data = []
+    data = CSV.read(fileName)
+    ts = data[1]
+    x = data[2]
+    y = data[3]
+    z = data[4]
+    ts, x, y, z
+end
+
 function distanceTests()
 	println("Distance Tests:")
 	println("---------------")
@@ -58,17 +74,36 @@ function powerTests()
 	@assert nearest == 64
 end
 
-function peakFindingTests()
+function peakFindingTests(data)
 	println("Peak Finding Tests:")
 	println("-------------------")
+
+    peaks = Peaks.findPeaks(data)
+    println(peaks)
+end
+
+# Parses the command line arguments
+function parse_commandline()
+    s = ArgParseSettings()
+
+    @add_arg_table s begin
+        "--csv"
+            help = "another option with an argument"
+            arg_type = String
+            default = "data/10_pullups.csv"
+    end
+
+    return parse_args(s)
 end
 
 # Run all the unit tests
+parsed_args = parse_commandline()
+ts, x, y, z = readAccelerometerCsv(parsed_args["csv"])
 distanceTests()
 println("")
 signalsTests()
 println("")
 powerTests()
 println("")
-peakFindingTests()
+peakFindingTests(x)
 println("")
