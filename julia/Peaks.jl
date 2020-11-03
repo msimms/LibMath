@@ -87,6 +87,7 @@ function findPeaks(data::Array{Float64}, sigmas = 1.0)
             elseif (currentPeak.peak.x > currentPeak.leftTrough.x) && (currentPeak.leftTrough.x > 0)
                 currentPeak.rightTrough.x = x
                 currentPeak.rightTrough.y = y
+
             else
                 currentPeak.leftTrough.x = x
                 currentPeak.leftTrough.y = y
@@ -104,6 +105,7 @@ function findPeaks(data::Array{Float64}, sigmas = 1.0)
             computeArea(data, currentPeak)
             push!(peaks, currentPeak)
             currentPeak = GraphPeak(GraphPoint(0,0.0), GraphPoint(0,0.0), GraphPoint(0,0.0), 0.0)
+
         else # Nothing is set, but the value is above the threshold.
             currentPeak.leftTrough.x = x
             currentPeak.leftTrough.y = y
@@ -146,9 +148,51 @@ end
 function findPeaks(data::Array{GraphPoint}, sigmas = 1.0)
     peaks = []
 
+    mean = average(data)
+    stddev = sigmas * standardDeviation(data, mean)
+    threshold = mean + stddev
     currentPeak = GraphPeak(GraphPoint(0,0.0), GraphPoint(0,0.0), GraphPoint(0,0.0), 0.0)
+    x = 1
 
-    for item in data
+    for point in data
+
+        if point.y < threshold
+
+            # Have we found a peak? If so, add it and start looking for the next one.
+            if currentPeak.rightTrough.x > 0
+                computeArea(data, currentPeak)
+                push!(peaks, currentPeak)
+                currentPeak = GraphPeak(GraphPoint(0,0.0), GraphPoint(0,0.0), GraphPoint(0,0.0), 0.0)
+
+            # Are we looking for a left trough?
+            elseif currentPeak.leftTrough.x == 0
+                currentPeak.leftTrough = point
+
+            # If we have a left trough and an existing peak, assume this is the right trough - for now.
+            elseif (currentPeak.peak.x > currentPeak.leftTrough.x) && (currentPeak.leftTrough.x > 0)
+                currentPeak.rightTrough = point
+
+            else
+                currentPeak.leftTrough = point
+            end
+
+        elseif currentPeak.leftTrough.x > 0 # Left trough is set.
+
+            # Are we looking for a peak or is this bigger than the current peak?
+            if currentPeak.peak.x == 0 || y >= currentPeak.peak.y
+                currentPeak.peak = point
+            end
+
+        elseif currentPeak.rightTrough.x > 0 # Right trough is set.
+            computeArea(data, currentPeak)
+            push!(peaks, currentPeak)
+            currentPeak = GraphPeak(GraphPoint(0,0.0), GraphPoint(0,0.0), GraphPoint(0,0.0), 0.0)
+
+        else # Nothing is set, but the value is above the threshold.
+            currentPeak.leftTrough = point
+        end
+
+        x = x + 1
     end
 
     peaks
@@ -157,9 +201,55 @@ end
 function findPeaksOfSize(data::Array{GraphPoint}, minPeakArea, sigmas = 1.0)
     peaks = []
 
+    mean = average(data)
+    stddev = sigmas * standardDeviation(data, mean)
+    threshold = mean + stddev
     currentPeak = GraphPeak(GraphPoint(0,0.0), GraphPoint(0,0.0), GraphPoint(0,0.0), 0.0)
+    x = 1
 
-    for item in data
+    for point in data
+
+        if point.y < threshold
+
+            # Have we found a peak? If so, add it and start looking for the next one.
+            if currentPeak.rightTrough.x > 0
+                computeArea(data, currentPeak)
+                if currentPeak.area >= minPeakArea
+                    push!(peaks, currentPeak)
+                end
+                currentPeak = GraphPeak(GraphPoint(0,0.0), GraphPoint(0,0.0), GraphPoint(0,0.0), 0.0)
+
+            # Are we looking for a left trough?
+            elseif currentPeak.leftTrough.x == 0
+                currentPeak.leftTrough = point
+
+            # If we have a left trough and an existing peak, assume this is the right trough - for now.
+            elseif (currentPeak.peak.x > currentPeak.leftTrough.x) && (currentPeak.leftTrough.x > 0)
+                currentPeak.rightTrough = point
+
+            else
+                currentPeak.leftTrough = point
+            end
+
+        elseif currentPeak.leftTrough.x > 0 # Left trough is set.
+
+            # Are we looking for a peak or is this bigger than the current peak?
+            if currentPeak.peak.x == 0 || y >= currentPeak.peak.y
+                currentPeak.peak = point
+            end
+
+        elseif currentPeak.rightTrough.x > 0 # Right trough is set.
+            computeArea(data, currentPeak)
+            if currentPeak.area >= minPeakArea
+                push!(peaks, currentPeak)
+            end
+            currentPeak = GraphPeak(GraphPoint(0,0.0), GraphPoint(0,0.0), GraphPoint(0,0.0), 0.0)
+
+        else # Nothing is set, but the value is above the threshold.
+            currentPeak.leftTrough = point
+        end
+
+        x = x + 1
     end
 
     peaks
