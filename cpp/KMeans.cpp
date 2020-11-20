@@ -46,7 +46,7 @@ namespace LibMath
 		size_t* clusterSizes = (size_t*)new size_t[k];
 		if (!clusterSizes)
 		{
-			delete errors;
+			delete[] errors;
 			return NULL;
 		}
 
@@ -54,8 +54,8 @@ namespace LibMath
 		size_t* tags = (size_t*)new size_t[dataLen];
 		if (!tags)
 		{
-			delete clusterSizes;
-			delete errors;
+			delete[] clusterSizes;
+			delete[] errors;
 			return NULL;
 		}
 
@@ -116,8 +116,8 @@ namespace LibMath
 		} while ((avgError > maxError) && (iterCount < maxIters) && (numRelocations > 0));
 
 		// Free memory.
-		delete clusterSizes;
-		delete errors;
+		delete[] clusterSizes;
+		delete[] errors;
 
 		return tags;
 	}
@@ -150,7 +150,7 @@ namespace LibMath
 			tags = kMeans1D(data, dataLen, k, maxError, maxIters, centroids);
 
 			// Clean up.
-			delete centroids;
+			delete[] centroids;
 		}
 		
 		return tags;
@@ -180,7 +180,7 @@ namespace LibMath
 			tags = kMeans1D(data, dataLen, k, maxError, maxIters, centroids);
 
 			// Clean up.
-			delete centroids;
+			delete[] centroids;
 		}
 		
 		return tags;
