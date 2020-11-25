@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "type": "java",
             "name": "CodeLens (Launch) - LibMathTests",
@@ -18,6 +19,15 @@
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}",
+            "args": [
+                "--csv", "data/10_pullups.csv"
+            ]
+        },
+        {
+            "type": "julia",
+            "name": "Debug (Launch) - Julia Tests",
+            "request": "launch",
+            "mainClass": "LibMathTests.jl",
             "args": [
                 "--csv", "data/10_pullups.csv"
             ]

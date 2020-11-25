@@ -31,9 +31,9 @@ using ArgParse
 Pkg.add("CSV")
 using CSV
 
-function readAccelerometerCsv(fileName::String)
+function read_accelerometer_csv(filename::String)
     data = []
-    data = CSV.read(fileName)
+    data = CSV.read(filename)
     ts = data[1]
     x = data[2]
     y = data[3]
@@ -41,44 +41,44 @@ function readAccelerometerCsv(fileName::String)
     ts, x, y, z
 end
 
-function distanceTests()
+function distance_tests()
 	println("Distance Tests:")
 	println("---------------")
 
-	distance = Distance.hammingDistance("1011101", "1001001")
+	distance = Distance.hamming_distance("1011101", "1001001")
 	println("Hamming Distance: ", distance)
 	@assert distance == 2
 
-	distance = Distance.levenshteinDistance("foo", "foobar")
+	distance = Distance.levenshtein_distance("foo", "foobar")
 	println("Levenshtein Distance: ", distance)
 	@assert distance == 3
 end
 
-function signalsTests()
+function signals_tests()
 	println("Signals Tests:");
 	println("--------------");
 
-	inData = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 ]
-    windowSize = 2
-    outData = Signals.smooth(inData, windowSize)
+	indata = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 ]
+    windowsize = 2
+    outdata = Signals.smooth(indata, windowsize)
 	
-    println(outData)
+    println(outdata)
 end
 
-function powerTests()
+function power_tests()
 	println("Power Tests:")
 	println("------------")
 
-	nearest = Powers.NearestPowerOf2(63)
+	nearest = Powers.nearest_power_of_2(63)
 	println("Nearest power of 2 for 63 is ", nearest)
 	@assert nearest == 64
 end
 
-function peakFindingTests(data)
+function peak_finding_tests(data)
 	println("Peak Finding Tests:")
 	println("-------------------")
 
-    peaks = Peaks.findPeaks(data)
+    peaks = Peaks.find_peaks(data)
     println(peaks)
 end
 
@@ -88,7 +88,7 @@ function parse_commandline()
 
     @add_arg_table s begin
         "--csv"
-            help = "another option with an argument"
+            help = "A CSV file with accelerometer data"
             arg_type = String
             default = "data/10_pullups.csv"
     end
@@ -98,12 +98,12 @@ end
 
 # Run all the unit tests
 parsed_args = parse_commandline()
-ts, x, y, z = readAccelerometerCsv(parsed_args["csv"])
-distanceTests()
+ts, x, y, z = read_accelerometer_csv(parsed_args["csv"])
+distance_tests()
 println("")
-signalsTests()
+signals_tests()
 println("")
-powerTests()
+power_tests()
 println("")
-peakFindingTests(x)
+peak_finding_tests(x)
 println("")

@@ -22,7 +22,9 @@
 
 module Powers
 
-function NearestPowerOf2(num)
+export nearest_power_of_2
+
+function nearest_power_of_2(num)
 	n = num > 0 ? num - 1 : 0
 	
 	n |= n >> 1

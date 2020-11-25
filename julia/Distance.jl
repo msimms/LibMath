@@ -22,13 +22,13 @@
 
 module Distance
 
-export hammingDistance
-export levenshteinDistance
-export euclidianDistance1D
-export euclidianDistance2D
+export hamming_distance
+export levenshtein_distance
+export euclidian_distance_1D
+export euclidian_distance_2D
 
 # Hamming Distance
-function hammingDistance(str1, str2)
+function hamming_distance(str1, str2)
 	len1 = length(str1)
 
 	# The strings must be the same length.
@@ -48,7 +48,7 @@ function hammingDistance(str1, str2)
 end
 
 # Levenshtein Distance
-function levenshteinDistance(str1, str2)
+function levenshtein_distance(str1, str2)
 	m = length(str1)
 	n = length(str2)
 
@@ -103,12 +103,12 @@ function levenshteinDistance(str1, str2)
 end
 
 # 1 dimensional Euclidian distance
-function euclidianDistance1D(pt1, pt2)
+function euclidian_distance_1D(pt1, pt2)
 	abs(pt1 - pt2)
 end
 
 # 2 dimensional Euclidian distance
-function euclidianDistance2D(pt1X, pt1Y, pt2X, pt2Y)
+function euclidian_distance_2D(pt1X, pt1Y, pt2X, pt2Y)
 	tempX = pt2X - pt1X
 	tempY = pt2Y - pt1Y
 	sqrt((tempX * tempX) + (tempY * tempY))

@@ -26,20 +26,20 @@ import Statistics
 export smooth
 
 # Smooths the data, which should be a list, by averaging with the given window size.
-function smooth(inData, windowSize)
-    outData = []
-    outDataLen = length(inData) - windowSize
-    if outDataLen <= 0
-        return outData
+function smooth(indata, windowsize)
+    outdata = []
+    outdatalen = length(indata) - windowsize
+    if outdatalen <= 0
+        return outdata
     end
 
-    for i in 1:outDataLen
-        tempData = inData[i:i + windowSize]
-        val = Statistics.mean(tempData)
-        push!(outData, val)
+    for i in 1:outdatalen
+        tempdata = indata[i:i + windowsize]
+        val = Statistics.mean(tempdata)
+        push!(outdata, val)
     end
 
-    outData
+    outdata
 end
 
 end
