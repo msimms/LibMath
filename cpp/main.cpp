@@ -262,7 +262,7 @@ void peakFindingTests(const std::vector<NumVec>& csvData)
 
 		const NumVec& columnData = (*csvIter);
 		uint64_t peakCount = 0;
-		std::vector<LibMath::GraphPeak> peaks = LibMath::Peaks::findPeaks(columnData, (double)2.0);
+		std::vector<LibMath::GraphPeak> peaks = LibMath::Peaks::findPeaks(columnData, (double)1.5);
 		for (auto peakIter = peaks.begin(); peakIter != peaks.end(); ++peakIter)
 		{
 			LibMath::GraphPeak& peak = (*peakIter);

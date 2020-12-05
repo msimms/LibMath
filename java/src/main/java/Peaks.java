@@ -187,6 +187,7 @@ public class Peaks {
 		if (currentPeak.leftTrough.x < currentPeak.rightTrough.x) {
             int leftIndex = data.indexOf(currentPeak.leftTrough);
             Iterator<GraphPoint> pointIter = data.listIterator(leftIndex);
+
             if (pointIter.hasNext()) { 
                 GraphPoint prevPoint = pointIter.next();
                 GraphPoint currPoint = pointIter.next();

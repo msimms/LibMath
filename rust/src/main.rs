@@ -192,9 +192,9 @@ fn peak_finding_tests(accel_data: &AccelerometerData) {
 	println!("\nPeak Finding Tests:");
 	println!("-------------------");
 
-	let x_peaks = peaks::find_peaks(&accel_data.x, 2.0);
-	let y_peaks = peaks::find_peaks(&accel_data.y, 2.0);
-	let z_peaks = peaks::find_peaks(&accel_data.z, 2.0);
+	let x_peaks = peaks::find_peaks(&accel_data.x, 1.5);
+	let y_peaks = peaks::find_peaks(&accel_data.y, 1.5);
+	let z_peaks = peaks::find_peaks(&accel_data.z, 1.5);
 
 	println!("\nX Peaks:");
 	for peak in x_peaks {

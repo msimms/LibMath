@@ -32,6 +32,8 @@ import peaks
 import signals
 import statistics
 import sys
+from matplotlib import pyplot as plt
+import numpy as np
 
 def read_polygon_csv(csv_file_name):
     """Loads the polygon data test file."""
@@ -116,24 +118,34 @@ def perform_kmeans_tests():
         print("Tags: " + str(tags))
         print("Average Error: " + str(avg_error))
 
-def perform_peak_finding_tests(csv_file_name):
+def perform_peak_finding_tests(csv_file_name, graph):
     """Performs unit tests on the peak finding module and prints the results."""
     print("\nPeak Finding Tests:")
     print("-------------------")
 
     real_path = os.path.realpath(csv_file_name)
     csv_data = read_peak_data_csv(real_path)
-    csv_data = csv_data[1:]
+    csv_time_data = csv_data[0]
+    csv_accel_data = csv_data[1:]
+    x = np.arange(0,len(csv_time_data))
     axis_count = 0
-    for csv_column in csv_data:
+    for axis_data in csv_accel_data:
         print("Axis " + str(axis_count) + ":")
         axis_count = axis_count + 1
 
         peak_count = 0
-        peak_list = peaks.find_peaks_in_numeric_array(csv_column, 2.0)
+        peak_list = peaks.find_peaks_in_numeric_array(axis_data, 1.5)
         for peak in peak_list:
             print("Peak " + str(peak_count) + ": {" + str(peak.left_trough.x) + ", " + str(peak.peak.x) + ", " + str(peak.right_trough.x) + ", " + str(peak.area) + "}")
             peak_count = peak_count + 1
+
+        if graph:
+            y = np.array(axis_data)
+            plt.plot(x,y)
+            plt.xlabel("Time")
+            plt.ylabel("Gs")
+            plt.title('Accelerometer Data')
+            plt.show()
 
 def perform_graphics_tests(poly_file_name):
     """Performs unit tests on the graphics module and prints the results."""
@@ -172,6 +184,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--peak_csv_file", default="../data/10_pullups.csv", help="CSV file containing test peak data", required=False)
     parser.add_argument("--poly_csv_file", default="../data/florida.csv", help="CSV file containing polygon data", required=False)
+    parser.add_argument("--graph", action="store_true", default=False, help="Plots the test data and results, when applicable", required=False)
 
     try:
         args = parser.parse_args()
@@ -184,7 +197,7 @@ def main():
     perform_kmeans_tests()
 
     if len(args.peak_csv_file) > 0:
-        perform_peak_finding_tests(args.peak_csv_file)
+        perform_peak_finding_tests(args.peak_csv_file, args.graph)
     if len(args.poly_csv_file) > 0:
         perform_graphics_tests(args.poly_csv_file)
 
