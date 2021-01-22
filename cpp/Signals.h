@@ -31,6 +31,7 @@ namespace LibMath
 	class Signals
 	{	
 	public:
+		static size_t smooth(const double* inData, double* outData, size_t numPoints, size_t windowSize);
 		static std::vector<double> smooth(const std::vector<double>& inData, size_t windowSize);
 	};
 }
