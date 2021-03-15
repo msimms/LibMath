@@ -23,8 +23,8 @@ use statistics;
 
 pub fn haversine_distance(loc1_lat: f64, loc1_lon: f64, loc1_alt: f64, loc2_lat: f64, loc2_lon: f64, loc2_alt: f64) -> f64 {
     // Returns the Haversine distance between two points on the Earth's surface.
-    let mut R = 6372797.560856; // radius of the earth in meters
-    R = R + loc2_alt - loc1_alt;
+    let mut r = 6372797.560856; // radius of the earth in meters
+    r = r + loc2_alt - loc1_alt;
 
     let lat_arc = (loc1_lat - loc2_lat).to_radians();
     let lon_arc = (loc1_lon - loc2_lon).to_radians();
@@ -36,9 +36,9 @@ pub fn haversine_distance(loc1_lat: f64, loc1_lon: f64, loc1_alt: f64, loc2_lat:
     lon_h = lon_h * lon_h;
 
     let tmp = loc1_lat.to_radians().cos() * loc2_lat.to_radians().cos();
-    let mut rad = 2.0 * (lat_h + tmp * lon_h).sqrt().asin();
+    let rad = 2.0 * (lat_h + tmp * lon_h).sqrt().asin();
 
-    rad * R
+    rad * r
 }
 
 pub fn hamming_distance(str1: &str, str2: &str) -> usize {
