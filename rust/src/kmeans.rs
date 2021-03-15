@@ -20,8 +20,8 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 
-extern crate rand;
-use self::rand::Rng;
+//extern crate rand;
+//use self::rand::Rng;
 
 use distance;
 use statistics;
@@ -123,6 +123,7 @@ pub fn kmeans_equally_space_centroids_1_d(data: Vec<f32>, k: usize, max_error: f
 	tags
 }
 
+/*
 pub fn kmeans_rand_centroids_1_d(data: Vec<f32>, k: usize, max_error: f32, max_iters: usize) -> Vec<usize> {
 	// Sanity check.
 	if data.len() <= 1 {
@@ -143,3 +144,4 @@ pub fn kmeans_rand_centroids_1_d(data: Vec<f32>, k: usize, max_error: f32, max_i
 	let tags = kmeans_1_d(data, k, max_error, max_iters, &mut centroids);
 	tags
 }
+*/

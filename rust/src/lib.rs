@@ -21,7 +21,7 @@
 //	SOFTWARE.
 
 pub mod distance;
-pub mod kmeans;
+//pub mod kmeans;
 pub mod peaks;
 pub mod powers;
 pub mod square_matrix;
