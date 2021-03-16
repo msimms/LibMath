@@ -73,8 +73,8 @@ def read_peak_data_csv(csv_file_name):
 
 def perform_distance_tests():
     """Performs unit tests on the distance module and prints the results."""
-    #print("Distance Tests:")
-    #print("---------------")
+    print("Distance Tests:")
+    print("---------------")
 
     #distance_calc = distance.hamming_distance("1011101", "1001001")
     #print("Hamming Distance: " + distance_calc)
@@ -82,7 +82,13 @@ def perform_distance_tests():
     #distance_calc = distance.levenshtein_distance("foo", "foobar")
     #print("Levenshtein Distance: " + distance_calc)
     #assert(distance_calc == 3)
-    pass
+
+    orlando_x = -81.38 # longitude
+    orlando_y = 28.54 # latitude
+    new_orleans_x = -90.08 # longitude
+    new_orleans_y = 29.95 # latitude
+    haversine_distance = distance.haversine_distance(orlando_y, orlando_x, 0.0, new_orleans_y, new_orleans_x, 0.0)
+    print("Haversine Distance: " + str(haversine_distance))
 
 def perform_statistics_tests():
     """Performs unit tests on the statistics module and prints the results."""

@@ -172,9 +172,18 @@ fn distance_tests() {
 	let mut distance = distance::hamming_distance("1011101", "1001001");
 	println!("Hamming Distance: {}", distance);
 	assert!(distance == 2);
+
 	distance = distance::levenshtein_distance("foo", "foobar");
 	println!("Levenshtein Distance: {}", distance);
 	assert!(distance == 3);
+
+    let orlando_x = -81.38; // longitude
+	let orlando_y = 28.54; // latitude
+	let new_orleans_x = -90.08; // longitude
+	let new_orleans_y = 29.95; // latitude
+	let haversine_distance = distance::haversine_distance(orlando_y, orlando_x, 0.0, new_orleans_y, new_orleans_x, 0.0);
+	println!("Haversine Distance: {}", haversine_distance);
+	//assert!(distance == 3);
 }
 
 fn kmeans_tests() {
