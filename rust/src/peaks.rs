@@ -23,8 +23,8 @@ use statistics;
 
 #[derive(Copy, Clone)]
 pub struct GraphPoint {
-	x: usize,
-	y: f64,
+	pub x: usize,
+	pub y: f64,
 }
 
 impl GraphPoint {
@@ -49,10 +49,10 @@ impl GraphPoint {
 
 #[derive(Copy, Clone)]
 pub struct GraphPeak {
-	left_trough: GraphPoint,
-	peak: GraphPoint,
-	right_trough: GraphPoint,
-	area: f64,
+	pub left_trough: GraphPoint,
+	pub peak: GraphPoint,
+	pub right_trough: GraphPoint,
+	pub area: f64,
 }
 
 impl GraphPeak {
