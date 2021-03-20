@@ -25,6 +25,7 @@ mod graphics;
 mod kmeans;
 mod peaks;
 mod powers;
+mod signals;
 mod square_matrix;
 mod statistics;
 mod vector;
@@ -96,7 +97,7 @@ fn help() {
 	println!("\t--<csv file name for peak tests> <csv file name for polygon tests>");
 }
 
-fn vector_tests() {
+fn perform_vector_tests() {
 	println!("Vector Tests:");
 	println!("-------------");
 
@@ -121,7 +122,7 @@ fn vector_tests() {
 	println!("{}", v_dot);
 }
 
-fn square_matrix_tests() {
+fn perform_square_matrix_tests() {
 	println!("Square Matrix Tests:");
 	println!("--------------------");
 
@@ -143,7 +144,7 @@ fn square_matrix_tests() {
 	m.print();
 }
 
-fn statistics_tests() {
+fn perform_statistics_tests() {
 	println!("\nStatistics Tests:");
 	println!("-----------------");
 
@@ -156,7 +157,7 @@ fn statistics_tests() {
 	println!("Average: {}", v_flt_avg);
 }
 
-fn power_tests() {
+fn perform_power_tests() {
 	println!("\nPower Tests:");
 	println!("------------");
 
@@ -165,7 +166,7 @@ fn power_tests() {
 	assert!(nearest == 64);
 }
 
-fn distance_tests() {
+fn perform_distance_tests() {
 	println!("\nDistance Tests:");
 	println!("---------------");
 
@@ -186,7 +187,7 @@ fn distance_tests() {
 	//assert!(distance == 3);
 }
 
-fn kmeans_tests() {
+fn perform_kmeans_tests() {
 	println!("\nK-Means Tests:");
 	println!("--------------");
 
@@ -197,7 +198,7 @@ fn kmeans_tests() {
 	}
 }
 
-fn peak_finding_tests(accel_data: &AccelerometerData) {
+fn perform_peak_finding_tests(accel_data: &AccelerometerData) {
 	println!("\nPeak Finding Tests:");
 	println!("-------------------");
 
@@ -238,6 +239,18 @@ fn perform_graphics_tests(poly_data: &Vec<graphics::Point>) {
 	println!("Is New Orleans is in Florida: {}", in_poly);
 }
 
+fn perform_signal_tests() {
+    // Performs unit tests on the signals module and prints the results."""
+    println!("\nSignals Tests:");
+    println!("--------------");
+
+    let data = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0];
+    println!("{:?}", data);
+    println!("{:?}", signals::smooth(&data, 1));
+    println!("{:?}", signals::smooth(&data, 2));
+    println!("{:?}", signals::smooth(&data, 3));
+}
+
 fn main() {
 	let args: Vec<String> = env::args().collect();
 	let mut accel_csv_file_name = "";
@@ -262,22 +275,24 @@ fn main() {
 		}
 	}
 
-	vector_tests();
+	perform_vector_tests();
 	println!("\n");
-	square_matrix_tests();
+	perform_square_matrix_tests();
 	println!("\n");
-	statistics_tests();
+	perform_statistics_tests();
 	println!("\n");
-	power_tests();
+	perform_power_tests();
 	println!("\n");
-	distance_tests();
+	perform_distance_tests();
 	println!("\n");
-	kmeans_tests();
+	perform_kmeans_tests();
 	println!("\n");
+    perform_signal_tests();
+	println!("\n");    
 
 	if accel_csv_file_name.len() > 0 {
 		let accel_data = read_accelerometer_csv(accel_csv_file_name);
-		peak_finding_tests(&accel_data);
+		perform_peak_finding_tests(&accel_data);
 	}
 	if poly_csv_file_name.len() > 0 {
 		let poly_data = read_polygon_csv(poly_csv_file_name);

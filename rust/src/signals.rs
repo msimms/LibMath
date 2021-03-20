@@ -1,6 +1,6 @@
 //	MIT License
 //
-//  Copyright © 2018 Michael J Simms. All rights reserved.
+//  Copyright © 2021 Michael J Simms. All rights reserved.
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -20,11 +20,21 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 
-pub mod distance;
-//pub mod kmeans;
-pub mod peaks;
-pub mod powers;
-pub mod signals;
-pub mod square_matrix;
-pub mod statistics;
-pub mod vector;
+use statistics;
+
+pub fn smooth(data_in: &Vec<f64>, window_size: usize) -> Vec<f64> {
+    // Smooths the data, which should be a list, by averaging with the given window size.
+    let data_in_len = data_in.len();
+    let data_out_len = data_in_len - window_size + 1;
+    if data_out_len <= 0 {
+        return data_in.to_vec();
+    }
+
+    let mut data_out: Vec<f64> = Vec::new();
+    for i in 1..data_out_len {
+        let val = statistics::average_f64(&data_in[i..i + window_size].to_vec());
+        data_out.push(val);
+    }
+
+    data_out
+}
