@@ -93,7 +93,7 @@ pub fn kmeans_1_d(data: Vec<f32>, k: usize, max_error: f32, max_iters: usize, ce
 
 		iter_count = iter_count + 1;
 
-		((avg_error > max_error) && (iter_count < max_iters) && (num_relocations > 0))
+		(avg_error > max_error) && (iter_count < max_iters) && (num_relocations > 0)
 	} {};
 
 	tags
