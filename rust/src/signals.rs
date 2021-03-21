@@ -31,7 +31,7 @@ pub fn smooth(data_in: &Vec<f64>, window_size: usize) -> Vec<f64> {
     }
 
     let mut data_out: Vec<f64> = Vec::new();
-    for i in 1..data_out_len {
+    for i in 0..data_out_len {
         let val = statistics::average_f64(&data_in[i..i + window_size].to_vec());
         data_out.push(val);
     }
