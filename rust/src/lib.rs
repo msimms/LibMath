@@ -21,6 +21,7 @@
 //	SOFTWARE.
 
 pub mod distance;
+pub mod graphics;
 //pub mod kmeans;
 pub mod peaks;
 pub mod powers;
