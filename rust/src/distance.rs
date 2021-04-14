@@ -111,12 +111,12 @@ pub fn levenshtein_distance(str1: &str, str2: &str) -> usize {
     distance
 }
 
-pub fn euclidian_distance_1_d(pt1: f32, pt2: f32) -> f32 {
+pub fn euclidian_distance_1_d(pt1: f64, pt2: f64) -> f64 {
     let distance = (pt1 - pt2).abs();
     distance
 }
 
-pub fn euclidian_distance_2_d(pt1_x: f32, pt1_y: f32, pt2_x: f32, pt2_y: f32) -> f32 {
+pub fn euclidian_distance_2_d(pt1_x: f64, pt1_y: f64, pt2_x: f64, pt2_y: f64) -> f64 {
     let temp_x = pt2_x - pt1_x;
     let temp_y = pt2_y - pt1_y;
     let distance = ((temp_x * temp_x) + (temp_y * temp_y)).sqrt();

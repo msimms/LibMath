@@ -39,7 +39,7 @@ extern crate csv;
 fn read_polygon_csv(file_path: &str) -> Vec<graphics::Point> {
 	let mut points = Vec::new(); 
 
-	let mut file = match File::open(&file_path) {
+	let file = match File::open(&file_path) {
 		Err(why) => panic!("couldn't open {}: {}", file_path, why.description()),
 		Ok(file) => file,
 	};
@@ -71,7 +71,7 @@ impl AccelerometerData {
 
 fn read_accelerometer_csv(file_path: &str) -> AccelerometerData {
 	let mut accel_vector = AccelerometerData::new();
-	let mut file = match File::open(&file_path) {
+	let file = match File::open(&file_path) {
 		Err(why) => panic!("couldn't open {}: {}", file_path, why.description()),
 		Ok(file) => file,
 	};

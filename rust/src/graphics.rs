@@ -52,8 +52,8 @@ pub fn is_point_in_polygon(test_point: Point, poly: &Vec<Point>) -> bool {
 		let poly_pt1_y = poly_pt.y;
 
 		// Cache the second point on the edge, handling the wrap around that happens when we close the polygon.
-		let mut poly_pt2_x = 0.0;
-		let mut poly_pt2_y = 0.0;
+		let poly_pt2_x;
+		let poly_pt2_y;
 		if i == num_vertices - 1 {
 			poly_pt = poly[0];
 			poly_pt2_x = poly_pt.x;
@@ -99,8 +99,8 @@ pub fn is_point_in_poly_array(test_x: f64, test_y: f64, poly: &Vec<Point>) -> bo
 		let poly_pt1_y = poly_pt.y;
 
 		// Cache the second point on the edge, handling the wrap around that happens when we close the polygon.
-		let mut poly_pt2_x = 0.0;
-		let mut poly_pt2_y = 0.0;
+		let poly_pt2_x;
+		let poly_pt2_y;
 		if i == num_vertices - 1 {
 			poly_pt = poly[0];
 			poly_pt2_x = poly_pt.x;
