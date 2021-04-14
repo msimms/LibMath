@@ -22,18 +22,18 @@
 
 pub fn nearest_power_of_2(num: u32) -> u32
 {
-	let mut n = 0;
+    let mut n = 0;
 
-	if num > 0 {
-		n = num - 1;
-	}
+    if num > 0 {
+        n = num - 1;
+    }
 
-	n |= n >> 1;
-	n |= n >> 2;
-	n |= n >> 4;
-	n |= n >> 8;
-	n |= n >> 16;
-	n = n + 1;
+    n |= n >> 1;
+    n |= n >> 2;
+    n |= n >> 4;
+    n |= n >> 8;
+    n |= n >> 16;
+    n = n + 1;
 
-	n
+    n
 }
