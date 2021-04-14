@@ -18,11 +18,12 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+#[allow(dead_code)]
 
 use statistics;
 
+/// Returns the Haversine distance between two points on the Earth's surface.
 pub fn haversine_distance(loc1_lat: f64, loc1_lon: f64, loc1_alt: f64, loc2_lat: f64, loc2_lon: f64, loc2_alt: f64) -> f64 {
-    // Returns the Haversine distance between two points on the Earth's surface.
     let mut r = 6372797.560856; // radius of the earth in meters
     r = r + loc2_alt - loc1_alt;
 
@@ -41,6 +42,7 @@ pub fn haversine_distance(loc1_lat: f64, loc1_lon: f64, loc1_alt: f64, loc2_lat:
     rad * r
 }
 
+/// Computes the Hamming distance of the two strings.
 pub fn hamming_distance(str1: &str, str2: &str) -> usize {
     let len1 = str1.len();
 
@@ -63,6 +65,7 @@ pub fn hamming_distance(str1: &str, str2: &str) -> usize {
     distance
 }
 
+/// Computes the Levenshtein distance between the two strings.
 pub fn levenshtein_distance(str1: &str, str2: &str) -> usize {
     let m = str1.len();
     let n = str2.len();
@@ -111,14 +114,29 @@ pub fn levenshtein_distance(str1: &str, str2: &str) -> usize {
     distance
 }
 
+/// Computes the Euclidian distance between the two values.
 pub fn euclidian_distance_1_d(pt1: f64, pt2: f64) -> f64 {
     let distance = (pt1 - pt2).abs();
     distance
 }
 
+/// Computes the Euclidian distance between the two points.
 pub fn euclidian_distance_2_d(pt1_x: f64, pt1_y: f64, pt2_x: f64, pt2_y: f64) -> f64 {
     let temp_x = pt2_x - pt1_x;
     let temp_y = pt2_y - pt1_y;
     let distance = ((temp_x * temp_x) + (temp_y * temp_y)).sqrt();
+    distance
+}
+
+/// Computes the Euclidian distance between two multidimensional points.
+/// Points must have the same dimensionality.
+pub fn euclidian_distance_n_d(pt1: Vec<f64>, pt2: Vec<f64>) -> f64 {
+    let num_dimensions = pt1.len();
+    let mut sum = 0.0;
+    for dimension in 0..num_dimensions {
+        let temp = pt2[dimension] - pt1[dimension];
+        sum = sum + (temp * temp);
+    }
+    let distance = sum.sqrt();
     distance
 }
