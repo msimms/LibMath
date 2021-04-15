@@ -202,13 +202,13 @@ mod tests {
         let max_iters = 3;
 
         let mut kmeans_in = vec![7.123, 0.999, 0.001, 0.5, 0.75, 0.002, 3.0, 2.0, 5.0, 0.001];
-        let tags1d = crate::kmeans::kmeans_equally_space_centroids_1_d(kmeans_in, k, max_error, max_iters);
-        println!("1D K-Means: {:?}", tags1d);
+        let mut tags_and_error = crate::kmeans::kmeans_equally_space_centroids_1_d(kmeans_in, k, max_error, max_iters);
+        println!("1D K-Means: {:?}", tags_and_error);
 
         let num_dimensions = 2;
         kmeans_in = vec![7.123, 1.0, 0.999, 1.0, 0.001, 1.0, 0.5, 1.0, 0.75, 1.0, 0.002, 1.0, 3.0, 1.0, 2.0, 1.0, 5.0, 1.0, 0.001, 1.0];
-        let tags2d = crate::kmeans::kmeans_equally_space_centroids(kmeans_in, num_dimensions, k, max_error, max_iters);
-        println!("2D K-Means: {:?}", tags2d);
+        tags_and_error = crate::kmeans::kmeans_equally_space_centroids(kmeans_in, num_dimensions, k, max_error, max_iters);
+        println!("2D K-Means: {:?}", tags_and_error);
     }
 
     #[test]

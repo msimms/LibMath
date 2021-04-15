@@ -23,11 +23,11 @@
 use distance;
 use statistics;
 
-pub fn kmeans_1_d(data: Vec<f64>, k: usize, max_error: f64, max_iters: usize, centroids: &mut Vec<f64>) -> Vec<usize> {
+pub fn kmeans_1_d(data: Vec<f64>, k: usize, max_error: f64, max_iters: usize, centroids: &mut Vec<f64>) -> (Vec<usize>, f64) {
     // Sanity check.
     if k == 0 {
         let tags = vec![0, 0];
-        return tags;
+        return (tags, 0.0);
     }
 
     let num_samples = data.len();
@@ -98,14 +98,14 @@ pub fn kmeans_1_d(data: Vec<f64>, k: usize, max_error: f64, max_iters: usize, ce
         (avg_error > max_error) && (iter_count < max_iters) && (num_relocations > 0)
     } {};
 
-    tags
+    (tags, avg_error)
 }
 
-pub fn kmeans(data: Vec<f64>, num_dimensions: usize, k: usize, max_error: f64, max_iters: usize, centroids: &mut Vec<f64>) -> Vec<usize> {
+pub fn kmeans(data: Vec<f64>, num_dimensions: usize, k: usize, max_error: f64, max_iters: usize, centroids: &mut Vec<f64>) -> (Vec<usize>, f64) {
     // Sanity check.
     if k == 0 {
         let tags = vec![0, 0];
-        return tags;
+        return (tags, 0.0);
     }
 
     let num_samples = data.len() / num_dimensions;
@@ -178,14 +178,14 @@ pub fn kmeans(data: Vec<f64>, num_dimensions: usize, k: usize, max_error: f64, m
         (avg_error > max_error) && (iter_count < max_iters) && (num_relocations > 0)
     } {};
 
-    tags
+    (tags, avg_error)
 }
 
-pub fn kmeans_equally_space_centroids_1_d(data: Vec<f64>, k: usize, max_error: f64, max_iters: usize) -> Vec<usize> {
+pub fn kmeans_equally_space_centroids_1_d(data: Vec<f64>, k: usize, max_error: f64, max_iters: usize) -> (Vec<usize>, f64) {
     // Sanity check.
     if data.len() <= 1 {
         let tags = vec![0, 0];
-        return tags;
+        return (tags, 0.0);
     }
 
     let mut centroids = vec![0.0; k];
@@ -201,15 +201,15 @@ pub fn kmeans_equally_space_centroids_1_d(data: Vec<f64>, k: usize, max_error: f
     }
 
     // Perform K Means clustering.
-    let tags = kmeans_1_d(data, k, max_error, max_iters, &mut centroids);
-    tags
+    let tags_and_error = kmeans_1_d(data, k, max_error, max_iters, &mut centroids);
+    tags_and_error
 }
 
-pub fn kmeans_equally_space_centroids(data: Vec<f64>, num_dimensions: usize, k: usize, max_error: f64, max_iters: usize) -> Vec<usize> {
+pub fn kmeans_equally_space_centroids(data: Vec<f64>, num_dimensions: usize, k: usize, max_error: f64, max_iters: usize) -> (Vec<usize>, f64) {
     // Sanity check.
     if data.len() <= 1 {
         let tags = vec![0, 0];
-        return tags;
+        return (tags, 0.0);
     }
 
     let mut centroids = vec![0.0; k];
@@ -225,6 +225,6 @@ pub fn kmeans_equally_space_centroids(data: Vec<f64>, num_dimensions: usize, k: 
     }
 
     // Perform K Means clustering.
-    let tags = kmeans(data, num_dimensions, k, max_error, max_iters, &mut centroids);
-    tags
+    let tags_and_error = kmeans(data, num_dimensions, k, max_error, max_iters, &mut centroids);
+    tags_and_error
 }
