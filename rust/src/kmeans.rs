@@ -20,6 +20,9 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 
+// Implementation of kmeans that is suitable for webasm as it doesn't use rand (either define
+// the initial centroids somewhere else or use the equally spaced function).
+
 use distance;
 use statistics;
 
@@ -122,9 +125,11 @@ pub fn kmeans(data: Vec<f64>, num_dimensions: usize, k: usize, max_error: f64, m
     // Assignment step. Find the closest centroid for each data point.
     for sample_index in 0..num_samples {
         for cluster_index in 0..k {
-            let slice_index_lower = sample_index * num_dimensions;
-            let slice_index_upper = slice_index_lower + num_dimensions;
-            let distance = distance::euclidian_distance_n_d(data[slice_index_lower..slice_index_upper].to_vec(), centroids.to_vec());
+            let data_index_lower = sample_index * num_dimensions;
+            let data_index_upper = data_index_lower + num_dimensions;
+            let centroid_index_lower = cluster_index * num_dimensions;
+            let centroid_index_upper = centroid_index_lower + num_dimensions;
+            let distance = distance::euclidian_distance_n_d(data[data_index_lower..data_index_upper].to_vec(), centroids[centroid_index_lower..centroid_index_upper].to_vec());
 
             if (cluster_index == 0) || (distance < errors[sample_index]) {
                 tags[sample_index] = cluster_index;
@@ -181,6 +186,7 @@ pub fn kmeans(data: Vec<f64>, num_dimensions: usize, k: usize, max_error: f64, m
     (tags, avg_error)
 }
 
+/// Calculates evenly spaced initial centroids and then calls kmeans.
 pub fn kmeans_equally_space_centroids_1_d(data: Vec<f64>, k: usize, max_error: f64, max_iters: usize) -> (Vec<usize>, f64) {
     // Sanity check.
     if data.len() <= 1 {
@@ -205,23 +211,42 @@ pub fn kmeans_equally_space_centroids_1_d(data: Vec<f64>, k: usize, max_error: f
     tags_and_error
 }
 
+/// Calculates evenly spaced initial centroids and then calls kmeans.
 pub fn kmeans_equally_space_centroids(data: Vec<f64>, num_dimensions: usize, k: usize, max_error: f64, max_iters: usize) -> (Vec<usize>, f64) {
     // Sanity check.
-    if data.len() <= 1 {
+    let data_len = data.len();
+    if data_len <= 1 {
         let tags = vec![0, 0];
         return (tags, 0.0);
     }
 
-    let mut centroids = vec![0.0; k];
+    let num_data_points = data_len / num_dimensions;
+    let mut centroids = vec![0.0; k * num_dimensions];
+    for dim_index in 0..num_dimensions {
 
-    // Select the k data points that are farthest apart from each other.
-    let min = statistics::min_f64(&data);
-    let max = statistics::max_f64(&data);
-    let increment = (max - min) / (k - 1) as f64;
-    centroids[0] = min;
-    centroids[k - 1] = max;
-    for i in 0..k {
-        centroids[i] = min + (increment * i as f64);
+        // Find the max and min values for this dimension.
+        let mut min = 0.0;
+        let mut max = 0.0;
+        for point_index in 0..num_data_points {
+            let data_index = dim_index + (point_index * num_dimensions);
+
+            if point_index == 0 {
+                min = data[data_index];
+                max = min;
+            }
+            else if data[data_index] < min {
+                min = data[data_index];
+            }
+            else if data[data_index] > max {
+                max = data[data_index];
+            }
+        }
+
+        // Select the k data points that are farthest apart from each other in this dimension.
+        let increment = (max - min) / (k - 1) as f64;
+        for i in 0..k {
+            centroids[dim_index + (i * num_dimensions)] = min + (increment * i as f64);
+        }
     }
 
     // Perform K Means clustering.
