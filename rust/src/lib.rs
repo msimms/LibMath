@@ -53,7 +53,7 @@ mod tests {
     fn read_accelerometer_csv(file_path: &str) -> AccelerometerData {
         let mut accel_vector = AccelerometerData::new();
         let file = match File::open(&file_path) {
-            Err(_why) => panic!("couldn't open {}", file_path),
+            Err(why) => panic!("couldn't open {} {}", file_path, why),
             Ok(file) => file,
         };
         let mut reader = csv::Reader::from_reader(file);
@@ -216,7 +216,7 @@ mod tests {
         println!("\nPeak Finding Tests:");
         println!("-------------------");
 
-        let accel_csv_file_name = "../../data/10_pullups.cxv";
+        let accel_csv_file_name = "../data/10_pullups.csv";
 		let accel_data = read_accelerometer_csv(accel_csv_file_name);
 
         let x_peaks = crate::peaks::find_peaks(&accel_data.x, 1.5);
@@ -243,7 +243,7 @@ mod tests {
         println!("\nGraphics Tests:");
         println!("----------------");
 
-        let poly_csv_file_name = "../data/florida.cxv";
+        let poly_csv_file_name = "../data/florida.csv";
 		let poly_data = read_polygon_csv(poly_csv_file_name);
 
         let mut orlando = crate::graphics::Point::new();
