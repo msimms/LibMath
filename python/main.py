@@ -22,11 +22,9 @@
 
 import argparse
 import csv
-import random
 import distance
 import graphics
 import kmeans
-import math
 import os
 import peaks
 import signals
@@ -49,7 +47,7 @@ def read_polygon_csv(csv_file_name):
             points.append(new_point)
 	return points
 
-def read_peak_data_csv(csv_file_name):
+def read_three_axis_data_from_csv(csv_file_name):
     """Loads the peak data test file."""
     columns = []
     ts_list = []
@@ -130,11 +128,14 @@ def perform_peak_finding_tests(csv_file_name, graph):
     print("-------------------")
 
     real_path = os.path.realpath(csv_file_name)
-    csv_data = read_peak_data_csv(real_path)
+    csv_data = read_three_axis_data_from_csv(real_path)
+
     csv_time_data = csv_data[0]
     csv_accel_data = csv_data[1:]
+
     x = np.arange(0,len(csv_time_data))
     axis_count = 0
+
     for axis_data in csv_accel_data:
         print("Axis " + str(axis_count) + ":")
         axis_count = axis_count + 1
@@ -170,6 +171,7 @@ def perform_graphics_tests(poly_file_name):
 
     real_path = os.path.realpath(poly_file_name)
     florida = read_polygon_csv(real_path)
+
     in_poly = graphics.is_point_in_polygon(orlando, florida)
     print("Is Orlando is in Florida: " + str(in_poly))
     in_poly = graphics.is_point_in_polygon(new_orleans, florida)
