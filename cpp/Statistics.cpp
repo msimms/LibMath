@@ -63,7 +63,7 @@ namespace LibMath
 
 	double Statistics::variance(const double* data, size_t numPoints, double mean)
 	{
-		double numerator = 0;
+		double numerator = (double)0.0;
 		
 		for (auto index = 0; index < numPoints; index++)
 			numerator = numerator + ((data[index] - mean) * (data[index] - mean));
@@ -72,7 +72,7 @@ namespace LibMath
 
 	double Statistics::variance(const std::vector<double>& data, double mean)
 	{
-		double numerator = 0;
+		double numerator = (double)0.0;
 		
 		for (auto iter = data.begin(); iter != data.end(); ++iter)
 			numerator = numerator + ((*iter - mean) * (*iter - mean));
