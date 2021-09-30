@@ -23,23 +23,23 @@
 
 namespace LibMath
 {
-    void derivative(double* in, double* out, size_t inLen, size_t spacing)
-    {
-        if (spacing >= 1)
-        {
-            for (size_t i = 0; i < inLen - spacing; i += spacing)
-            {
-                out[i] = (in[i + spacing] - in[i]) / spacing;
-            }
-        }
-    }
+	void derivative(double* in, double* out, size_t inLen, size_t spacing)
+	{
+		if (spacing >= 1)
+		{
+			for (size_t i = 0; i < inLen - spacing; i += spacing)
+			{
+				out[i] = (in[i + spacing] - in[i]) / spacing;
+			}
+		}
+	}
 
 	std::vector<double> derivative(std::vector<double> in, size_t spacing)
 	{
 		std::vector<double> result;
 
-        if (spacing >= 1)
-        {
+		if (spacing >= 1)
+		{
 			auto iter = in.begin();
 			double lastY = (*iter);
 			std::next(iter, spacing);
@@ -56,17 +56,17 @@ namespace LibMath
 	}
 
 	double integral(double* data, size_t dataLen)
-    {
-        double area = (double)0.0;
+	{
+		double area = (double)0.0;
 
-        if (dataLen > 1)
-        {
-            for (size_t i = 1; i < dataLen; ++i)
-            {
-                double b = data[i] + data[i - 1];
-                area += ((double)0.5 * b);
-            }
-        }
-        return area;
-    }
+		if (dataLen > 1)
+		{
+			for (size_t i = 1; i < dataLen; ++i)
+			{
+				double b = data[i] + data[i - 1];
+				area += ((double)0.5 * b);
+			}
+		}
+		return area;
+	}
 }
