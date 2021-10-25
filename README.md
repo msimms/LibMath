@@ -10,7 +10,7 @@ This is a collection of small, and quick, math routines I've written for other h
 This library is primarily focused on C and C++. However, I have started adding Python and Rust implementations where appropriate, or when needed. As python already has a large collection of libraries, there simply isn't as much need for python implementations for many of these algorithms.
 
 ### Distance Calculations
-* Hamming Distance (C, C++, Rust, Julia)
+* Hamming Distance (C, C++, Rust, Python, Julia)
 * Levenshtein Distance (C, C++, Rust, Julia)
 * Basic Euclidian Distances (C, C++, Rust, Python, Julia)
 * Haversine Distance (C, C++, Rust, Python) - Distance between points on the Earth's surface.
