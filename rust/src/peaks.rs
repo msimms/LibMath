@@ -144,6 +144,8 @@ pub fn find_peaks(data: &Vec<f64>, sigmas: f64) -> Vec<GraphPeak> {
             if current_peak.peak.x == 0 || y >= current_peak.peak.y {
                 current_peak.peak.x = x;
                 current_peak.peak.y = y;
+                current_peak.right_trough.x = 0;
+                current_peak.right_trough.y = 0.0;
             }
         }
         else if current_peak.right_trough.x > 0 { // Right trough is set.

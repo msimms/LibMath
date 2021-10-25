@@ -110,6 +110,8 @@ def find_peaks_in_numeric_array(data, sigmas):
             if current_peak.peak.x == 0 or y >= current_peak.peak.y:
                 current_peak.peak.x = x
                 current_peak.peak.y = y
+                current_peak.right_trough.x = 0
+                current_peak.right_trough.y = 0.0
 
         elif current_peak.right_trough.x > 0: # Right trough is set.
             compute_area_from_numeric_array(data, current_peak)

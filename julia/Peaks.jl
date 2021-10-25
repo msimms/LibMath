@@ -99,6 +99,8 @@ function find_peaks(data::Array{Float64}, sigmas = 1.0)
             if current_peak.peak.x == 0 || y >= current_peak.peak.y
                 current_peak.peak.x = x
                 current_peak.peak.y = y
+                current_peak.right_trough.x = 0
+                current_peak.right_trough.y = 0.0
             end
 
         elseif current_peak.right_trough.x > 0 # Right trough is set.

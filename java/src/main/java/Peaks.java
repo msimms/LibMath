@@ -105,6 +105,8 @@ public class Peaks {
 				if (currentPeak.peak.x == 0 || y >= currentPeak.peak.y) {
 					currentPeak.peak.x = x;
 					currentPeak.peak.y = y;
+					currentPeak.rightTrough.x = 0;
+					currentPeak.rightTrough.y = 0.0;
 				}
 			}
 			else if (currentPeak.rightTrough.x > 0) { // Right trough is set.

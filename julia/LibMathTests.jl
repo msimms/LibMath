@@ -90,7 +90,7 @@ function parse_commandline()
         "--csv"
             help = "A CSV file with accelerometer data"
             arg_type = String
-            default = "data/10_pullups.csv"
+            default = "../data/10_pullups.csv"
     end
 
     return parse_args(s)
