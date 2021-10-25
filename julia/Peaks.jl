@@ -1,24 +1,24 @@
-#  MIT License
+# MIT License
 #
-#  Copyright (c) 2020 Michael J Simms. All rights reserved.
+# Copyright © 2020 Michael J Simms. All rights reserved.
 #
-#  Permission is hereby granted, free of charge, to any person obtaining a copy
-#  of this software and associated documentation files (the "Software"), to deal
-#  in the Software without restriction, including without limitation the rights
-#  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-#  copies of the Software, and to permit persons to whom the Software is
-#  furnished to do so, subject to the following conditions:
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
 #
-#  The above copyright notice and this permission notice shall be included in all
-#  copies or substantial portions of the Software.
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
 #
-#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-#  SOFTWARE.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
 module Peaks
 
@@ -56,15 +56,10 @@ function compute_area(data, current_peak::GraphPeak)
     end
 end
 
-# Returns a list of all statistically significant peaks in the given waveform.
-# These are defined as peaks that rise more than one standard deviation above the mean for at least three points on the x axis.
+# Returns a list of the peaks that rise above the threshold.
 
-function find_peaks(data::Array{Float64}, sigmas = 1.0)
+function find_peaks_over_threshold(data::Array{Float64}, threshold = 0.0)
     peaks = []
-
-    mean = Statistics.mean(data)
-    stddev = sigmas * Statistics.std(data)
-    threshold = mean + stddev
     current_peak = GraphPeak(GraphPoint(0,0.0), GraphPoint(0,0.0), GraphPoint(0,0.0), 0.0)
     x = 1
 
@@ -74,9 +69,18 @@ function find_peaks(data::Array{Float64}, sigmas = 1.0)
 
             # Have we found a peak? If so, add it and start looking for the next one.
             if current_peak.right_trough.x > 0
-                compute_area(data, current_peak)
-                push!(peaks, current_peak)
-                current_peak = GraphPeak(GraphPoint(0,0.0), GraphPoint(0,0.0), GraphPoint(0,0.0), 0.0)
+
+                # Still descending
+                if y <= current_peak.right_trough.y
+                    current_peak.right_trough.x = x
+                    current_peak.right_trough.y = y
+
+                # Rising
+                else
+                    compute_area(data, current_peak)
+                    push!(peaks, current_peak)
+                    current_peak = GraphPeak(GraphPoint(0,0.0), GraphPoint(0,0.0), GraphPoint(0,0.0), 0.0)
+                end
 
             # Are we looking for a left trough?
             elseif current_peak.left_trough.x == 0
@@ -119,6 +123,19 @@ function find_peaks(data::Array{Float64}, sigmas = 1.0)
     peaks
 end
 
+# Returns a list of all statistically significant peaks in the given waveform.
+# These are defined as peaks that rise more than one standard deviation above the mean for at least three points on the x axis.
+
+function find_peaks_over_stddev(data::Array{Float64}, sigmas = 1.0)
+    mean = Statistics.mean(data)
+    stddev = sigmas * Statistics.std(data)
+    threshold = mean + stddev
+    peaks = find_peaks_over_threshold(data, threshold)
+    peaks
+end
+
+# Utility functions
+
 function average(data::Array{GraphPoint})
     sum = 0.0
 
@@ -147,12 +164,10 @@ function standard_deviation(data::Array{GraphPoint}, mean)
     dev
 end
 
-function find_peaks(data::Array{GraphPoint}, sigmas = 1.0)
-    peaks = []
+# Returns a list of the peaks that rise above the threshold.
 
-    mean = average(data)
-    stddev = sigmas * standard_deviation(data, mean)
-    threshold = mean + stddev
+function find_peaks_over_threshold(data::Array{GraphPoint}, threshold = 0.0)
+    peaks = []
     current_peak = GraphPeak(GraphPoint(0,0.0), GraphPoint(0,0.0), GraphPoint(0,0.0), 0.0)
     x = 1
 
@@ -162,9 +177,18 @@ function find_peaks(data::Array{GraphPoint}, sigmas = 1.0)
 
             # Have we found a peak? If so, add it and start looking for the next one.
             if current_peak.right_trough.x > 0
-                compute_area(data, current_peak)
-                push!(peaks, current_peak)
-                current_peak = GraphPeak(GraphPoint(0,0.0), GraphPoint(0,0.0), GraphPoint(0,0.0), 0.0)
+
+                # Still descending
+                if y <= current_peak.right_trough.y
+                    current_peak.right_trough.x = x
+                    current_peak.right_trough.y = y
+
+                # Rising
+                else
+                    compute_area(data, current_peak)
+                    push!(peaks, current_peak)
+                    current_peak = GraphPeak(GraphPoint(0,0.0), GraphPoint(0,0.0), GraphPoint(0,0.0), 0.0)
+                end
 
             # Are we looking for a left trough?
             elseif current_peak.left_trough.x == 0
@@ -183,6 +207,8 @@ function find_peaks(data::Array{GraphPoint}, sigmas = 1.0)
             # Are we looking for a peak or is this bigger than the current peak?
             if current_peak.peak.x == 0 || y >= current_peak.peak.y
                 current_peak.peak = point
+                current_peak.right_trough.x = 0
+                current_peak.right_trough.y = 0.0
             end
 
         elseif current_peak.right_trough.x > 0 # Right trough is set.
@@ -199,6 +225,19 @@ function find_peaks(data::Array{GraphPoint}, sigmas = 1.0)
 
     peaks
 end
+
+# Returns a list of all statistically significant peaks in the given waveform.
+# These are defined as peaks that rise more than one standard deviation above the mean for at least three points on the x axis.
+
+function find_peaks_over_stddev(data::Array{GraphPoint}, sigmas = 1.0)
+    mean = Statistics.mean(data)
+    stddev = sigmas * standard_deviation(data, mean)
+    threshold = mean + stddev
+    peaks = find_peaks_over_threshold(data, threshold)
+    peaks
+end
+
+# Returns a list of all statistically significant peaks in the given waveform, with the specified minimum area.
 
 function find_peaks_of_size(data::Array{GraphPoint}, minpeakarea, sigmas = 1.0)
     peaks = []
@@ -238,6 +277,8 @@ function find_peaks_of_size(data::Array{GraphPoint}, minpeakarea, sigmas = 1.0)
             # Are we looking for a peak or is this bigger than the current peak?
             if current_peak.peak.x == 0 || y >= current_peak.peak.y
                 current_peak.peak = point
+                current_peak.right_trough.x = 0
+                current_peak.right_trough.y = 0.0
             end
 
         elseif current_peak.right_trough.x > 0 # Right trough is set.

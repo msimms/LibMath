@@ -20,7 +20,7 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
-import statistics
+import numpy as np
 
 class GraphPoint(object):
     """Represents an x,y point value."""
@@ -28,7 +28,10 @@ class GraphPoint(object):
     def __init__(self, x, y):
         self.x = x
         self.y = y
-    
+
+    def __repr__(self):
+        return "( " + str(self.x) + ", " + str(self.y) + " )"
+
     def clear(self):
         self.x = 0
         self.y = 0.0
@@ -41,6 +44,9 @@ class GraphPeak(object):
         self.peak = GraphPoint(0, 0.0)
         self.right_trough = GraphPoint(0, 0.0)
         self.area = 0.0
+
+    def __repr__(self):
+        return "{ " + str(self.left_trough) + ", " + str(self.peak) + ", " + str(self.right_trough) + ", " + str(self.area) + " }"
 
     def clear(self):
         self.left_trough.clear()
@@ -70,25 +76,30 @@ def compute_area_from_numeric_array(data, current_peak):
             current_peak.area = current_peak.area + (0.5 * b)
             prev_point = current_point
 
-def find_peaks_in_numeric_array(data, sigmas):
-    """Returns a list of peaks in the given array of numeric values. Only peaks that go above the given sigma line will be counted."""
+def find_peaks_in_numeric_array_over_threshold(data, threshold):
+    """Returns a list of peaks in the given array of numeric values. Only peaks that go above the given threshold will be counted."""
     peaks = []
     current_peak = GraphPeak()
-
-    mean = statistics.mean(data)
-    stddev = sigmas * statistics.stddev(data, mean)
-    threshold = mean + stddev
 
     x = 0
 
     for y in data:
+
         if y < threshold:
 
             # Have we found a peak? If so, add it and start looking for the next one.
             if current_peak.right_trough.x > 0:
-                compute_area_from_numeric_array(data, current_peak)
-                peaks.append(current_peak)
-                current_peak = GraphPeak()
+
+                # Still descending
+                if y <= current_peak.right_trough.y:
+                    current_peak.right_trough.x = x
+                    current_peak.right_trough.y = y
+
+                # Rising
+                else:
+                    compute_area_from_numeric_array(data, current_peak)
+                    peaks.append(current_peak)
+                    current_peak = GraphPeak()
 
             # Are we looking for a left trough?
             elif current_peak.left_trough.x == 0:
@@ -104,7 +115,8 @@ def find_peaks_in_numeric_array(data, sigmas):
                 current_peak.left_trough.x = x
                 current_peak.left_trough.y = y
 
-        elif current_peak.left_trough.x > 0: # Left trough is set.
+        # Left trough is set.
+        elif current_peak.left_trough.x > 0:
 
             # Are we looking for a peak or is this bigger than the current peak?
             if current_peak.peak.x == 0 or y >= current_peak.peak.y:
@@ -113,15 +125,26 @@ def find_peaks_in_numeric_array(data, sigmas):
                 current_peak.right_trough.x = 0
                 current_peak.right_trough.y = 0.0
 
-        elif current_peak.right_trough.x > 0: # Right trough is set.
+        # Right trough is set.
+        elif current_peak.right_trough.x > 0:
             compute_area_from_numeric_array(data, current_peak)
             peaks.append(current_peak)
             current_peak = GraphPeak()
 
-        else: # Nothing is set, but the value is above the threshold.
+        # Nothing is set, but the value is above the threshold.
+        else:
             current_peak.left_trough.x = x
             current_peak.left_trough.y = y
 
         x = x + 1
 
+    return peaks
+
+def find_peaks_in_numeric_array_over_stddev(data, sigmas):
+    """Returns a list of peaks in the given array of numeric values. Only peaks that go above the given sigma line will be counted."""
+    mean = np.mean(data)
+    stddev = sigmas * np.std(data)
+    threshold = mean + stddev
+
+    peaks = find_peaks_in_numeric_array_over_threshold(data, threshold)
     return peaks

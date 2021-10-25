@@ -78,7 +78,7 @@ function peak_finding_tests(data)
 	println("Peak Finding Tests:")
 	println("-------------------")
 
-    peaks = Peaks.find_peaks(data)
+    peaks = Peaks.find_peaks_over_stddev(data)
     println(peaks)
 end
 

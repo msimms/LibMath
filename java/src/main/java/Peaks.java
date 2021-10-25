@@ -79,9 +79,18 @@ public class Peaks {
 			if (y < threshold) {
 				// Have we found a peak? If so, add it and start looking for the next one.
 				if (currentPeak.rightTrough.x > 0) {
-					computeArea(data, currentPeak);
-					peaks.add(currentPeak);
-					currentPeak = new GraphPeak();
+					// Still descending
+					if (y <= currentPeak.rightTrough.y) {
+						currentPeak.rightTrough.x = x;
+						currentPeak.rightTrough.y = y;
+					}
+
+					// Rising
+					else {
+                        computeArea(data, currentPeak);
+                        peaks.add(currentPeak);
+                        currentPeak = new GraphPeak();
+                    }
 				}
 				
 				// Are we looking for a left trough?

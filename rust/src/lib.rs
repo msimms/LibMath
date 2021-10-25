@@ -219,9 +219,9 @@ mod tests {
         let accel_csv_file_name = "../data/10_pullups.csv";
 		let accel_data = read_accelerometer_csv(accel_csv_file_name);
 
-        let x_peaks = crate::peaks::find_peaks(&accel_data.x, 1.5);
-        let y_peaks = crate::peaks::find_peaks(&accel_data.y, 1.5);
-        let z_peaks = crate::peaks::find_peaks(&accel_data.z, 1.5);
+        let x_peaks = crate::peaks::find_peaks_over_stddev(&accel_data.x, 1.5);
+        let y_peaks = crate::peaks::find_peaks_over_stddev(&accel_data.y, 1.5);
+        let z_peaks = crate::peaks::find_peaks_over_stddev(&accel_data.z, 1.5);
 
         println!("\nX Peaks:");
         for peak in x_peaks {

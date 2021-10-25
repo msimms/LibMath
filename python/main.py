@@ -141,7 +141,7 @@ def perform_peak_finding_tests(csv_file_name, graph):
         axis_count = axis_count + 1
 
         peak_count = 0
-        peak_list = peaks.find_peaks_in_numeric_array(axis_data, 1.5)
+        peak_list = peaks.find_peaks_in_numeric_array_over_stddev(axis_data, 1.5)
         for peak in peak_list:
             print("Peak " + str(peak_count) + ": {" + str(peak.left_trough.x) + ", " + str(peak.peak.x) + ", " + str(peak.right_trough.x) + ", " + str(peak.area) + "}")
             peak_count = peak_count + 1

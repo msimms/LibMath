@@ -60,9 +60,20 @@ namespace LibMath
 				// Have we found a peak? If so, add it and start looking for the next one.
 				if (currentPeak.rightTrough.x > 0)
 				{
-					Peaks::computeArea(data, dataLen, currentPeak);
-					peaks.push_back(currentPeak);
-					currentPeak.clear();
+					// Still descending
+					if (y <= currentPeak.rightTrough.y)
+					{
+						currentPeak.rightTrough.x = x;
+						currentPeak.rightTrough.y = y;
+					}
+
+					// Rising
+					else
+					{
+						Peaks::computeArea(data, dataLen, currentPeak);
+						peaks.push_back(currentPeak);
+						currentPeak.clear();
+					}
 				}
 				
 				// Are we looking for a left trough?
@@ -144,9 +155,20 @@ namespace LibMath
 				// Have we found a peak? If so, add it and start looking for the next one.
 				if (currentPeak.rightTrough.x > 0)
 				{
-					Peaks::computeArea(data, currentPeak);
-					peaks.push_back(currentPeak);
-					currentPeak.clear();
+					// Still descending
+					if (y <= currentPeak.rightTrough.y)
+					{
+						currentPeak.rightTrough.x = x;
+						currentPeak.rightTrough.y = y;
+					}
+
+					// Rising
+					else
+					{
+                        Peaks::computeArea(data, currentPeak);
+                        peaks.push_back(currentPeak);
+                        currentPeak.clear();
+					}
 				}
 
 				// Are we looking for a left trough?
@@ -259,9 +281,20 @@ namespace LibMath
 				// Have we found a peak? If so, add it and start looking for the next one.
 				if (currentPeak.rightTrough.x > 0) // Right trough is set
 				{
-					Peaks::computeArea(data, currentPeak);
-					peaks.push_back(currentPeak);
-					currentPeak.clear();
+					// Still descending
+					if (pt.y <= currentPeak.rightTrough.y)
+					{
+						currentPeak.rightTrough.x = pt.x;
+						currentPeak.rightTrough.y = pt.y;
+					}
+
+					// Rising
+					else
+					{
+						Peaks::computeArea(data, currentPeak);
+						peaks.push_back(currentPeak);
+						currentPeak.clear();
+					}
 				}
 
 				// Are we looking for a left trough?
