@@ -59,6 +59,20 @@ def haversine_distance_ignore_altitude(loc1_lat, loc1_lon, loc2_lat, loc2_lon):
 
     return rad * R
 
+def hamming_distance(str1, str2):
+    len1 = len(str1)
+
+    # The strings must be the same length.
+    if len1 != len(str2):
+        return -1
+
+    distance = 0
+
+    for i in range(0, len1):
+        if str1[i] != str2[i]:
+            distance += 1
+    return distance
+
 def euclidian_distance_1_d(pt1, pt2):
     return abs(pt1 - pt2)
 

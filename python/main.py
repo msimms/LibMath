@@ -74,11 +74,11 @@ def perform_distance_tests():
     print("Distance Tests:")
     print("---------------")
 
-    #distance_calc = distance.hamming_distance("1011101", "1001001")
-    #print("Hamming Distance: " + distance_calc)
-    #assert(distance_calc == 2)
+    distance_calc = distance.hamming_distance("1011101", "1001001")
+    print("Hamming Distance: " + str(distance_calc))
+    assert(distance_calc == 2)
     #distance_calc = distance.levenshtein_distance("foo", "foobar")
-    #print("Levenshtein Distance: " + distance_calc)
+    #print("Levenshtein Distance: " + str(distance_calc))
     #assert(distance_calc == 3)
 
     orlando_x = -81.38 # longitude
