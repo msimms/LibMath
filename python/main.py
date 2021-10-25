@@ -86,11 +86,11 @@ def perform_distance_tests():
     new_orleans_x = -90.08 # longitude
     new_orleans_y = 29.95 # latitude
     haversine_distance = distance.haversine_distance(orlando_y, orlando_x, 0.0, new_orleans_y, new_orleans_x, 0.0)
-    print("Haversine Distance: " + str(haversine_distance))
+    print("Haversine Distance: " + str(haversine_distance)) + " meters"
 
 def perform_statistics_tests():
     """Performs unit tests on the statistics module and prints the results."""
-    print("Statistics Tests:")
+    print("\nStatistics Tests:")
     print("-----------------")
 
     v_flt = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 ]
