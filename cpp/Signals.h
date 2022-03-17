@@ -31,7 +31,15 @@ namespace LibMath
 	class Signals
 	{	
 	public:
+		/**
+		 * Smooths the data by averaging points with the given window size.
+		 * Returns the number of points written to 'outData'.
+		 **/
 		static size_t smooth(const double* inData, double* outData, size_t numPoints, size_t windowSize);
+
+		/**
+		 * Smooths the data, which should be a list, by averaging with the given window size.
+		 **/
 		static std::vector<double> smooth(const std::vector<double>& inData, size_t windowSize);
 	};
 }

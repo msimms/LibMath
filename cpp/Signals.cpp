@@ -24,7 +24,6 @@
 
 namespace LibMath
 {
-	// Smooths the data by averaging points with the given window size. Returns the number of points written to 'outData'.
 	size_t Signals::smooth(const double* inData, double* outData, size_t numPointsIn, size_t windowSize)
 	{
 		size_t outDataLen = numPointsIn - windowSize + 1;
@@ -40,7 +39,6 @@ namespace LibMath
 		return i;
 	}
 
-	// Smooths the data, which should be a list, by averaging with the given window size.
 	std::vector<double> Signals::smooth(const std::vector<double>& inData, size_t windowSize)
 	{
 		std::vector<double> outData;

@@ -58,7 +58,8 @@ namespace LibMath
 
 	bool Prime::isPrimeFermat(uint64_t num)
 	{
-		// If the first test succeeds, then do a second test, to make sure we don't have a Fermat liar.
+		// If the first test succeeds, then do a second test,
+		// to make sure we don't have a Fermat liar.
 		for (size_t i = 0; i < 2; ++i)
 		{
 			size_t n = generateCoprime(num);
