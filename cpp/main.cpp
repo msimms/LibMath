@@ -27,6 +27,7 @@
 #include "BigInt.h"
 #include "Calculus.h"
 #include "Distance.h"
+#include "Graphics.h"
 #include "KMeans.h"
 #include "Peaks.h"
 #include "Powers.h"
@@ -321,6 +322,38 @@ void bigIntTests()
 	std::cout << "Small Value In a Big Int: " << big.toString() << std::endl;
 }
 
+void printDoubleMatrix(double in[][2])
+{
+	for (size_t i = 0; i < 3; ++i)
+	{
+		std::cout << "{ " << in[i][0] << ", " << in[i][1] << " }" << std::endl;
+	}
+}
+
+void graphicsTests()
+{
+	std::cout << "Graphics Tests:" << std::endl;
+	std::cout << "---------------" << std::endl;
+
+	double in1[3][2] = { { 1.0, 1.0 }, { 1.0, 1.0 }, { 1.0, 1.0 } };
+	double out1[3][2] = { { 0.0, 0.0 }, { 0.0, 0.0 }, { 0.0, 0.0 } };
+
+	double in2[3][2] = { { 1.0, 1.0 }, { 2.0, 7.0 }, { 3.0, 2.0 } };
+	double out2[3][2] = { { 0.0, 0.0 }, { 0.0, 0.0 }, { 0.0, 0.0 } };
+
+	std::cout << "Input:" << std::endl;
+	printDoubleMatrix(in1);
+	LibMath::QuadBezierFit2D(in1, out1, 3, 0.5);
+	std::cout << "Output:" << std::endl;
+	printDoubleMatrix(out1);
+
+	std::cout << "Input:" << std::endl;
+	printDoubleMatrix(in2);
+	LibMath::QuadBezierFit2D(in2, out2, 3, 0.5);
+	std::cout << "Output:" << std::endl;
+	printDoubleMatrix(out2);
+}
+
 int main(int argc, const char * argv[])
 {
 	const std::string OPTION_CSV_FILE = "--csv";
@@ -362,6 +395,8 @@ int main(int argc, const char * argv[])
 	primalityTests();
 	std::cout << std::endl;
 	bigIntTests();
+	std::cout << std::endl;
+	graphicsTests();
 	std::cout << std::endl;
 
 	return 0;

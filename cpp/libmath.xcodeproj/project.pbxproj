@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2707D2DC2162FB0A008CCE52 /* Peaks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2707D2DA2162FB0A008CCE52 /* Peaks.cpp */; };
 		2718DC65227A25E000746F4D /* Double.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2718DC64227A25E000746F4D /* Double.cpp */; };
+		272543E927E3BB7900BC6F43 /* Graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 272543E727E3BB7900BC6F43 /* Graphics.cpp */; };
 		272A3F5720FCE241000248AB /* Distance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 272A3F5520FCE241000248AB /* Distance.cpp */; };
 		276BC88023C3B59500102112 /* Signals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276BC87E23C3B59400102112 /* Signals.cpp */; };
 		277E9B99218A418C00C75AE9 /* Prime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 277E9B97218A418C00C75AE9 /* Prime.cpp */; };
@@ -40,6 +41,8 @@
 		2707D2DB2162FB0A008CCE52 /* Peaks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Peaks.h; sourceTree = SOURCE_ROOT; };
 		2718DC63227A256200746F4D /* Double.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Double.h; sourceTree = SOURCE_ROOT; };
 		2718DC64227A25E000746F4D /* Double.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Double.cpp; sourceTree = SOURCE_ROOT; };
+		272543E727E3BB7900BC6F43 /* Graphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Graphics.cpp; sourceTree = SOURCE_ROOT; };
+		272543E827E3BB7900BC6F43 /* Graphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graphics.h; sourceTree = SOURCE_ROOT; };
 		272A3F5520FCE241000248AB /* Distance.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Distance.cpp; sourceTree = SOURCE_ROOT; };
 		272A3F5620FCE241000248AB /* Distance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Distance.h; sourceTree = SOURCE_ROOT; };
 		276BC87E23C3B59400102112 /* Signals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Signals.cpp; sourceTree = SOURCE_ROOT; };
@@ -105,6 +108,8 @@
 				272A3F5620FCE241000248AB /* Distance.h */,
 				2718DC64227A25E000746F4D /* Double.cpp */,
 				2718DC63227A256200746F4D /* Double.h */,
+				272543E727E3BB7900BC6F43 /* Graphics.cpp */,
+				272543E827E3BB7900BC6F43 /* Graphics.h */,
 				27A71FC6215248C000995B56 /* KMeans.cpp */,
 				27A71FC7215248C000995B56 /* KMeans.h */,
 				279CC71A20D8A4BC00E8690E /* Matrix.cpp */,
@@ -196,6 +201,7 @@
 				279CC71920D74FD600E8690E /* main.cpp in Sources */,
 				277E9B99218A418C00C75AE9 /* Prime.cpp in Sources */,
 				27B413AF20D6884200A97E4B /* Statistics.cpp in Sources */,
+				272543E927E3BB7900BC6F43 /* Graphics.cpp in Sources */,
 				272A3F5720FCE241000248AB /* Distance.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

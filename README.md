@@ -15,6 +15,9 @@ This library is primarily focused on C and C++. However, I have started adding P
 * Basic Euclidian Distances (C, C++, Rust, Python, Julia)
 * Haversine Distance (C, C++, Rust, Python) - Distance between points on the Earth's surface.
 
+### Graphics
+* Quadratic Bezier Curve (C++)
+
 ### Linear Algebra
 * Basic Matrix Operations - with optimizations for square matrices (C, C++, Rust)
 * Basic Vector Operations (C, C++, Rust)
